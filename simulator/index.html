@@ -1,0 +1,46 @@
+<html>
+<head>
+	<script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		var auto_refresh = setInterval(
+		function ()
+		{
+			$('#text').load('/text').fadeIn("slow");
+		}, 3000); // refresh every 10000 milliseconds
+	</script>
+</head>
+
+<body>
+	<h1>Afficheur LCD</h1>
+	<div id="text">Chargement... </div>
+	<h1>Boutons vote</h1>
+	<p>Vote : avez vous aim&eacute; la session ?</p>
+		<button id="oui">oui</button>
+		<button id="bof">bof</button>
+		<button id="non">non</button>
+	<script type="text/javascript">
+	    $.ajaxSetup({ cache: false });
+	    $('#oui').click(function(){ 
+	         $.ajax({ 
+	             type: "GET",
+	             dataType: "json",
+	             url: "/vote/1",
+	             });
+	         });
+	    $('#bof').click(function(){ 
+	         $.ajax({ 
+	             type: "GET",
+	             dataType: "json",
+	             url: "/vote/0",
+	             });
+	         });
+	    $('#non').click(function(){ 
+	         $.ajax({ 
+	             type: "GET",
+	             dataType: "json",
+	             url: "/vote/-1",
+	             });
+	         });
+	</script>
+</body>
+</html>
