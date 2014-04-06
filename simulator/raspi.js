@@ -12,11 +12,13 @@ app.get('/', function(req, res) {
 
 app.get('/text', function(req, res) {
     db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='1'", function (error, row) { 
+	var progressbar = ':( |------------| :)'
 	var total = row.total; 
 	var votes = row.nbvote; 
+	var curseur = Math.round(total*12/votes);
 	console.log(row);
     	res.setHeader('Content-Type', 'text/plain');
-    	res.end('Developer en Java et en caleçon<BR/>Valeur du vote : ' + total + ' sur nb votes : ' + votes);
+    	res.end('Developer en Java et en caleçon<BR/>Valeur du vote : ' + total + ' sur nb votes : ' + votes + ' soit un curseur de ' + curseur + '<BR/>' + setCharAt(progressbar,curseur+4,'*'));
     	console.log('Acces text');
 	}
     );
@@ -29,5 +31,10 @@ app.get('/vote/:valeur', function(req, res) {
     console.log('Vote pour la session' + session + ' : ' + req.params.valeur);
 });
 
-app.listen(8080);
-console.log('Server running on 8080 port');
+app.listen(8088);
+console.log('Server running on 8088 port');
+
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substr(0,index) + chr + str.substr(index+1);
+}
