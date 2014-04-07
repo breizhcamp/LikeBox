@@ -22,18 +22,25 @@ for (var conf in confsJourSalle) {
 	switch (confsJourSalle[conf].format) {
 	case 'quickie' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 40;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 10;
 	case 'tools in action' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 25;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 15;
 	case 'hands-on' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 115;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 45;
 	case 'conference' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 55;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 30;
 	case 'lab' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 85;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 30;
 	case 'biglab' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 115;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 45;
 	case 'universite' : 
 		confsJourSalle[conf].stop = parseInt(confsJourSalle[conf].start) + 180;
+		confsJourSalle[conf].finvote = parseInt(confsJourSalle[conf].stop) + 90;
 	}
 } 
 
@@ -55,8 +62,9 @@ app.get('/text', function(req, res) {
 	var votes = row.nbvote; 
 	var curseur = Math.round(total*12/votes);
 	console.log(row);
+	console.log(parseInt(confCourante[0].finvote));
     	res.setHeader('Content-Type', 'text/plain');
-    	res.end(sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20) + '<BR/>&nbsp;' + Math.floor(parseInt(confCourante[0].start)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].start) % 60)  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(parseInt(confCourante[0].stop)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].stop) % 60) + '&nbsp;<BR/>Temps vote : -12min<BR/>' + setCharAt(progressbar,curseur+4,'*'));
+    	res.end(sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20) + '<BR/>&nbsp;' + Math.floor(parseInt(confCourante[0].start)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].start) % 60)  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(parseInt(confCourante[0].stop)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].stop) % 60) + '&nbsp;<BR/>Temps vote : ' + (parseInt(confCourante[0].finvote) - parseInt(heureCourante))  + 'min<BR/>' + setCharAt(progressbar,curseur+4,'*'));
 	if (i == sessiontextdisp.length) { i = 0; } else { i = i+1; };
     	console.log('Acces text ' + i);
 	}
@@ -68,6 +76,11 @@ app.get('/vote/:valeur', function(req, res) {
     session='1';
     stmt.run({$session : session, $vote : req.params.valeur});
     console.log('Vote pour la session' + session + ' : ' + req.params.valeur);
+});
+
+app.post('/settime', function(req, res) {
+	console.log("Set time : ");
+	console.log(req.params);
 });
 
 app.listen(8088);
