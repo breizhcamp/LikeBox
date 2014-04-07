@@ -4,6 +4,7 @@ var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(__dirname + '/votes.db');
 //var db = new sqlite3.Database(':memory:');
+var i = 0;
 
 app.get('/', function(req, res) {
     res.sendfile(__dirname + '/index.html');
@@ -12,14 +13,17 @@ app.get('/', function(req, res) {
 
 app.get('/text', function(req, res) {
     db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='1'", function (error, row) { 
-	var progressbar = ':( |------------| :)'
+	var sessiontext = 'Developper en Java et en caleçon';
+	var sessiontextdisp = sessiontext.concat('---');
+	var progressbar = ':( |------------| :)';
 	var total = row.total; 
 	var votes = row.nbvote; 
 	var curseur = Math.round(total*12/votes);
 	console.log(row);
     	res.setHeader('Content-Type', 'text/plain');
-    	res.end('Developer en Java et en caleçon<BR/>Valeur du vote : ' + total + ' sur nb votes : ' + votes + ' soit un curseur de ' + curseur + '<BR/>' + setCharAt(progressbar,curseur+4,'*'));
-    	console.log('Acces text');
+    	res.end(sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20) + '<BR/>&nbsp;12h30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13h30&nbsp;<BR/>Temps vote : -12min<BR/>' + setCharAt(progressbar,curseur+4,'*'));
+	if (i == sessiontextdisp.length) { i = 0; } else { i = i+1; };
+    	console.log('Acces text ' + i);
 	}
     );
 });

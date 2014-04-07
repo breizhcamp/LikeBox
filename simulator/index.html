@@ -6,8 +6,18 @@
 		function ()
 		{
 			$('#text').load('/text').fadeIn("slow");
-		}, 3000); // refresh every 10000 milliseconds
+		}, 1000); // refresh every 1000 milliseconds
 	</script>
+	<style type="text/css">
+	    #text {
+	        border: #000000 solid 2px;
+		background-color: #42C0FB;
+	        font: 20px/1.2 Courier, monospace;
+	        width: 12em;  /* 20 x 0.6 (the width/height ratio of Courier) */
+	        height: 4.8em; /* 4 x 1.2 (line-height is 1.2) */
+	        overflow: hidden;
+	    }
+	</style>
 </head>
 
 <body>
