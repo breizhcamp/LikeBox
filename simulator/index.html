@@ -6,7 +6,7 @@
 		function ()
 		{
 			$('#text').load('/text').fadeIn("slow");
-			$('#sessionId').load('/sessionId').fadeIn("slow");
+			$('#sessionId').load('/sessionId');
 		}, 1000); // refresh every 1000 milliseconds
 	</script>
 	<style type="text/css">
@@ -24,7 +24,7 @@
 <body>
 	<h1>Afficheur LCD</h1>
 	<div id="text">Chargement... </div>
-	<div id="sessionId"></div>
+	<div id="sessionId" style="visibility: hidden;"></div>
 	<h1>Boutons vote</h1>
 	<p>Vote : avez vous aim&eacute; la session ?</p>
 		<button id="oui">oui</button>
