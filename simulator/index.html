@@ -6,6 +6,7 @@
 		function ()
 		{
 			$('#text').load('/text').fadeIn("slow");
+			$('#sessionId').load('/sessionId').fadeIn("slow");
 		}, 1000); // refresh every 1000 milliseconds
 	</script>
 	<style type="text/css">
@@ -23,6 +24,7 @@
 <body>
 	<h1>Afficheur LCD</h1>
 	<div id="text">Chargement... </div>
+	<div id="sessionId"></div>
 	<h1>Boutons vote</h1>
 	<p>Vote : avez vous aim&eacute; la session ?</p>
 		<button id="oui">oui</button>
@@ -52,23 +54,26 @@
 	    $.ajaxSetup({ cache: false });
 	    $('#oui').click(function(){ 
 	         $.ajax({ 
-	             type: "GET",
+	             type: "POST",
 	             dataType: "json",
-	             url: "/vote/1",
+	             url: "/vote",
+		     data: "valeur=1&session=" + $('#sessionId').text()
 	             });
 	         });
 	    $('#bof').click(function(){ 
 	         $.ajax({ 
-	             type: "GET",
+	             type: "POST",
 	             dataType: "json",
-	             url: "/vote/0",
+	             url: "/vote",
+		     data: "valeur=0&session=" + $('#sessionId').text()
 	             });
 	         });
 	    $('#non').click(function(){ 
 	         $.ajax({ 
-	             type: "GET",
+	             type: "POST",
 	             dataType: "json",
-	             url: "/vote/-1",
+	             url: "/vote",
+		     data: "valeur=-1&session=" + $('#sessionId').text()
 	             });
 	         });
 	    $('#dateheure').submit(function(e) {
