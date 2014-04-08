@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+app.use(express.urlencoded());
 
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(__dirname + '/votes.db');
@@ -80,7 +81,14 @@ app.get('/vote/:valeur', function(req, res) {
 
 app.post('/settime', function(req, res) {
 	console.log("Set time : ");
-	console.log(req.params);
+	console.log(req.body);
+	res.send("ok");
+});
+
+app.post('/setsalle', function(req, res) {
+	console.log("Set Salle : ");
+	console.log(req.body);
+	res.send("ok");
 });
 
 app.listen(8088);

@@ -28,6 +28,24 @@
 		<button id="oui">oui</button>
 		<button id="bof">bof</button>
 		<button id="non">non</button>
+	<h1>Paramètres</h1>
+	<h2>Date et heure courante</h2>
+	<form id="dateheure" action="/settime" method="POST">
+		Heure : <input name="heure" type="text" size="2" value="9"><input name="minutes" type="text" size="2" value="45">
+		Date : <input name="jour" type="text" size="2" value="13"><input name="mois" type="text" size="2" value="06"><input name="année" type="text" size="4" value="2013">
+		<input type="submit" value="Go">
+	</form>
+	<h2>Salle</h2>
+	<form id="salle" action="/setsalle" method="POST">
+		<select name="Choix">
+			<option value="Ouessant">Ouessant</option>
+			<option value="Groix">Groix</option>
+			<option value="Belle-île">Belle-île</option>
+			<option value="Molène">Molène</option>
+			<option value="Bréhat">Bréhat</option>
+		</select>
+		<input type="submit" value="Go">
+	</form>
 	<script type="text/javascript">
 	    $.ajaxSetup({ cache: false });
 	    $('#oui').click(function(){ 
@@ -51,13 +69,26 @@
 	             url: "/vote/-1",
 	             });
 	         });
+	    $('#dateheure').submit(function(e) {
+		e.preventDefault();
+		var serializedFormData = $('#dateheure').serialize();
+         	$.ajax({
+                	url: '/settime', 
+	                type: 'POST',
+        	        data: serializedFormData 
+			});
+		return false;
+		});
+	    $('#salle').submit(function(e) {
+		e.preventDefault();
+		var serializedFormData = $('#salle').serialize();
+         	$.ajax({
+                	url: '/setsalle', 
+	                type: 'POST',
+        	        data: serializedFormData 
+			});
+		return false;
+		});
 	</script>
-	<h1>Paramètres</h1>
-	<h2>Date et heure courante</h2>
-	<form id="dateheure" action="/settime" method="POST">
-		Heure : <input name="heure" type="text" size="2" value="9"><input name="minutes" type="text" size="2" value="45">
-		Date : <input name="jour" type="text" size="2" value="13"><input name="mois" type="text" size="2" value="06"><input name="année" type="text" size="4" value="2013">
-		<input type="submit" value="Go">
-	</form>
 </body>
 </html>
