@@ -16,7 +16,6 @@ var sessionNum = '999';
 
 app.get('/', function(req, res) {
     	res.sendfile(__dirname + '/index.html');
-    	console.log('Acces racine');
 });
 
 app.get('/sessionId', function(req, res) {
@@ -78,7 +77,6 @@ app.get('/text', function(req, res) {
 	// Si on trouve la session, on affiche les informations sur le LCD
 		var sessiontext=confCourante[0].title;
 		sessionNum=confCourante[0].id;
-		console.log(sessionNum);
 		// Ligne 1 - Génération de la rotation sur le titre de la session en cours - TODO : c'est ptet un peu buggé...
 		var sessiontextdisp = sessiontext.concat('---');
 		var rotatingText = sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20);
@@ -91,7 +89,7 @@ app.get('/text', function(req, res) {
 
 		// Récupération des votes pour la session en cours
 		db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='" + sessionNum + "'", function (error, row) { 
-			// Ligne 4 - Affichage du vote sur une barre de progression - TODO : virer la division par zéro si il n'y a pas de votes :P
+			// Ligne 4 - Affichage du vote sur une barre de progression - TODO : il reste un bug si on fait un vote négatif en premier...
 			var progressbar = ':( |------------| :)';
 			var total = row.total; 
 			var votes = row.nbvote; 
@@ -99,8 +97,6 @@ app.get('/text', function(req, res) {
 			if (votes != 0) { curseur = Math.round(total*12/votes); };
 			// Positionnement du curseur de vote sur la barre
 			var progressbarCurseur = setCharAt(progressbar,curseur+4,'*');
-			console.log(row);
-			console.log(parseInt(confCourante[0].finvote));
 
 		    	res.setHeader('Content-Type', 'text/plain');
 		    	res.end(rotatingText + '<BR/>&nbsp;' + heuresConf + '&nbsp;<BR/>Temps vote : ' + tempsFinVote + 'min<BR/>' + progressbarCurseur);
@@ -110,13 +106,6 @@ app.get('/text', function(req, res) {
 		});
 	};
 });
-
-//app.get('/vote/:valeur', function(req, res) {
-//    var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, datetime('now'))");
-//    session='1';
-//    stmt.run({$session : session, $vote : req.params.valeur});
-//    console.log('Vote pour la session' + session + ' : ' + req.params.valeur);
-//});
 
 app.post('/vote', function(req, res) {
     	var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, datetime('now'))");
