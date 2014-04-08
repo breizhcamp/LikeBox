@@ -20,6 +20,8 @@ app.get('/', function(req, res) {
 
 app.get('/text', function(req, res) {
 
+	console.log('Jour : ' + jourCourant + ', Heure : ' + heureCourante + ', Salle : ' + salleCourante);
+
 	// Récupération des sessions depuis le programme json
 	var programJSON = require(__dirname + '/breizhcamp.json');
 
@@ -60,37 +62,44 @@ app.get('/text', function(req, res) {
 	var heureCouranteSplit = heureCourante.split(':');
 	var heureCouranteNum = parseInt(heureCouranteSplit[0]*60)+parseInt(heureCouranteSplit[1]);
 	var confCourante = jsonPath.eval(confsJourSalle, "$[?(@.start<'" + heureCouranteNum + "'&&@.stop>'" + heureCouranteNum + "')]");
-	var sessiontext=confCourante[0].title;
-	var sessionNum=confCourante[0].id;
 
-	// Ligne 1 - Génération de la rotation sur le titre de la session en cours - TODO : c'est ptet un peu buggé...
-	var sessiontextdisp = sessiontext.concat('---');
-	var rotatingText = sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20);
+	// Si il n'y a pas de session en cours, on affiche un petit mot...
+	if (confCourante.length == 0) { 
+		res.setHeader('Content-Type', 'text/plain');
+		res.end('BreizhCamp<BR/>For<BR/>The<BR/>Win');
+	} else {
+	// Si on trouve la session, on affiche les informations sur le LCD
+		var sessiontext=confCourante[0].title;
+		var sessionNum=confCourante[0].id;
+		// Ligne 1 - Génération de la rotation sur le titre de la session en cours - TODO : c'est ptet un peu buggé...
+		var sessiontextdisp = sessiontext.concat('---');
+		var rotatingText = sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20);
 
-	// Ligne 2 - Création de la ligne affichant l'heure de début et l'heure de fin
-	var heuresConf = Math.floor(parseInt(confCourante[0].start)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].start) % 60)  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(parseInt(confCourante[0].stop)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].stop) % 60);
+		// Ligne 2 - Création de la ligne affichant l'heure de début et l'heure de fin
+		var heuresConf = Math.floor(parseInt(confCourante[0].start)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].start) % 60)  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(parseInt(confCourante[0].stop)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].stop) % 60);
 
-	// Ligne 3 - Affichage du temps avant la fin des votes
-	var tempsFinVote = (parseInt(confCourante[0].finvote)) - parseInt(heureCourante);
+		// Ligne 3 - Affichage du temps avant la fin des votes
+		var tempsFinVote = (parseInt(confCourante[0].finvote)) - parseInt(heureCourante);
 
-	// Récupération des votes pour la session en cours
-	db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='1'", function (error, row) { 
-		// Ligne 4 - Affichage du vote sur une barre de progression
-		var progressbar = ':( |------------| :)';
-		var total = row.total; 
-		var votes = row.nbvote; 
-		var curseur = Math.round(total*12/votes);
-		// Positionnement du curseur de vote sur la barre
-		var progressbarCurseur = setCharAt(progressbar,curseur+4,'*');
-		console.log(row);
-		console.log(parseInt(confCourante[0].finvote));
+		// Récupération des votes pour la session en cours
+		db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='1'", function (error, row) { 
+			// Ligne 4 - Affichage du vote sur une barre de progression - TODO : virer la division par zéro si il n'y a pas de votes :P
+			var progressbar = ':( |------------| :)';
+			var total = row.total; 
+			var votes = row.nbvote; 
+			var curseur = Math.round(total*12/votes);
+			// Positionnement du curseur de vote sur la barre
+			var progressbarCurseur = setCharAt(progressbar,curseur+4,'*');
+			console.log(row);
+			console.log(parseInt(confCourante[0].finvote));
 
-	    	res.setHeader('Content-Type', 'text/plain');
-	    	res.end(rotatingText + '<BR/>&nbsp;' + heuresConf + '&nbsp;<BR/>Temps vote : ' + tempsFinVote + 'min<BR/>' + progressbarCurseur);
+		    	res.setHeader('Content-Type', 'text/plain');
+		    	res.end(rotatingText + '<BR/>&nbsp;' + heuresConf + '&nbsp;<BR/>Temps vote : ' + tempsFinVote + 'min<BR/>' + progressbarCurseur);
 
-		// On avance le curseur pour la rotation du titre
-		if (i == sessiontextdisp.length) { i = 0; } else { i = i+1; };
-	});
+			// On avance le curseur pour la rotation du titre
+			if (i == sessiontextdisp.length) { i = 0; } else { i = i+1; };
+		});
+	};
 });
 
 app.get('/vote/:valeur', function(req, res) {
@@ -111,7 +120,7 @@ app.post('/settime', function(req, res) {
 app.post('/setsalle', function(req, res) {
 	console.log("Set Salle : ");
 	console.log(req.body);
-	salleCourante = req.body.choix;
+	salleCourante = req.body.Choix;
 	res.send("ok");
 });
 
