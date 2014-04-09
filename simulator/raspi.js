@@ -75,14 +75,14 @@ app.get('/text', function(req, res) {
 		res.end('BreizhCamp<BR/>For<BR/>The<BR/>Win');
 	} else {
 	// Si on trouve la session, on affiche les informations sur le LCD
-		var sessiontext=confCourante[0].title;
+		var sessionText=confCourante[0].title;
 		sessionNum=confCourante[0].id;
 		// Ligne 1 - Génération de la rotation sur le titre de la session en cours - TODO : c'est ptet un peu buggé...
-		var sessiontextdisp = sessiontext.concat('---');
-		var rotatingText = sessiontextdisp.substr(i,20) + sessiontextdisp.substr(0,i-sessiontextdisp.length+20);
+		var sessionTextDisp = sessionText.concat('---');
+		var rotatingText = sessionTextDisp.substr(i,20) + sessionTextDisp.substr(0,i-sessionTextDisp.length+20);
 
 		// Ligne 2 - Création de la ligne affichant l'heure de début et l'heure de fin
-		var heuresConf = Math.floor(parseInt(confCourante[0].start)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].start) % 60)  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(parseInt(confCourante[0].stop)/60) + 'h' + deuxchiffres(parseInt(confCourante[0].stop) % 60);
+		var heuresConf = Math.floor(parseInt(confCourante[0].start)/60) + 'h' + deuxChiffres(parseInt(confCourante[0].start) % 60)  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(parseInt(confCourante[0].stop)/60) + 'h' + deuxChiffres(parseInt(confCourante[0].stop) % 60);
 
 		// Ligne 3 - Affichage du temps avant la fin des votes
 		var tempsFinVote = (parseInt(confCourante[0].finvote)) - parseInt(heureCouranteNum);
@@ -90,19 +90,19 @@ app.get('/text', function(req, res) {
 		// Récupération des votes pour la session en cours
 		db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='" + sessionNum + "'", function (error, row) { 
 			// Ligne 4 - Affichage du vote sur une barre de progression
-			var progressbar = ':( |------------| :)';
+			var progressBar = ':( |------------| :)';
 			var total = row.total; 
 			var votes = row.nbvote; 
 			var curseur = 0;
 			if (votes != 0) { curseur = Math.round(total*6/votes); };
 			// Positionnement du curseur de vote sur la barre
-			var progressbarCurseur = setCharAt(progressbar,curseur+10,'*');
+			var progressBarCurseur = setCharAt(progressBar,curseur+10,'*');
 
 		    	res.setHeader('Content-Type', 'text/plain');
-		    	res.end(rotatingText + '<BR/>&nbsp;' + heuresConf + '&nbsp;<BR/>Temps vote : ' + tempsFinVote + 'min<BR/>' + progressbarCurseur);
+		    	res.end(rotatingText + '<BR/>&nbsp;' + heuresConf + '&nbsp;<BR/>Temps vote : ' + tempsFinVote + 'min<BR/>' + progressBarCurseur);
 
 			// On avance le curseur pour la rotation du titre
-			if (i == sessiontextdisp.length) { i = 0; } else { i = i+1; };
+			if (i == sessionTextDisp.length) { i = 0; } else { i = i+1; };
 		});
 	};
 });
@@ -136,6 +136,6 @@ function setCharAt(str,index,chr) {
     return str.substr(0,index) + chr + str.substr(index+1);
 }
 
-function deuxchiffres(n){
+function deuxChiffres(n){
     return n > 9 ? "" + n: "0" + n;
 }
