@@ -27,29 +27,33 @@
 	<div id="sessionId" style="visibility: hidden;"></div>
 	<h1>Boutons vote</h1>
 	<p>Vote : avez vous aim&eacute; la session ?</p>
-		<button id="oui">oui</button>
-		<button id="bof">bof</button>
-		<button id="non">non</button>
-	<h1>Paramètres</h1>
-	<h2>Date et heure courante</h2>
-	<form id="dateheure" action="/settime" method="POST">
-		Heure : <input name="heure" type="text" size="2" value="9"><input name="minutes" type="text" size="2" value="45">
-		<select name="jour">
-			<option value="13/06/2013">13/06/2013</option>
-			<option value="14/06/2013">14/06/2013</option>
-		<input type="submit" value="Go">
-	</form>
-	<h2>Salle</h2>
-	<form id="salle" action="/setsalle" method="POST">
-		<select name="Choix">
-			<option value="Ouessant">Ouessant</option>
-			<option value="Groix">Groix</option>
-			<option value="Belle-Île-en-Mer">Belle-Île-en-Mer</option>
-			<option value="Molène">Molène</option>
-			<option value="Bréhat">Bréhat</option>
-		</select>
-		<input type="submit" value="Go">
-	</form>
+		<button id="oui" style="background-color:#33CC33">oui</button>
+		<button id="bof" style="background-color:#FFFF00">bof</button>
+		<button id="non" style="background-color:#FF0000">non</button>
+	<BR/>
+	<BR/>
+	<div id="params" style="border: #000000 solid 1px; width: 20em;">
+		<h1>Paramètres</h1>
+		<h2>Date et heure courante</h2>
+		<form id="dateheure" action="/settime" method="POST">
+			Heure : <input name="heure" type="text" size="2" value="9"><input name="minutes" type="text" size="2" value="45">
+			<select name="jour">
+				<option value="13/06/2013">13/06/2013</option>
+				<option value="14/06/2013">14/06/2013</option>
+			<input type="submit" value="Go">
+		</form>
+		<h2>Salle</h2>
+		<form id="salle" action="/setsalle" method="POST">
+			<select name="Choix">
+				<option value="Ouessant">Ouessant</option>
+				<option value="Groix">Groix</option>
+				<option value="Belle-Île-en-Mer">Belle-Île-en-Mer</option>
+				<option value="Molène">Molène</option>
+				<option value="Bréhat">Bréhat</option>
+			</select>
+			<input type="submit" value="Go">
+		</form>
+	</div>
 	<script type="text/javascript">
 	    $.ajaxSetup({ cache: false });
 	    $('#oui').click(function(){ 

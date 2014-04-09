@@ -11,7 +11,7 @@ var i = 0;
 
 var jourCourant = '13/06/2013';
 var heureCourante = '9:45';
-var salleCourante = 'Groix';
+var salleCourante = 'Ouessant';
 var sessionNum = '999'; 
 
 app.get('/', function(req, res) {
