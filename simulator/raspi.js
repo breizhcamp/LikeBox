@@ -89,14 +89,14 @@ app.get('/text', function(req, res) {
 
 		// Récupération des votes pour la session en cours
 		db.get("SELECT sum(vote) as total, count(vote) as nbvote FROM votes WHERE sessionId='" + sessionNum + "'", function (error, row) { 
-			// Ligne 4 - Affichage du vote sur une barre de progression - TODO : il reste un bug si on fait un vote négatif en premier...
+			// Ligne 4 - Affichage du vote sur une barre de progression
 			var progressbar = ':( |------------| :)';
 			var total = row.total; 
 			var votes = row.nbvote; 
-			var curseur = 6;
-			if (votes != 0) { curseur = Math.round(total*12/votes); };
+			var curseur = 0;
+			if (votes != 0) { curseur = Math.round(total*6/votes); };
 			// Positionnement du curseur de vote sur la barre
-			var progressbarCurseur = setCharAt(progressbar,curseur+4,'*');
+			var progressbarCurseur = setCharAt(progressbar,curseur+10,'*');
 
 		    	res.setHeader('Content-Type', 'text/plain');
 		    	res.end(rotatingText + '<BR/>&nbsp;' + heuresConf + '&nbsp;<BR/>Temps vote : ' + tempsFinVote + 'min<BR/>' + progressbarCurseur);
@@ -118,11 +118,13 @@ app.post('/vote', function(req, res) {
 app.post('/settime', function(req, res) {
 	jourCourant=req.body.jour;
 	heureCourante= req.body.heure + ':' + req.body.minutes;
+	i = 0;
 	res.send("ok");
 });
 
 app.post('/setsalle', function(req, res) {
 	salleCourante = req.body.Choix;
+	i = 0;
 	res.send("ok");
 });
 
