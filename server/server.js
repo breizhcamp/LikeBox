@@ -14,10 +14,10 @@ app.get('/Program', function(req, res) {
 });
 
 app.post('/Vote/:idsession', function(req, res) {
-        var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, datetime('now'))");
+        var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, $timestamp)");
         var session = req.params.idsession;
 	console.log(req.body);
-        stmt.run({$session : session, $vote : req.body.valeur});
+        stmt.run({$session : session, $vote : req.body.valeur, $timestamp : req.body.timestamp});
         console.log('Vote pour la session ' + session + ' : ' + req.body.valeur);
         res.send("ok");
 });
