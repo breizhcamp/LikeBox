@@ -11,6 +11,25 @@ Here is the wiring schematic :
 
 ![Wiring](docs/wiring_2014_04_27.png)
 
+**I2C installation**
+In order to use the i2c port for the LCD module, you have to do the following on a raspbian :
+
+```
+sudo apt-get install i2c-tools
+```
+
+Disable blacklist for the modules in `/etc/modprobe.d/raspi-blacklist.conf`:
+
+```
+#blacklist spi-bcm2708
+#blacklist i2c-bcm2708
+```
+
+Activate the i2c driver at boot time in `/etc/modules`:
+
+```
+i2c-dev
+```
 
 Software
 --------
@@ -25,10 +44,20 @@ and release. The event `pushed` is emitted when the button is pushed, the event 
 is released. A software debounce is in place to avoid repeated fake events. You can also get the state button
 (`up` or `down`) at anytime.
 
-The virtual debug
-module starts an HTTP server defined with the pin button number (eg: button pin 27 starts an HTTP server on 9027 port).
+The virtual debug module starts an HTTP server defined with the pin button number
+(eg: button pin 27 starts an HTTP server on 9027 port).
 You can call the following url to emulate the button :
 
 - `/pushed`: the button is pushed
 - `/released`: the button is released
 - `/click`: the button is pushed the released 500ms after
+
+
+**The lcd module** is used to print text on the LCD screen. The screen is connected on the i2c bus.
+
+The virtual debug module starts a socket server and print data onto the user console, you can use netcat or telnet
+to connect on the socket:
+
+```
+nc localhost 9139
+```
