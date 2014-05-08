@@ -61,3 +61,7 @@ to connect on the socket:
 ```
 nc localhost 9139
 ```
+
+
+**The votes module** has the responsibility to store the vote and do the counting.
+You can retrieve all vote from a specific timestamp and the count for a specific session.
