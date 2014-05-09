@@ -2,9 +2,9 @@
  * Node file for client poll machine
  */
 var debug = process.env.DEBUG,
-	button = debug ? require('./button_virtual.js') : require('./button.js'),
-	lcd = debug ? require('./lcd_virtual.js') : require('./lcd.js'),
-	votes = require('./votes.js')();
+	button = debug ? require('./modules/button_virtual.js') : require('./modules/button.js'),
+	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
+	votes = require('./modules/votes.js')();
 
 /**
  * State of the vote machine. Could be the following state :

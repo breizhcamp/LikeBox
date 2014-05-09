@@ -28,21 +28,19 @@ module.exports = function(pinNum) {
 
 		//listening to onoff module event
 		var button = new Gpio(pinNum, 'in', 'both'),
-			lastDown = 0, lastUp = 0, count = 0; //to avoid bounces
+			lastDown = 0, lastUp = 0; //to avoid bounces
 
 		button.watch(function(err, value) {
 			var now = Date.now();
 			if (!value) {
 				if (now - lastDown > debounceMs) {
 					lastDown = now;
-					//console.log('Bouton ' + pinNum + ' appuyé: ' + count++);
 					state = 'down';
 					events.emit('pushed');
 				}
 			} else {
 				if (now - lastUp > debounceMs) {
 					lastUp = now;
-					//console.log('Bouton ' + pinNum + ' relaché');
 					state = 'up';
 					events.emit('released');
 				}
