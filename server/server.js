@@ -9,11 +9,22 @@ app.get('/', function(req, res) {
 	res.send('It works');
 });
 
-app.get('/Program', function(req, res) {
+app.get('/program', function(req, res) {
         res.download(__dirname + '/schedule.json');
 });
 
-app.post('/Vote/:idsession', function(req, res) {
+app.get('/status/:idsession', function(req, res) {
+	var session = req.params.idsession;
+	var fs = require('fs');
+	var stats = fs.statSync(__dirname + '/schedule.json');
+	var schedule_mtime = stats.mtime.getTime();
+        db.get("SELECT max(timestamp) as last_timestamp, count(id) as nb_votes FROM votes WHERE sessionId='" + session + "'", function (error, row) {
+        	console.log('Dernier timestamp pour la session : ' + session + ' => ' + row.last_timestamp);
+        	res.send("{'timestamp':'" + row.last_timestamp + "', 'nb_votes':'" + row.nb_votes + "', 'schedule_mtime':'" + schedule_mtime + "'}");
+	});
+});
+
+app.post('/vote/:idsession', function(req, res) {
         var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, $timestamp)");
         var session = req.params.idsession;
 	console.log(req.body);
