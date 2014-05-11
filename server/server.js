@@ -6,7 +6,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(__dirname + '/server_votes.db');
 
 app.get('/', function(req, res) {
-	res.send('It works');
+        res.sendfile(__dirname + '/index.html');
 });
 
 app.get('/program', function(req, res) {

@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Meilleures confs</title>
+	<script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+        <script type="text/javascript">
+                var auto_refresh = setInterval(
+                function ()
+                {
+			$.getJSON("/top/5" , function(data) {
+				var items = [];
+				items.push("<ul>");
+				$.each( data, function( key, val ) {
+					items.push( "<li id='" + key + "'>" + val + "</li>" );
+				});
+				items.push("</ul>");
+				$("#text").replaceWith( items.join('') );
+			});
+                }, 10000); 
+        </script>
+</head>
+
+<body>
+	<h1>Meilleures confs : </h1>
+	<div id="text">Chargement... </div>
+</body>
+</html>
