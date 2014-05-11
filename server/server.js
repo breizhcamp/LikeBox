@@ -35,10 +35,13 @@ app.post('/vote/:idsession', function(req, res) {
 
 app.get('/top/:nb', function(req, res) {
 	var nombre = req.params.nb;
-	var result = "";
-        db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row, callback) {
-        	result += "{'sessionId':'" + row.sessionId + "', 'nb_votes':'" + row.nb_votes + "', 'somme_votes':'" + row.somme + "'}";
-	}, function () { res.send(result) })
+	var results = {};
+	var row_num = 1;
+        db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
+		cur_sess=row_num;
+        	results[cur_sess] = "{'sessionId':'" + row.sessionId + "', 'nb_votes':'" + row.nb_votes + "', 'somme_votes':'" + row.somme + "'}";
+		row_num += 1;
+	}, function () { res.send(results) })
 });
 
 app.listen(3000, function() {
