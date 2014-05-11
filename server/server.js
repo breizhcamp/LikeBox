@@ -33,6 +33,14 @@ app.post('/vote/:idsession', function(req, res) {
         res.send("ok");
 });
 
+app.get('/top/:nb', function(req, res) {
+	var nombre = req.params.nb;
+	var result = "";
+        db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row, callback) {
+        	result += "{'sessionId':'" + row.sessionId + "', 'nb_votes':'" + row.nb_votes + "', 'somme_votes':'" + row.somme + "'}";
+	}, function () { res.send(result) })
+});
+
 app.listen(3000, function() {
 	console.log('Listening on port 3000');
 });
