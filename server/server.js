@@ -39,7 +39,7 @@ app.get('/top/:nb', function(req, res) {
 	var row_num = 1;
         db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
 		cur_sess=row_num;
-        	results[cur_sess] = "{'sessionId':'" + row.sessionId + "', 'nb_votes':'" + row.nb_votes + "', 'somme_votes':'" + row.somme + "'}";
+		results[cur_sess] = row;
 		row_num += 1;
 	}, function () { res.send(results) })
 });
