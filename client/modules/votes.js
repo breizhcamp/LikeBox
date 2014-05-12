@@ -72,7 +72,7 @@ module.exports = function() {
 	var getCount = function(sessionId) {
 		if (!db) throw "Vote module not started";
 		var deferred = Q.defer();
-		db.all("SELECT COUNT(*) as nb, vote FROM votes GROUP BY vote", function(err, rows) {
+		db.all("SELECT COUNT(*) as nb, vote FROM votes WHERE session = ? GROUP BY vote", sessionId, function(err, rows) {
 			if (err) {
 				deferred.reject(new Error(err));
 				return;
