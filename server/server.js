@@ -5,6 +5,8 @@ app.use(express.json());
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(__dirname + '/server_votes.db');
 
+var jsonPath = require('JSONPath');
+
 app.get('/', function(req, res) {
         res.sendfile(__dirname + '/index.html');
 });
@@ -27,7 +29,6 @@ app.get('/status/:idsession', function(req, res) {
 app.post('/vote/:idsession', function(req, res) {
         var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, $timestamp)");
         var session = req.params.idsession;
-	console.log(req.body);
         stmt.run({$session : session, $vote : req.body.valeur, $timestamp : req.body.timestamp});
         console.log('Vote pour la session ' + session + ' : ' + req.body.valeur);
         res.send("ok");
@@ -36,10 +37,13 @@ app.post('/vote/:idsession', function(req, res) {
 app.get('/top/:nb', function(req, res) {
 	var nombre = req.params.nb;
 	var results = {};
+	var programJSON = require(__dirname + '/schedule.json');
 	var row_num = 1;
         db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
 		cur_sess=row_num;
 		results[cur_sess] = row;
+		var conf = jsonPath.eval(programJSON, "$..proposals[?(@.id=='" + row.sessionId + "')]");
+		results[cur_sess].titre = conf[0].title;
 		row_num += 1;
 	}, function () { res.send(results) })
 });
