@@ -6,13 +6,13 @@
 		function getdata() {
 			$.getJSON("/top/5" , function(data) {
 				var items = [];
-				items.push("<ul>");
+				items.push("<ol>");
 				$.each( data, function( key, val ) {
 					items.push( "<li id='" + key + "'>");
-					items.push("Conf : " + val.titre + ", Score : " + val.somme + ", Nombre de votes : " + val.nb_votes);
+					items.push("Conf : <b>" + val.titre + "</b>, Score : " + val.somme + ", Nombre de votes : " + val.nb_votes);
 					items.push( "</li>");
 				});
-				items.push("</ul>");
+				items.push("</ol>");
 				$("#text").replaceWith( items.join('') );
 			});
 		};
