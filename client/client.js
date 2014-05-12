@@ -34,14 +34,15 @@ redButton.events().on('released', function(){
 });
 
 //--- VOTE INITIALISATION ---
-schedule.getRooms(function(rooms) {
+schedule.getRooms().then(function(rooms) {
 	console.log(rooms);
-});
-schedule.getCurrentSession('Ouessant', function(session) {
-	console.log(session);
-});
+	return schedule.getCurrentSession('Ouessant');
 
-votes.start(function() {
+}).then(function(session) {
+	console.log(session);
+	return votes.start();
+
+}).then(function() {
 	//database opened successfully, switching to voting mode
 	state = 'voting';
 });
@@ -57,7 +58,7 @@ function userVoted(button) {
 
 setInterval(function() {
 	if (state == 'voting') {
-		votes.getCount(0, function(data) {
+		votes.getCount(0).then(function(data) {
 			console.log("-: " + data.m + " | +: " + data.p);
 		});
 //		votes.listVotes(1399592105779, function(votes) {

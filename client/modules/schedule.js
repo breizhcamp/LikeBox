@@ -1,5 +1,6 @@
 var fs = require('fs'),
-	moment = require('moment');
+	moment = require('moment'),
+	Q = require('q');
 
 /**
  * Read the schedule file and extract rooms names and current voting talk.
@@ -9,11 +10,15 @@ module.exports = function(scheduleFile) {
 	return {
 		/**
 		 * Returns all rooms names from the schedule.
-		 * @param cb Callback that 1st param will be an array with rooms names.
+		 * @returns {promise|Q.promise} Param will contains an array with rooms name
 		 */
-		getRooms: function(cb) {
+		getRooms: function() {
+			var deferred = Q.defer();
 			fs.readFile(scheduleFile, 'utf8', function (err, data) {
-				if (err) throw err;
+				if (err) {
+					deferred.reject(new Error(err));
+					return;
+				}
 				var schedule = JSON.parse(data);
 				var rooms = {};
 
@@ -38,19 +43,25 @@ module.exports = function(scheduleFile) {
 				Object.keys(rooms).forEach(function(key) {
 					res.push(key);
 				});
-				cb(res);
+				deferred.resolve(res);
 			});
+			return deferred.promise;
 		},
 
 		/**
 		 * Retrieve the current voting session from the schedule file
 		 * @param room Name of the room to get the current voting session
-		 * @param cb Callback that 1st param will be the current voting session:
-		 * { id: numeric, title: String, endVote: date }
+		 * @returns {promise|Q.promise} Param will be the current voting session or undefined:
+		 * 		{ id: numeric, title: String, endVote: date }
 		 */
-		getCurrentSession: function(room, cb) {
+		getCurrentSession: function(room) {
+			var deferred = Q.defer();
 			fs.readFile(scheduleFile, 'utf8', function (err, data) {
-				if (err) throw err;
+				if (err) {
+					deferred.reject(new Error(err));
+					return;
+				}
+
 				var schedule = JSON.parse(data);
 				var now = moment('2014-05-22 10:36:27');
 
@@ -98,7 +109,7 @@ module.exports = function(scheduleFile) {
 
 				//if we don't hit any current session, we return nothing
 				if (!current) {
-					cb();
+					deferred.resolve();
 					return;
 				}
 
@@ -134,8 +145,10 @@ module.exports = function(scheduleFile) {
 					endVote: moment(current.endDate).add('minutes', closeAfterSession).toDate()
 				};
 
-				cb(res);
+				deferred.resolve(res);
 			});
+
+			return deferred.promise;
 		}
 
 	}

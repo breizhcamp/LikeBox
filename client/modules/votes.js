@@ -1,4 +1,5 @@
-var sqlite3 = require('sqlite3').verbose();
+var sqlite3 = require('sqlite3').verbose(),
+	Q = require('q');
 
 /**
  * Module to handle votes count
@@ -8,20 +9,28 @@ module.exports = function() {
 
 	/**
 	 * Starts vote module.
-	 * @param cb Function to call when the vote module is ready
+	 * @returns {promise|Q.promise} Resolve promise when module started
 	 */
-	var start = function(cb) {
+	var start = function() {
+		var deferred = Q.defer();
 		db = new sqlite3.Database('votes.db', function(err) {
-			if (err) throw err;
+			if (err) {
+				deferred.reject(new Error(err));
+				return;
+			}
 
 			//create table if not existing
 			db.run("CREATE TABLE IF NOT EXISTS votes " +
 				"(id INTEGER PRIMARY KEY, timestamp INTEGER, session INTEGER, vote TEXT)",
 			function(err) {
-				if (err) throw err;
-				cb();
+				if (err) {
+					deferred.reject(new Error(err));
+				} else {
+					deferred.resolve();
+				}
 			});
 		});
+		return deferred.promise;
 	};
 
 	/**
@@ -40,26 +49,36 @@ module.exports = function() {
 	/**
 	 * Retrieve all votes from a specific time.
 	 * @param fromTimestamp Timestamp of the minimal vote to retrieve
-	 * @param cb Function called with votes list ({timestamp: number, session: number, vote: string})
+	 * @returns {promise|Q.promise} Param will be votes list ({timestamp: number, session: number, vote: string})
 	 */
-	var listVotes = function(fromTimestamp, cb) {
+	var listVotes = function(fromTimestamp) {
 		if (!db) throw "Vote module not started";
+		var deferred = Q.defer();
 		db.all("SELECT timestamp, session, vote FROM votes WHERE timestamp > ?", fromTimestamp, function(err, rows) {
-			if (err) throw err;
-			cb(rows);
+			if (err) {
+				deferred.reject(new Error(err));
+			} else {
+				deferred.resolve(rows);
+			}
 		});
+		return deferred.promise;
 	};
 
 	/**
 	 * Get the count of votes for a specific session.
 	 * @param sessionId Id of the session to get the votes
-	 * @param cb Callback called with : {m: number, p: number} 'm' for minus count, 'p' for plus count
+	 * @returns {promise|Q.promise} Param will be : {m: number, p: number} 'm' for minus count, 'p' for plus count
 	 */
-	var getCount = function(sessionId, cb) {
+	var getCount = function(sessionId) {
 		if (!db) throw "Vote module not started";
+		var deferred = Q.defer();
 		db.all("SELECT COUNT(*) as nb, vote FROM votes GROUP BY vote", function(err, rows) {
-			if (err) throw err;
+			if (err) {
+				deferred.reject(new Error(err));
+				return;
+			}
 
+			//read count res and put it into a single object
 			var res = { p: 0, m:0 };
 			for (var i = 0 ; i < rows.length ; i++) {
 				var row = rows[i];
@@ -67,20 +86,26 @@ module.exports = function() {
 				else if (row.vote == 'm') res.m = row.nb;
 			}
 
-			cb(res);
+			deferred.resolve(res);
 		});
+		return deferred.promise;
 	};
 
 	/**
 	 * Stops the vote module.
-	 * @param cb Function to call when the vote module is stopped
+	 * @returns {promise|Q.promise} Resolved when module stopped
 	 */
-	var stop = function(cb) {
+	var stop = function() {
 		if (!db) throw "Vote module not started";
+		var deferred = Q.defer();
 		db.close(function(err) {
-			if (err) throw err;
-			cb();
+			if (err) {
+				deferred.reject(new Error(err));
+			} else {
+				deferred.resolve();
+			}
 		});
+		return deferred.promise;
 	};
 
 	return {
