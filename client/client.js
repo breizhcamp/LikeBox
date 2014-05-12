@@ -4,6 +4,7 @@
 var debug = process.env.DEBUG,
 	button = debug ? require('./modules/button_virtual.js') : require('./modules/button.js'),
 	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
+	scheduleReader = require('./modules/schedule.js'),
 	votes = require('./modules/votes.js')();
 
 /**
@@ -17,7 +18,8 @@ var state = 'init';
 
 var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
 	greenButton = button(23),
-	redButton = button(24);
+	redButton = button(24),
+	schedule = scheduleReader('schedule.json');
 
 greenButton.events().on('released', function(){
 	if (state == 'voting') {
@@ -29,6 +31,14 @@ redButton.events().on('released', function(){
 	if (state == 'voting') {
 		userVoted('red');
 	}
+});
+
+//--- VOTE INITIALISATION ---
+schedule.getRooms(function(rooms) {
+	console.log(rooms);
+});
+schedule.getCurrentSession('Ouessant', function(session) {
+	console.log(session);
 });
 
 votes.start(function() {
