@@ -34,17 +34,65 @@ function displayCurrentSession() {
 
 	schedule.getCurrentSession(room).then(function(session) {
 		currentSession = session;
+
 		screen.goto(0,0);
-		screen.print(session.title.substr(0, 40));
+		screen.print(currentSession.title.substr(0, 40));
+		displayRemainingTime();
 
-		screen.goto(0,2);
-		var nbMinLeft = moment().diff(moment(session.endVote), 'minutes');
-		screen.print('Tps restant: ' + nbMinLeft + 'min');
+		return votes.getCount(session.id);
 
-		setTimeout(displayCurrentSession, 50000);
+	}).then(function(votes) {
+		currentSession.m = votes.m;
+		currentSession.p = votes.p;
+		displayVoteCount();
+
+		setTimeout(displayCurrentSession, 3000);
 	});
 }
 
+/** Display the voting remaining time on the LCD screen */
+function displayRemainingTime() {
+	var nbMinLeft = moment().diff(moment(currentSession.endVote), 'minutes');
+	if (nbMinLeft >= 0) {
+		displayCurrentSession();
+		return;
+	}
+	screen.goto(0,2);
+	screen.print('Tps restant: ' + nbMinLeft + 'min');
+}
+
+/** Display current vote count on the LCD screen */
+function displayVoteCount() {
+	screen.goto(0,3);
+	screen.print(' - : ' + currentSession.m + '    + : ' + currentSession.p + ' ');
+}
+
+/**
+ * Function to call when a user push a button during the voting mode
+ * @param button {string} 'red' or 'green' depending of the button pressed
+ */
+function userVoted(button) {
+	console.log("User pressed [" + button + "] button");
+
+	state = 'voted';
+	screen.goto(0,2);
+	screen.print("       A VOTE       ");
+
+	votes.addVote(0, button == 'green' ? 'p' : 'm');
+	if (button == 'green') {
+		currentSession.p++;
+	} else {
+		currentSession.m++;
+	}
+	displayVoteCount();
+
+	setTimeout(function() {
+		state = 'voting';
+		displayRemainingTime();
+	}, 2000);
+}
+
+//--- BINDING BUTTONS ---
 greenButton.events().on('released', function(){
 	if (state == 'voting') {
 		userVoted('green');
@@ -65,31 +113,10 @@ votes.start().then(function() {
 	displayCurrentSession();
 });
 
-schedule.getRooms().then(function(rooms) {
-	console.log(rooms);
-	return schedule.getCurrentSession('Ouessant');
-
-}).then(function(session) {
-	console.log(session);
-	return votes.start();
-
-}).then(function() {
-	//database opened successfully, switching to voting mode
-	state = 'voting';
-});
-
-/**
- * Function to call when a user push a button during the voting mode
- * @param button {string} 'red' or 'green' depending of the button pressed
- */
-function userVoted(button) {
-	console.log("User pressed [" + button + "] button");
-	votes.addVote(0, button == 'green' ? 'p' : 'm');
-}
 
 setInterval(function() {
 	if (state == 'voting') {
-		votes.getCount(0).then(function(data) {
+		votes.getCount(currentSession.id).then(function(data) {
 			console.log("-: " + data.m + " | +: " + data.p);
 		});
 //		votes.listVotes(1399592105779, function(votes) {
