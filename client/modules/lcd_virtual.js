@@ -34,7 +34,7 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 					printStr = maxStr.substr(0, maxLength);
 				maxStr = maxStr.substr(maxLength);
 
-				console.log("write [" + printStr + "] at pos [" + data.x + "," + data.y + "]");
+				//console.log("write [" + printStr + "] at pos [" + data.x + "," + data.y + "]");
 				cursor.write(printStr);
 				data.x = 0;
 				data.y++;
@@ -43,7 +43,7 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 
 			//at this point, the string has the correct length to be print in the space left
 			//or on the last line
-			console.log("write [" + maxStr + "] at pos [" + data.x + "," + data.y + "]");
+			//console.log("write [" + maxStr + "] at pos [" + data.x + "," + data.y + "]");
 			cursor.write(maxStr.substr(0, nbCols - data.x)).goto(xOrig + 1, yOrig + 1);
 		})
 	});
