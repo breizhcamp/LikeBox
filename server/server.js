@@ -15,22 +15,24 @@ app.get('/program', function(req, res) {
         res.download(__dirname + '/schedule.json');
 });
 
-app.get('/status/:idsession', function(req, res) {
-	var session = req.params.idsession;
+app.get('/status/:idboitier', function(req, res) {
+	var boitier = req.params.idboitier;
 	var fs = require('fs');
 	var stats = fs.statSync(__dirname + '/schedule.json');
 	var schedule_mtime = stats.mtime.getTime();
-        db.get("SELECT max(timestamp) as last_timestamp, count(id) as nb_votes FROM votes WHERE sessionId='" + session + "'", function (error, row) {
-        	console.log('Dernier timestamp pour la session : ' + session + ' => ' + row.last_timestamp);
+        db.get("SELECT max(timestamp) as last_timestamp, count(id) as nb_votes FROM votes WHERE boitierId='" + boitier + "'", function (error, row) {
+        	console.log('Dernier timestamp pour le boitier : ' + boitier + ' => ' + row.last_timestamp);
         	res.send("{'timestamp':'" + row.last_timestamp + "', 'nb_votes':'" + row.nb_votes + "', 'schedule_mtime':'" + schedule_mtime + "'}");
 	});
 });
 
-app.post('/vote/:idsession', function(req, res) {
-        var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp') values ($session, $vote, $timestamp)");
-        var session = req.params.idsession;
-        stmt.run({$session : session, $vote : req.body.valeur, $timestamp : req.body.timestamp});
-        console.log('Vote pour la session ' + session + ' : ' + req.body.valeur);
+app.post('/vote/:idboitier', function(req, res) {
+  for (var voteid in req.body.votes) {
+        var boitier = req.params.idboitier;
+        var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp', 'boitierId') values ($session, $vote, $timestamp, $boitierId)");
+        stmt.run({$session : req.body.votes[voteid].sessionId, $vote : req.body.votes[voteid].vote, $timestamp : req.body.votes[voteid].timestamp, $boitierId : boitier});
+        console.log('Vote sur le boitier ' + boitier + 'pour la session ' + req.body.votes[voteid].sessionId + ' : ' + req.body.votes[voteid].valeur);
+      }
         res.send("ok");
 });
 
