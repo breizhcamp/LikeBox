@@ -37,17 +37,17 @@ app.post('/vote/:idboitier', function(req, res) {
 });
 
 app.get('/top/:nb', function(req, res) {
-	var nombre = req.params.nb;
-	var results = {};
-	var programJSON = require(__dirname + '/schedule.json');
-	var row_num = 1;
-        db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
-		cur_sess=row_num;
-		results[cur_sess] = row;
-		var conf = jsonPath.eval(programJSON, "$..proposals[?(@.id=='" + row.sessionId + "')]");
-		results[cur_sess].titre = conf[0].title;
-		row_num += 1;
-	}, function () { res.send(results) })
+  var nombre = req.params.nb;
+  var results = {};
+  var programJSON = require(__dirname + '/schedule.json');
+  var row_num = 1;
+  db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
+    cur_sess=row_num;
+    results[cur_sess] = row;
+    var conf = jsonPath.eval(programJSON, "$..proposals[?(@.id=='" + row.sessionId + "')]");
+    results[cur_sess].titre = conf[0].title;
+    row_num += 1;
+  }, function () { res.send(results) })
 });
 
 app.listen(3000, function() {
