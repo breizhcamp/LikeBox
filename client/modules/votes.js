@@ -21,7 +21,7 @@ module.exports = function() {
 
 			//create table if not existing
 			db.run("CREATE TABLE IF NOT EXISTS votes " +
-				"(id INTEGER PRIMARY KEY, timestamp INTEGER, session INTEGER, vote TEXT)",
+				"(id INTEGER PRIMARY KEY, timestamp INTEGER, session INTEGER, vote INTEGER)",
 			function(err) {
 				if (err) {
 					deferred.reject(new Error(err));
@@ -36,20 +36,20 @@ module.exports = function() {
 	/**
 	 * Add a vote into the database
 	 * @param sessionId Id of the session the user vote to
-	 * @param vote Value of the vote : 'p' for plus, 'm' for minus
+	 * @param vote Value of the vote : 1 or -1
 	 */
 	var addVote = function(sessionId, vote) {
 		if (!db) throw "Vote module not started";
 
 		var timestamp = Date.now();
-		vote = (vote == 'm' ? 'm' : 'p');
+		vote = (vote == -1 ? -1 : 1);
 		db.run("INSERT INTO votes (timestamp, session, vote) VALUES (?, ?, ?)", timestamp, sessionId, vote);
 	};
 
 	/**
 	 * Retrieve all votes from a specific time.
 	 * @param fromTimestamp Timestamp of the minimal vote to retrieve
-	 * @returns {promise|Q.promise} Param will be votes list ({timestamp: number, session: number, vote: string})
+	 * @returns {promise|Q.promise} Param will be votes list ({timestamp: number, session: number, vote: number})
 	 */
 	var listVotes = function(fromTimestamp) {
 		if (!db) throw "Vote module not started";
@@ -67,7 +67,7 @@ module.exports = function() {
 	/**
 	 * Get the count of votes for a specific session.
 	 * @param sessionId Id of the session to get the votes
-	 * @returns {promise|Q.promise} Param will be : {m: number, p: number} 'm' for minus count, 'p' for plus count
+	 * @returns {promise|Q.promise} Param will be : {m: number, p: number} 'm' for -1 count, 'p' for +1 count
 	 */
 	var getCount = function(sessionId) {
 		if (!db) throw "Vote module not started";
@@ -82,8 +82,8 @@ module.exports = function() {
 			var res = { p: 0, m:0 };
 			for (var i = 0 ; i < rows.length ; i++) {
 				var row = rows[i];
-				if (row.vote == 'p') res.p = row.nb;
-				else if (row.vote == 'm') res.m = row.nb;
+				if (row.vote == 1) res.p = row.nb;
+				else if (row.vote == -1) res.m = row.nb;
 			}
 
 			deferred.resolve(res);

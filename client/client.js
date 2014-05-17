@@ -17,6 +17,9 @@ var debug = process.env.DEBUG,
  */
 var state = 'init';
 
+/** Number of cols on the LCD screen */
+var nbCols = 20;
+
 /** Room's name of the polling box */
 var room = 'Ouessant';
 
@@ -36,7 +39,7 @@ function displayCurrentSession() {
 		currentSession = session;
 
 		screen.goto(0,0);
-		screen.print(currentSession.title.substr(0, 40));
+		screen.print(currentSession.title.substr(0, nbCols * 2));
 		displayRemainingTime();
 
 		return votes.getCount(session.id);
@@ -58,13 +61,13 @@ function displayRemainingTime() {
 		return;
 	}
 	screen.goto(0,2);
-	screen.print('Reste ' + nbMinLeft + 'min de vote  '.substr(0, 40));
+	screen.print('Reste ' + nbMinLeft + 'min de vote  '.substr(0, nbCols));
 }
 
 /** Display current vote count on the LCD screen */
 function displayVoteCount() {
 	screen.goto(0,3);
-	screen.print(' - : ' + currentSession.m + '    + : ' + currentSession.p + ' ');
+	screen.print('   Nb votes : ' + (currentSession.m + currentSession.p) + '     '.substr(0, nbCols));
 }
 
 /**
@@ -78,7 +81,7 @@ function userVoted(button) {
 	screen.goto(0,2);
 	screen.print("       A VOTE       ");
 
-	votes.addVote(0, button == 'green' ? 'p' : 'm');
+	votes.addVote(currentSession.id, button == 'green' ? 1 : -1);
 	if (button == 'green') {
 		currentSession.p++;
 	} else {
