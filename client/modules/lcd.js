@@ -20,6 +20,7 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 		lcd.setCursor(x, y);
 		curX = x;
 		curY = y;
+		return this;
 	};
 
 	/**
@@ -46,10 +47,18 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 		lcd.print(maxStr.substr(0, nbCols - curX));
 
 		goto(xOrig, yOrig);
+		return this;
+	};
+
+	/** Empty the LCD screen */
+	var clear = function() {
+		lcd.clear();
+		return this;
 	};
 
 	return {
 		goto: goto,
-		print: print
+		print: print,
+		clear: clear
 	}
 };

@@ -45,7 +45,11 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 			//or on the last line
 			//console.log("write [" + maxStr + "] at pos [" + data.x + "," + data.y + "]");
 			cursor.write(maxStr.substr(0, nbCols - data.x)).goto(xOrig + 1, yOrig + 1);
-		})
+		});
+
+		events.on('clear', function(data) {
+			cursor.goto(1,1).eraseData().goto(data.x + 1, data.y + 1);
+		});
 	});
 
 	/**
@@ -57,6 +61,7 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 		events.emit('goto', { x: x, y: y });
 		curX = x;
 		curY = y;
+		return this;
 	};
 
 	/**
@@ -67,6 +72,13 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 	 */
 	var print = function(str) {
 		events.emit('print', { str: str, x: curX, y: curY });
+		return this;
+	};
+
+	/** Empty the screen */
+	var clear = function() {
+		events.emit('clear', { x: curX, y: curY });
+		return this;
 	};
 
 	var port = 9100 + address;
@@ -75,6 +87,7 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 
 	return {
 		goto: goto,
-		print: print
+		print: print,
+		clear: clear
 	}
 };

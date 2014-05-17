@@ -31,37 +31,53 @@ var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
 	redButton = button(24),
 	schedule = scheduleReader('schedule.json');
 
-/** Display current voting session on the LCD screen */
-function displayCurrentSession() {
+/** Load current voting session and display it on the LCD */
+function loadCurrentSession() {
 	if (state != 'voting') return;
 
 	schedule.getCurrentSession(room).then(function(session) {
+		var oldSession = currentSession;
 		currentSession = session;
 
-		screen.goto(0,0);
-		screen.print(currentSession.title.substr(0, nbCols * 2));
-		displayRemainingTime();
+		if (session) {
+			displayCurrentSession();
+			displayRemainingTime();
 
-		return votes.getCount(session.id);
+			return votes.getCount(session.id).then(function(votes) {
+				currentSession.m = votes.m;
+				currentSession.p = votes.p;
+				displayVoteCount();
+			});
+		} else {
+			displayNoSession(oldSession);
+		}
 
-	}).then(function(votes) {
-		currentSession.m = votes.m;
-		currentSession.p = votes.p;
-		displayVoteCount();
+	}).fin(function() {
+		setTimeout(loadCurrentSession, 3000);
 
-		setTimeout(displayCurrentSession, 3000);
-	});
+	}).fail(console.log);
+}
+
+function displayNoSession(clear) {
+	if (clear) screen.clear();
+	screen.goto(3,1).print('AUCUNE SESSION');
+	screen.goto(2,2).print('EN COURS DE VOTE');
+}
+
+/** Display the current voting session on the LCD screen */
+function displayCurrentSession() {
+	var title = currentSession.title + '                                        '; //padding screen
+	screen.goto(0, 0).print(title.substr(0, nbCols * 2));
 }
 
 /** Display the voting remaining time on the LCD screen */
 function displayRemainingTime() {
-	var nbMinLeft = moment(currentSession.endVote).diff(moment(), 'minutes');
+	var nbMinLeft = moment(currentSession.endVote).diff(moment('2014-05-22 11:35:27'), 'minutes');
 	if (nbMinLeft <= 0) {
-		displayCurrentSession();
+		loadCurrentSession();
 		return;
 	}
-	screen.goto(0,2);
-	screen.print(('Reste ' + nbMinLeft + 'min de vote  ').substr(0, nbCols));
+	screen.goto(0,2).print(('Reste ' + nbMinLeft + 'min de vote  ').substr(0, nbCols));
 }
 
 /** Display current vote count on the LCD screen */
@@ -76,6 +92,8 @@ function displayVoteCount() {
  */
 function userVoted(vote) {
 	console.log("User vote [" + vote + "]");
+	//don't allow vote if no voting session
+	if (!currentSession) return;
 
 	state = 'voted';
 	screen.goto(0,2);
@@ -113,12 +131,12 @@ votes.start().then(function() {
 	//database opened successfully, switching to voting mode
 	state = 'voting';
 
-	displayCurrentSession();
+	loadCurrentSession();
 });
 
 
 setInterval(function() {
-	if (state == 'voting') {
+	if (state == 'voting' && currentSession) {
 		votes.getCount(currentSession.id).then(function(data) {
 			console.log("-: " + data.m + " | +: " + data.p);
 		});

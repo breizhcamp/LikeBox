@@ -68,7 +68,7 @@ module.exports = function(scheduleFile) {
 				}
 
 				var schedule = JSON.parse(data);
-				var now = moment('2014-05-22 11:35:27');
+				var now = moment();
 
 				//let's find the current day in schedule file
 				var current;
