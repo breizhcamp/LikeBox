@@ -6,7 +6,15 @@ var debug = process.env.DEBUG,
 	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
 	scheduleReader = require('./modules/schedule.js'),
 	votes = require('./modules/votes.js')(),
+	confMod = require('./modules/conf.js'),
 	moment = require('moment');
+
+// -- init modules --
+var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
+	greenButton = button(23),
+	redButton = button(24),
+	schedule = scheduleReader('schedule.json'),
+	conf = confMod('config.json');
 
 /**
  * State of the vote machine. Could be the following state :
@@ -20,16 +28,14 @@ var state = 'init';
 /** Number of cols on the LCD screen */
 var nbCols = 20;
 
-/** Room's name of the polling box */
-var room = 'Ouessant';
+/** Room's name of the voting box */
+var room = conf.roomName;
+
+/** Id of the voting box, used when sending to the server */
+var boxId = conf.boxId;
 
 /** Current voting session */
 var currentSession;
-
-var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
-	greenButton = button(23),
-	redButton = button(24),
-	schedule = scheduleReader('schedule.json');
 
 /** Load current voting session and display it on the LCD */
 function loadCurrentSession() {
@@ -126,13 +132,19 @@ redButton.events().on('released', function(){
 	}
 });
 
-//--- VOTE INITIALISATION ---
-votes.start().then(function() {
-	//database opened successfully, switching to voting mode
-	state = 'voting';
+//--- BOX INITIALISATION ---
+if (!room) {
+	console.log("Room name not defined, goto config menu");
 
-	loadCurrentSession();
-});
+} else {
+	//normal startup
+	votes.start().then(function() {
+		//database opened successfully, switching to voting mode
+		state = 'voting';
+
+		loadCurrentSession();
+	});
+}
 
 
 setInterval(function() {
