@@ -49,12 +49,17 @@ module.exports = function(scheduleFile) {
 		},
 
 		/**
-		 * Retrieve the current voting session from the schedule file
+		 * Retrieve the current voting session from the schedule file. The voting starts 10 minutes
+		 * after the beginning of the session and ends 15 minutes after the session ends.
 		 * @param room Name of the room to get the current voting session
 		 * @returns {promise|Q.promise} Param will be the current voting session or undefined:
 		 * 		{ id: numeric, title: String, endVote: date }
 		 */
 		getCurrentSession: function(room) {
+			//number of minutes after which the vote starts and ends
+			var startDelay = 10,
+				endDelay = 15;
+
 			var deferred = Q.defer();
 			fs.readFile(scheduleFile, 'utf8', function (err, data) {
 				if (err) {
@@ -63,10 +68,10 @@ module.exports = function(scheduleFile) {
 				}
 
 				var schedule = JSON.parse(data);
-				var now = moment('2014-05-22 10:36:27');
+				var now = moment('2014-05-22 11:35:27');
 
-				//1 - we need to find the current track and the next one to compute the voting end date
-				var current, next, nextArr = [], curDate;
+				//let's find the current day in schedule file
+				var current;
 				var days = schedule.programme.jours;
 				for (var i = 0 ; i < days.length ; i++) {
 					var date = days[i].date; //ex: 21/05/2014
@@ -76,7 +81,6 @@ module.exports = function(scheduleFile) {
 					}
 
 					//we're on the good day, let's find the right proposal
-					curDate = date;
 					var tracks = days[i].tracks;
 					for (var j = 0 ; j < tracks.length ; j++) {
 						var proposals = tracks[j].proposals;
@@ -87,23 +91,22 @@ module.exports = function(scheduleFile) {
 								continue;
 							}
 
-							//we're on the right room, let's check the time
-							var start = moment(date + ' ' + proposal.start, 'DD/MM/YYYY HH:mm:ss'),
-								end = moment(date + ' ' + proposal.end, 'DD/MM/YYYY HH:mm:ss');
+							//we're on the right room, let's check the start and end+delay
+							var start = moment(date + ' ' + proposal.start, 'DD/MM/YYYY HH:mm:ss')
+									.add('minutes', startDelay),
+								end = moment(date + ' ' + proposal.end, 'DD/MM/YYYY HH:mm:ss')
+										.add('minutes', endDelay);
 
 							if (start.isBefore(now) && end.isAfter(now)) {
 								//we found the current proposal
 								current = proposal;
-								current.startDate = start;
 								current.endDate = end;
 
-							} else if (start.isAfter(now)) {
-								//could be a next proposal
-								nextArr.push(proposal);
 							}
 						}
 					}
 
+					//on the right day, exit loop
 					break;
 				}
 
@@ -113,36 +116,11 @@ module.exports = function(scheduleFile) {
 					return;
 				}
 
-				//2 - for each possible next proposal, keep the one with the min start date
-				if (nextArr.length > 0) {
-					var minI, minDate;
-					for (i = 0 ; i < nextArr.length ; i++) {
-						proposal = nextArr[i];
-						start = moment(date + ' ' + proposal.start, 'DD/MM/YYYY HH:mm:ss');
-
-						if (!minDate || start.isBefore(minDate)) {
-							minI = i;
-							minDate = start;
-						}
-					}
-					next = nextArr[minI];
-				}
-
-				//3 - we have current and next, we can compute the vote end date
-				//number of minutes after we close the vote for a session
-				var closeAfterSession = 45;
-				//if the next session starts 45 min before the end of the current session
-				if (minDate && minDate.isBefore(moment(current.endDate).add('minutes', 45))) {
-					switch (next.format) {
-						case 'conference': closeAfterSession = 30; break;
-						case 'tools in action': closeAfterSession = 15; break;
-						case 'quickie': closeAfterSession = 10; break;
-					}
-				}
+				//building result
 				var res = {
 					id: current.id,
 					title: current.title,
-					endVote: moment(current.endDate).add('minutes', closeAfterSession).toDate()
+					endVote: current.endDate.toDate()
 				};
 
 				deferred.resolve(res);
