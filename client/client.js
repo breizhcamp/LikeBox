@@ -52,13 +52,13 @@ function displayCurrentSession() {
 
 /** Display the voting remaining time on the LCD screen */
 function displayRemainingTime() {
-	var nbMinLeft = moment().diff(moment(currentSession.endVote), 'minutes');
-	if (nbMinLeft >= 0) {
+	var nbMinLeft = moment(currentSession.endVote).diff(moment(), 'minutes');
+	if (nbMinLeft <= 0) {
 		displayCurrentSession();
 		return;
 	}
 	screen.goto(0,2);
-	screen.print('Tps restant: ' + nbMinLeft + 'min');
+	screen.print('Reste ' + nbMinLeft + 'min de vote  '.substr(0, 40));
 }
 
 /** Display current vote count on the LCD screen */
@@ -89,7 +89,7 @@ function userVoted(button) {
 	setTimeout(function() {
 		state = 'voting';
 		displayRemainingTime();
-	}, 2000);
+	}, 800);
 }
 
 //--- BINDING BUTTONS ---
