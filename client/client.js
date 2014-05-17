@@ -61,28 +61,28 @@ function displayRemainingTime() {
 		return;
 	}
 	screen.goto(0,2);
-	screen.print('Reste ' + nbMinLeft + 'min de vote  '.substr(0, nbCols));
+	screen.print(('Reste ' + nbMinLeft + 'min de vote  ').substr(0, nbCols));
 }
 
 /** Display current vote count on the LCD screen */
 function displayVoteCount() {
 	screen.goto(0,3);
-	screen.print('   Nb votes : ' + (currentSession.m + currentSession.p) + '     '.substr(0, nbCols));
+	screen.print(('   Nb votes : ' + (currentSession.m + currentSession.p) + '     ').substr(0, nbCols));
 }
 
 /**
  * Function to call when a user push a button during the voting mode
- * @param button {string} 'red' or 'green' depending of the button pressed
+ * @param vote numeric Vote value: -1 or 1
  */
-function userVoted(button) {
-	console.log("User pressed [" + button + "] button");
+function userVoted(vote) {
+	console.log("User vote [" + vote + "]");
 
 	state = 'voted';
 	screen.goto(0,2);
 	screen.print("       A VOTE       ");
 
-	votes.addVote(currentSession.id, button == 'green' ? 1 : -1);
-	if (button == 'green') {
+	votes.addVote(currentSession.id, vote);
+	if (vote == 1) {
 		currentSession.p++;
 	} else {
 		currentSession.m++;
@@ -98,13 +98,13 @@ function userVoted(button) {
 //--- BINDING BUTTONS ---
 greenButton.events().on('released', function(){
 	if (state == 'voting') {
-		userVoted('green');
+		userVoted(1);
 	}
 });
 
 redButton.events().on('released', function(){
 	if (state == 'voting') {
-		userVoted('red');
+		userVoted(-1);
 	}
 });
 
@@ -126,4 +126,4 @@ setInterval(function() {
 //			console.log(votes);
 //		});
 	}
-}, 1000);
+}, 3000);
