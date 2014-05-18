@@ -5,6 +5,8 @@
   "author": "Team BreizhCamp",
   "license": "MIT",
   "dependencies": {
-    "express": "^3.5.1"
+    "express": "^3.5.1",
+    "JSONPath": "^0.10.0",
+    "sqlite3": "^2.2.3"
   }
 }
