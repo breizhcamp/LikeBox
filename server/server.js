@@ -7,6 +7,8 @@ var db = new sqlite3.Database(__dirname + '/server_votes.db');
 
 var jsonPath = require('JSONPath');
 
+var auth = express.basicAuth('bzhcamp', 'CHANGEME');
+
 app.get('/', function(req, res) {
         res.sendfile(__dirname + '/index.html');
 });
@@ -15,7 +17,7 @@ app.get('/program', function(req, res) {
         res.download(__dirname + '/schedule.json');
 });
 
-app.get('/status/:idboitier', function(req, res) {
+app.get('/status/:idboitier', auth, function(req, res) {
 	var boitier = req.params.idboitier;
 	var fs = require('fs');
 	var stats = fs.statSync(__dirname + '/schedule.json');
@@ -26,7 +28,7 @@ app.get('/status/:idboitier', function(req, res) {
 	});
 });
 
-app.post('/vote/:idboitier', function(req, res) {
+app.post('/vote/:idboitier', auth, function(req, res) {
   for (var voteid in req.body.votes) {
         var boitier = req.params.idboitier;
         var stmt = db.prepare("INSERT INTO votes ('sessionId', 'vote', 'timeStamp', 'boitierId') values ($session, $vote, $timestamp, $boitierId)");
