@@ -1,4 +1,5 @@
-var fs = require('fs');
+var fs = require('fs'),
+	Q = require('q');
 
 /**
  * Configuration module, read JSON file as param and add into returned module,
@@ -21,11 +22,12 @@ module.exports = function(file) {
 	 * Save all properties of the conf object (string, number, boolean) into the conf file
 	 */
 	conf.save = function() {
+		var deferred = Q.defer();
 		var res = {};
 
-		for (var key in this) {
-			if (this.hasOwnProperty(key)) {
-				var val = this[key];
+		for (var key in conf) {
+			if (conf.hasOwnProperty(key)) {
+				var val = conf[key];
 
 				switch (typeof val) {
 					case "string":
@@ -36,7 +38,16 @@ module.exports = function(file) {
 			}
 		}
 
-		fs.writeFileSync(file, JSON.stringify(res));
+		//async file and resolve promise
+		fs.writeFile(file, JSON.stringify(res), function(err) {
+			if (err) {
+				deferred.reject(new Error(err));
+			} else {
+				deferred.resolve();
+			}
+		});
+
+		return deferred.promise;
 	};
 
 	return conf;

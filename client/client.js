@@ -5,7 +5,6 @@ var debug = process.env.DEBUG,
 	button = debug ? require('./modules/button_virtual.js') : require('./modules/button.js'),
 	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
 	scheduleReader = require('./modules/schedule.js'),
-	votes = require('./modules/votes.js')(),
 	confMod = require('./modules/conf.js'),
 	moment = require('moment');
 
@@ -14,7 +13,9 @@ var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
 	greenButton = button(23),
 	redButton = button(24),
 	schedule = scheduleReader('schedule.json'),
-	conf = confMod('config.json');
+	conf = confMod('config.json'),
+	votes = require('./modules/votes.js')(),
+	rest = require('./modules/rest_client.js')(conf, schedule, votes);
 
 /**
  * State of the vote machine. Could be the following state :
@@ -28,12 +29,6 @@ var state = 'init';
 /** Number of cols on the LCD screen */
 var nbCols = 20;
 
-/** Room's name of the voting box */
-var room = conf.roomName;
-
-/** Id of the voting box, used when sending to the server */
-var boxId = conf.boxId;
-
 /** Current voting session */
 var currentSession;
 
@@ -41,7 +36,7 @@ var currentSession;
 function loadCurrentSession() {
 	if (state != 'voting') return;
 
-	schedule.getCurrentSession(room).then(function(session) {
+	schedule.getCurrentSession(conf.roomName).then(function(session) {
 		var oldSession = currentSession;
 		currentSession = session;
 
@@ -64,6 +59,10 @@ function loadCurrentSession() {
 	}).fail(console.log);
 }
 
+/**
+ * Display no session message on LCD screen
+ * @param clear True if we have to clear screen before printing the message
+ */
 function displayNoSession(clear) {
 	if (clear) screen.clear();
 	screen.goto(3,1).print('AUCUNE SESSION');
@@ -133,7 +132,7 @@ redButton.events().on('released', function(){
 });
 
 //--- BOX INITIALISATION ---
-if (!room) {
+if (!conf.roomName) {
 	console.log("Room name not defined, goto config menu");
 
 } else {
@@ -142,6 +141,7 @@ if (!room) {
 		//database opened successfully, switching to voting mode
 		state = 'voting';
 
+		rest.start();
 		loadCurrentSession();
 	});
 }

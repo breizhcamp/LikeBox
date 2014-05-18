@@ -127,6 +127,32 @@ module.exports = function(scheduleFile) {
 			});
 
 			return deferred.promise;
+		},
+
+		/**
+		 * update new schedule and replace the old one
+		 * @param newSchedule String new schedule file
+		 * @returns {promise|Q.promise} Promise resolved when new schedule updated
+		 */
+		update: function(newSchedule) {
+			var deferred = Q.defer();
+
+			fs.writeFile(scheduleFile + '.part', newSchedule, function(err) {
+				if (err) {
+					deferred.reject(new Error(err));
+				} else {
+					//moving part file to old one
+					fs.rename(scheduleFile + '.part', scheduleFile, function(err) {
+						if (err) {
+							deferred.reject(new Error(err));
+						} else {
+							deferred.resolve();
+						}
+					});
+				}
+			});
+
+			return deferred.promise;
 		}
 
 	}
