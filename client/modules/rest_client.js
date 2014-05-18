@@ -12,8 +12,9 @@ var restler = require('restler');
  * @param conf Conf module
  * @param schedule Schedule module
  * @param votes Vote module
+ * @param winston Winston log module
  */
-module.exports = function(conf, schedule, votes) {
+module.exports = function(conf, schedule, votes, winston) {
 
 	/** Base url of the server */
 	var base_url = "http://server:3000";
@@ -24,24 +25,30 @@ module.exports = function(conf, schedule, votes) {
 	/** Start module watching from server */
 	var start = function() {
 		running = true;
+		winston.info("Starting rest_client module");
 		loadStatus();
 	};
 
 	/** Stop module watching from server */
 	var stop = function() {
 		running = false;
+		winston.info("Stopping rest_client module");
 	};
 
 	/** Load status, upload vote if needed, grab schedule if needed */
 	function loadStatus() {
-		restler.get(base_url + '/status/' + conf.idBox, { timeout: 3000 })
+		var url = base_url + '/status/' + conf.idBox;
+		winston.debug("Trying to retrieve status on [" + url + "]");
+
+		restler.get(url, { timeout: 3000 })
 			.on('fail', function(data, response) {
-				console.log("fail on data: " + data);
+				winston.error("fail on decoding status data:" + data);
 			}).on('error', function (err, response) {
-				console.log("error", err);
+				winston.error("error when retrieving status", err);
 			}).on('timeout', function(ms) {
-				console.log("timeout after " + ms);
+				winston.error("timeout when retrieving status after " + ms);
 			}).on('success', function(data, response) {
+				winston.debug("Successfully retrieved status");
 				sendVotes(data.timestamp);
 				getSchedule(data.schedule_mtime);
 			});
@@ -64,14 +71,12 @@ module.exports = function(conf, schedule, votes) {
 			var data = { votes: votesList };
 
 			restler.postJson(base_url + '/vote/' + conf.idBox, data, { timeout: 3000 })
-				.on('fail', function(data, response) {
-					console.log("fail on data: " + data);
-				}).on('error', function (err, response) {
-					console.log("error", err);
+				.on('error', function (err, response) {
+					winston.error("error when posting votes", err);
 				}).on('timeout', function(ms) {
-					console.log("timeout after " + ms);
+					winston.error("timeout when posting votes after " + ms);
 				}).on('success', function(data, response) {
-					console.log(data);
+					winston.info("Successfully sending votes");
 				});
 
 		});
@@ -89,16 +94,21 @@ module.exports = function(conf, schedule, votes) {
 
 		restler.get(base_url + '/program', { timeout: 3000 })
 			.on('fail', function(data, response) {
-				console.log("fail on data: " + data);
+				winston.error("fail on decoding schedule data: " + data);
 			}).on('error', function (err, response) {
-				console.log("error", err);
+				winston.error("error when retrieving schedule", err);
 			}).on('timeout', function(ms) {
-				console.log("timeout after " + ms);
+				winston.error("timeout when retrieving schedule after " + ms);
 			}).on('success', function(data, response) {
+				winston.debug("Scheduled received");
+
 				schedule.update(response.raw).then(function() {
+					winston.info("Schedule successfully updated");
 					conf.scheduleModifTime = modifTimestamp;
 					return conf.save();
-				}).fail(console.log);
+				}).fail(function(err) {
+					winston.error("Can't update schedule", err);
+				});
 			});
 	}
 

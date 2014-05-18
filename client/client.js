@@ -6,7 +6,8 @@ var debug = process.env.DEBUG,
 	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
 	scheduleReader = require('./modules/schedule.js'),
 	confMod = require('./modules/conf.js'),
-	moment = require('moment');
+	moment = require('moment'),
+	winston = require('winston');
 
 // -- init modules --
 var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
@@ -15,7 +16,10 @@ var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
 	schedule = scheduleReader('schedule.json'),
 	conf = confMod('config.json'),
 	votes = require('./modules/votes.js')(),
-	rest = require('./modules/rest_client.js')(conf, schedule, votes);
+	rest = require('./modules/rest_client.js')(conf, schedule, votes, winston);
+
+winston.remove(winston.transports.Console)
+	.add(winston.transports.Console, { timestamp: true });
 
 /**
  * State of the vote machine. Could be the following state :
@@ -56,7 +60,9 @@ function loadCurrentSession() {
 	}).fin(function() {
 		setTimeout(loadCurrentSession, 3000);
 
-	}).fail(console.log);
+	}).fail(function(err) {
+		winston.error("Error when loading current session", err);
+	});
 }
 
 /**
@@ -96,7 +102,7 @@ function displayVoteCount() {
  * @param vote numeric Vote value: -1 or 1
  */
 function userVoted(vote) {
-	console.log("User vote [" + vote + "]");
+	winston.info("User vote [" + vote + "]");
 	//don't allow vote if no voting session
 	if (!currentSession) return;
 
@@ -133,7 +139,7 @@ redButton.events().on('released', function(){
 
 //--- BOX INITIALISATION ---
 if (!conf.roomName) {
-	console.log("Room name not defined, goto config menu");
+	winston.error("Room name not defined, goto config menu");
 
 } else {
 	//normal startup
@@ -146,14 +152,13 @@ if (!conf.roomName) {
 	});
 }
 
-
-setInterval(function() {
-	if (state == 'voting' && currentSession) {
-		votes.getCount(currentSession.id).then(function(data) {
-			console.log("-: " + data.m + " | +: " + data.p);
-		});
-//		votes.listVotes(1399592105779, function(votes) {
-//			console.log(votes);
-//		});
-	}
-}, 3000);
+//debug if needed
+if (debug) {
+	setInterval(function() {
+		if (state == 'voting' && currentSession) {
+			votes.getCount(currentSession.id).then(function(data) {
+				winston.debug("-: " + data.m + " | +: " + data.p);
+			});
+		}
+	}, 3000);
+}
