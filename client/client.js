@@ -36,25 +36,35 @@ var nbCols = 20;
 /** Current voting session */
 var currentSession;
 
+/** do blinking dot to have visual feedback that the program still running */
+var dot = true;
+
 /** Load current voting session and display it on the LCD */
 function loadCurrentSession() {
-	if (state != 'voting') return;
+	if (state != 'voting') {
+		setTimeout(loadCurrentSession, 3000);
+		return;
+	}
+
+	//blink dot
+	if (state == 'voting') {
+		screen.goto(19,3).print(dot ? '.' : ' ');
+		dot = !dot;
+	}
 
 	schedule.getCurrentSession(conf.roomName).then(function(session) {
-		var oldSession = currentSession;
-		currentSession = session;
-
 		if (session) {
-			displayCurrentSession();
-			displayRemainingTime();
-
 			return votes.getCount(session.id).then(function(votes) {
+				currentSession = session;
 				currentSession.m = votes.m;
 				currentSession.p = votes.p;
+				displayCurrentSession();
+				displayRemainingTime();
 				displayVoteCount();
 			});
 		} else {
-			displayNoSession(oldSession);
+			displayNoSession(currentSession);
+			currentSession = session;
 		}
 
 	}).fin(function() {
@@ -84,13 +94,20 @@ function displayCurrentSession() {
 /** Display the voting remaining time on the LCD screen */
 function displayRemainingTime() {
 	var nbMinLeft = moment(currentSession.endVote).diff(moment(), 'minutes');
+	if (nbMinLeft < 0 && currentSession) {
+		loadCurrentSession();
+		return;
+	}
+	if (nbMinLeft == 0) nbMinLeft = "<1";
+
 	screen.goto(0,2).print(('Reste ' + nbMinLeft + 'min de vote  ').substr(0, nbCols));
 }
 
 /** Display current vote count on the LCD screen */
 function displayVoteCount() {
 	screen.goto(0,3);
-	screen.print(('   Nb votes : ' + (currentSession.m + currentSession.p) + '     ').substr(0, nbCols));
+	screen.print(('   Nb votes : ' + (currentSession.m + currentSession.p) + '     ').substr(0, nbCols-1));
+	//remove 1 col to print "dot"
 }
 
 /**
@@ -103,8 +120,7 @@ function userVoted(vote) {
 	if (!currentSession) return;
 
 	state = 'voted';
-	screen.goto(0,2);
-	screen.print("       A VOTE       ");
+	screen.goto(0,2).print("       A VOTE       ");
 
 	votes.addVote(currentSession.id, vote);
 	if (vote == 1) {
