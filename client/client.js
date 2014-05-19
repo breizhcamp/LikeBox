@@ -54,14 +54,20 @@ function loadCurrentSession() {
 
 	schedule.getCurrentSession(conf.roomName).then(function(session) {
 		if (session) {
-			return votes.getCount(session.id).then(function(votes) {
-				currentSession = session;
-				currentSession.m = votes.m;
-				currentSession.p = votes.p;
-				displayCurrentSession();
+			if (!currentSession || currentSession.id != session.id) {
+				//reload only if we change session
+				return votes.getCount(session.id).then(function(votes) {
+					currentSession = session;
+					currentSession.m = votes.m;
+					currentSession.p = votes.p;
+					displayCurrentSession();
+					displayRemainingTime();
+					displayVoteCount();
+				});
+			} else {
+				//same session, only update remaining time
 				displayRemainingTime();
-				displayVoteCount();
-			});
+			}
 		} else {
 			displayNoSession(currentSession);
 			currentSession = session;
