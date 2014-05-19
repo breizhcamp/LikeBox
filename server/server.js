@@ -1,5 +1,6 @@
 var express = require('express'),
 	fs = require('fs'),
+	http = require('http'),
 	jsonPath = require('JSONPath'),
 	sqlite3 = require('sqlite3').verbose();
 
@@ -23,6 +24,22 @@ var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 	});
 });
 
+var programJSON = null;
+http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
+    var body = '';
+
+    res.on('data', function(chunk) {
+        body += chunk;
+    });
+
+    res.on('end', function() {
+        programJSON = JSON.parse(body);
+				fs.writeFile(__dirname + '/schedule.json', body);
+    });
+}).on('error', function(e) {
+      console.log("Got error: ", e);
+});
+
 // -- MAPPING URL --
 var auth = express.basicAuth('bzhcamp', 'CHANGEME');
 
@@ -30,11 +47,11 @@ app.use('/css', express.static(__dirname + '/css'));
 app.use('/img', express.static(__dirname + '/img'));
 
 app.get('/', function(req, res) {
-        res.sendfile(__dirname + '/index.html');
+    res.sendfile(__dirname + '/index.html');
 });
 
 app.get('/program', function(req, res) {
-        res.download(__dirname + '/schedule.json');
+    res.download(__dirname + '/schedule.json');
 });
 
 app.get('/status/:idboitier', auth, function(req, res) {
@@ -76,7 +93,6 @@ app.get('/top/:nb', function(req, res) {
 
 	var nombre = req.params.nb;
 	var results = {};
-	var programJSON = require(__dirname + '/schedule.json');
 	var row_num = 1;
 	db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes " +
 		"from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {

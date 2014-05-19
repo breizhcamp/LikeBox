@@ -15,7 +15,9 @@
 				});
 				items.push("</ul>");
 				$("#text").replaceWith( items.join('') );
-				$("#time").replaceWith( new Date().getHours() + ':' + new Date().getMinutes() );
+
+				var minutes = new Date().getMinutes();
+				$("#time").replaceWith( new Date().getHours() + ':' + (minutes < 10 ? '0' : '') + minutes );
 			});
 		};
 
