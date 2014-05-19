@@ -154,6 +154,12 @@ function userVoted(vote) {
 	}, 800);
 }
 
+/** Function called to exit the client */
+function exit() {
+	screen.clear().goto(0,1).print('EXTINCTION EN COURS');
+	process.exit(0);
+}
+
 //--- BINDING BUTTONS ---
 greenButton.events().on('released', function(){
 	if (state == 'voting') {
@@ -181,6 +187,9 @@ if (!conf.roomName) {
 		loadCurrentSession();
 	});
 }
+
+process.on('SIGINT', exit);
+process.on('SIGTERM', exit);
 
 //debug if needed
 if (debug) {
