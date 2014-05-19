@@ -1,7 +1,7 @@
 var Gpio = require('onoff').Gpio,
 	exec = require('child_process').exec,
 	eventEmitter = require('events').EventEmitter,
-	debounceMs = 500; //nb of ms for software debounce
+	debounceMs = 100; //nb of ms for software debounce
 
 /**
  * Module handling action buttons
@@ -28,19 +28,20 @@ module.exports = function(pinNum) {
 
 		//listening to onoff module event
 		var button = new Gpio(pinNum, 'in', 'both'),
-			lastDown = 0, lastUp = 0; //to avoid bounces
+			last = 0; //to avoid bounces
 
 		button.watch(function(err, value) {
 			var now = Date.now();
+			console.log(now + " : " + value);
 			if (!value) {
-				if (now - lastDown > debounceMs) {
-					lastDown = now;
+				if (now - last > debounceMs && state == 'up') {
+					last = now;
 					state = 'down';
 					events.emit('pushed');
 				}
 			} else {
-				if (now - lastUp > debounceMs) {
-					lastUp = now;
+				if (now - last > debounceMs && state == 'down') {
+					last = now;
 					state = 'up';
 					events.emit('released');
 				}
