@@ -11,6 +11,26 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 	var lcd = new LCD(i2cDev, address);
 	var curX = 0, curY = 0;
 
+	//init accents
+	lcd .createChar(0, [ 130,132,142,145,159,144,142,128 ]) //é
+		.createChar(1, [ 136,132,142,145,159,144,142,128 ]) //è
+		.createChar(2, [ 132,138,142,145,159,144,142,128 ]) //ê
+		.createChar(3, [ 136,134,128,142,145,147,141,128 ]) //à
+		.createChar(4, [ 132,138,128,142,145,147,141,128 ]) //â
+		.createChar(5, [ 132,138,128,140,132,132,142,128 ]) //î
+		.createChar(6, [ 132,138,128,145,145,147,141,128 ]) //û
+		.createChar(7, [ 136,134,128,145,145,147,141,128 ]) //ù
+		;
+
+	function replaceAccent(str) {
+		var chars = ['é', 'è', 'ê', 'à', 'â', 'î', 'û', 'ù'];
+		for (var i = 0; i < chars.length; i++) {
+			var char = chars[i];
+			str = str.replace(char, String.fromCharCode(i));
+		}
+		return str;
+	}
+
 	/**
 	 * Move the cursor to the selected position
 	 * @param x horizontal position, starts at 0
@@ -38,13 +58,13 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 			var maxLength = (nbCols - curX),
 				printStr = maxStr.substr(0, maxLength);
 			maxStr = maxStr.substr(maxLength);
-			lcd.print(printStr);
+			lcd.print(replaceAccent(printStr));
 			goto(0, curY + 1);
 		}
 
 		//at this point, the string has the correct length to be print in the space left
 		//or on the last line
-		lcd.print(maxStr.substr(0, nbCols - curX));
+		lcd.print(replaceAccent(maxStr.substr(0, nbCols - curX)));
 
 		goto(xOrig, yOrig);
 		return this;
