@@ -50,6 +50,10 @@ app.get('/', function(req, res) {
     res.sendfile(__dirname + '/index.html');
 });
 
+app.get('/tweetwall', function(req, res) {
+		res.sendfile(__dirname + '/tweetwall.html');
+});
+
 app.get('/program', function(req, res) {
     res.download(__dirname + '/schedule.json');
 });
@@ -100,9 +104,9 @@ app.get('/top/:nb', function(req, res) {
 		cur_sess = row_num;
 		results[cur_sess] = row;
 		var conf = jsonPath.eval(programJSON, "$..proposals[?(@.id=='" + row.sessionId + "')]");
-		if (conf.length === 0) { 
+		if (conf.length === 0) {
 			results[cur_sess].titre = "Not Found";
-		} 
+		}
 		else {
 			results[cur_sess].titre = conf[0].title;
 		}

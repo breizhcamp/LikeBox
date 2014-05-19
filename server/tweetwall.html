@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Tweetwall</title>
+	<link href="css/app.css" rel="stylesheet"/>
+	<script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+  <script type="text/javascript">
+		function getdata() {
+			var minutes = new Date().getMinutes();
+			$("#time").text(new Date().getHours() + ':' + (minutes < 10 ? '0' : '') + minutes);
+		};
+
+		$( document ).ready(function() {
+			getdata();
+		});
+
+    var auto_refresh = setInterval(function () {
+			getdata();
+    }, 10000);
+  </script>
+</head>
+
+<body>
+	<header>
+  	<span id="time"></span>
+  </header>
+
+	<a class="twitter-timeline" href="https://twitter.com/search?q=breizhcamp+OR+bzhcmp" data-widget-id="468312696564097025" data-chrome="nofooter transparent">Tweets concernant "breizhcamp OR bzhcmp"</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>

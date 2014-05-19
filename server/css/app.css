@@ -50,3 +50,9 @@ li div {
   color: #8800BB;
   text-align: right;
 }
+
+.twitter-timeline {
+  width: 90% !important;
+  margin: 20px auto;
+  display: block;
+}

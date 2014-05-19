@@ -14,10 +14,10 @@
 					items.push( "</li>");
 				});
 				items.push("</ul>");
-				$("#text").replaceWith( items.join('') );
+				$("#text").html( items.join('') );
 
 				var minutes = new Date().getMinutes();
-				$("#time").replaceWith( new Date().getHours() + ':' + (minutes < 10 ? '0' : '') + minutes );
+				$("#time").text(new Date().getHours() + ':' + (minutes < 10 ? '0' : '') + minutes);
 			});
 		};
 
