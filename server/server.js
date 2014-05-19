@@ -104,7 +104,7 @@ app.get('/top/:nb', function(req, res) {
 		cur_sess = row_num;
 		results[cur_sess] = row;
 		var conf = jsonPath.eval(programJSON, "$..proposals[?(@.id=='" + row.sessionId + "')]");
-		if (conf.length === 0) {
+		if (conf == null || conf.length === 0) {
 			results[cur_sess].titre = "Not Found";
 		}
 		else {
