@@ -1,19 +1,21 @@
 <html>
 <head>
 	<title>Meilleures confs</title>
+	<link href="css/app.css" rel="stylesheet"/>
 	<script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
         <script type="text/javascript">
 		function getdata() {
 			$.getJSON("/top/5" , function(data) {
 				var items = [];
-				items.push("<ol>");
+				items.push("<ul>");
 				$.each( data, function( key, val ) {
 					items.push( "<li id='" + key + "'>");
-					items.push("Conf : <b>" + val.titre + "</b>, Score : " + val.somme + ", Nombre de votes : " + val.nb_votes);
+					items.push( "<div>" + val.somme + " <small>/ " + val.nb_votes + " votes</small></div><b>" + val.titre + "</b>");
 					items.push( "</li>");
 				});
-				items.push("</ol>");
+				items.push("</ul>");
 				$("#text").replaceWith( items.join('') );
+				$("#time").replaceWith( new Date().getHours() + ':' + new Date().getMinutes() );
 			});
 		};
 
@@ -25,12 +27,15 @@
                 function ()
                 {
 			getdata();
-                }, 10000); 
+                }, 10000);
         </script>
 </head>
 
 <body>
-	<h1>Meilleures confs : </h1>
+	<header>
+  	<span id="time"></span>
+  </header>
+	<h1>Top des talks</h1>
 	<div id="text">Chargement... </div>
 </body>
 </html>

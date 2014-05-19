@@ -26,6 +26,9 @@ var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 // -- MAPPING URL --
 var auth = express.basicAuth('bzhcamp', 'CHANGEME');
 
+app.use('/css', express.static(__dirname + '/css'));
+app.use('/img', express.static(__dirname + '/img'));
+
 app.get('/', function(req, res) {
         res.sendfile(__dirname + '/index.html');
 });
@@ -70,6 +73,7 @@ app.post('/vote/:idboitier', auth, function(req, res) {
 });
 
 app.get('/top/:nb', function(req, res) {
+
 	var nombre = req.params.nb;
 	var results = {};
 	var programJSON = require(__dirname + '/schedule.json');
