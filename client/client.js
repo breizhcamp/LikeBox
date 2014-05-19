@@ -18,9 +18,6 @@ var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
 	votes = require('./modules/votes.js')(),
 	rest = require('./modules/rest_client.js')(conf, schedule, votes, winston);
 
-winston.remove(winston.transports.Console)
-	.add(winston.transports.Console, { timestamp: true });
-
 /**
  * State of the vote machine. Could be the following state :
  * - init: init mode (opening database, getting current session...)
@@ -38,6 +35,21 @@ var currentSession;
 
 /** do blinking dot to have visual feedback that the program still running */
 var dot = true;
+
+//--- LOGGING CONFIG ---
+winston.remove(winston.transports.Console);
+
+if (debug) {
+	winston.add(winston.transports.Console, { timestamp: true });
+} else {
+	winston.add(winston.transports.File, {
+		timestamp: true,
+		filename: '/tmp/vote-client.log',
+		maxsize: 1024*1024*5, //5 MB
+		maxFiles: 5
+	});
+}
+
 
 /** Load current voting session and display it on the LCD */
 function loadCurrentSession() {
