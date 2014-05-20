@@ -15,7 +15,7 @@
                         "end":"14:55",
                         "title":"Objets connectés : démystification",
                         "format":"conference",
-                        "room":"Molène"
+                        "room":"Belle-Île-en-Mer"
                      },
                      {
                         "id":24,
@@ -23,7 +23,7 @@
                         "end":"17:00",
                         "title":"NodeSchool : workshops NodeJS en self-service",
                         "format":"hands-on",
-                        "room":"Molène"
+                        "room":"Belle-Île-en-Mer"
                      }
                   ]
                },
@@ -36,7 +36,7 @@
                         "end":"17:00",
                         "title":"Buy a game",
                         "format":"hands-on",
-                        "room":"Groix"
+                        "room":"Bréhat"
                      }
                   ]
                },
@@ -102,7 +102,7 @@
                         "end":"17:00",
                         "title":"Devoxx4Kids",
                         "format":"hands-on",
-                        "room":"Belle-Île-en-Mer"
+                        "room":"Molène"
                      }
                   ]
                },
@@ -115,7 +115,7 @@
                         "end":"17:00",
                         "title":"LabFab",
                         "format":"hands-on",
-                        "room":"Bréhat"
+                        "room":"Groix"
                      }
                   ]
                }
@@ -394,10 +394,10 @@
                         "room":"Molène"
                      },
                      {
-                        "id":150,
+                        "id":84,
                         "start":"14:00",
                         "end":"14:55",
-                        "title":"Maitriser le Temps: Event Sourcing",
+                        "title":"Voteriez-vous pour un Web Déconnecté ?",
                         "format":"conference",
                         "room":"Bréhat"
                      },
@@ -535,12 +535,12 @@
                         "room":"Belle-Île-en-Mer"
                      },
                      {
-                        "id":144,
+                        "id":105,
                         "start":"14:00",
                         "end":"14:55",
-                        "title":"Faire agile c'est bien, être agile c'est mieux, vivre agile c'est...",
+                        "title":"Google Glass - Ma première application",
                         "format":"conference",
-                        "room":"Belle-Île-en-Mer"
+                        "room":"Ouessant"
                      },
                      {
                         "id":53,
@@ -662,7 +662,7 @@
                         "end":"14:55",
                         "title":"HTML5 Gaming",
                         "format":"conference",
-                        "room":"Ouessant"
+                        "room":"Belle-Île-en-Mer"
                      },
                      {
                         "id":22,
@@ -734,10 +734,10 @@
                         "room":"Bréhat"
                      },
                      {
-                        "id":0,
+                        "id":144,
                         "start":"15:00",
                         "end":"15:55",
-                        "title":"Voteriez-vous pour un Web Déconnecté ?",
+                        "title":"Faire agile c'est bien, être agile c'est mieux, vivre agile c'est...",
                         "format":"conference",
                         "room":"Bréhat"
                      },

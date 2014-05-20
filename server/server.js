@@ -24,6 +24,7 @@ var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 	});
 });
 
+console.log("Downloading schedule");
 var programJSON = null;
 http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
     var body = '';
@@ -33,26 +34,24 @@ http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
     });
 
     res.on('end', function() {
+		console.log("Schedule downloaded");
         programJSON = JSON.parse(body);
-				fs.writeFile(__dirname + '/schedule.json', body);
+		fs.writeFileSync(__dirname + '/schedule.json', body);
     });
+
 }).on('error', function(e) {
-      console.log("Got error: ", e);
+	console.log("Got error when downloading schedule, using local version: ", e);
+	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
+
+}).setTimeout(10000, function() {
+	console.log("Got timeout when downloading schedule, using local version");
+	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
 });
 
 // -- MAPPING URL --
 var auth = express.basicAuth('bzhcamp', 'CHANGEME');
 
-app.use('/css', express.static(__dirname + '/css'));
-app.use('/img', express.static(__dirname + '/img'));
-
-app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/index.html');
-});
-
-app.get('/tweetwall', function(req, res) {
-		res.sendfile(__dirname + '/tweetwall.html');
-});
+app.use(express.static(__dirname + '/static'));
 
 app.get('/program', function(req, res) {
     res.download(__dirname + '/schedule.json');
