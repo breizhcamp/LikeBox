@@ -2,7 +2,7 @@
 <head>
 	<title>Meilleures confs</title>
 	<link href="css/app.css" rel="stylesheet"/>
-	<script  type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script  type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
 		function getdata() {
 			$.getJSON("/top/5" , function(data) {
@@ -10,7 +10,7 @@
 				items.push("<ul>");
 				$.each( data, function( key, val ) {
 					items.push( "<li id='" + key + "'>");
-					items.push( "<div>" + val.somme + " <small>/ " + val.nb_votes + " votes</small></div><b>" + val.titre + "</b>");
+					items.push( "<b>" + val.titre + "</b>");
 					items.push( "</li>");
 				});
 				items.push("</ul>");

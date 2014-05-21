@@ -53,6 +53,7 @@ li div {
 
 .twitter-timeline {
   width: 90% !important;
+  height: 80% !important;
   margin: 20px auto;
   display: block;
 }
