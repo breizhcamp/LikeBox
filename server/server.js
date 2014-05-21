@@ -1,7 +1,6 @@
 var express = require('express'),
 	fs = require('fs'),
 	http = require('http'),
-	jsonPath = require('JSONPath'),
 	sqlite3 = require('sqlite3').verbose();
 
 // -- INIT --
@@ -37,16 +36,37 @@ http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
 		console.log("Schedule downloaded");
         programJSON = JSON.parse(body);
 		fs.writeFileSync(__dirname + '/schedule.json', body);
+		cacheTitle();
     });
 
 }).on('error', function(e) {
 	console.log("Got error when downloading schedule, using local version: ", e);
 	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
+	cacheTitle();
 
 }).setTimeout(10000, function() {
 	console.log("Got timeout when downloading schedule, using local version");
 	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
+	cacheTitle();
 });
+
+var proposalsMap = {};
+function cacheTitle() {
+	// map proposal cache
+	var days = programJSON.programme.jours;
+	for (var i = 0 ; i < days.length ; i++) {
+		var tracks = days[i].tracks;
+
+		for (var j = 0 ; j < tracks.length ; j++) {
+			var proposals = tracks[j].proposals;
+
+			for (var k = 0 ; k < proposals.length ; k++) {
+				var id = proposals[k].id;
+				proposalsMap[id] = proposals[k].title;
+			}
+		}
+	}
+}
 
 // -- MAPPING URL --
 var auth = express.basicAuth('bzhcamp', 'CHANGEME');
@@ -100,15 +120,13 @@ app.get('/top/:nb', function(req, res) {
 	db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes " +
 		"from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
 
-		cur_sess = row_num;
+		var sessionId = row.sessionId;
+		var cur_sess = row_num;
 		results[cur_sess] = row;
-		var conf = jsonPath.eval(programJSON, "$..proposals[?(@.id=='" + row.sessionId + "')]");
-		if (conf == null || conf.length === 0) {
-			results[cur_sess].titre = "Not Found";
-		}
-		else {
-			results[cur_sess].titre = conf[0].title;
-		}
+
+		var title = proposalsMap[sessionId];
+		results[cur_sess].titre = title ? title : "Non trouvé";
+
 		row_num += 1;
 
 	}, function () {
