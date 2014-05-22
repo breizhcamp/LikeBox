@@ -117,8 +117,9 @@ app.get('/top/:nb', function(req, res) {
 	var nombre = req.params.nb;
 	var results = {};
 	var row_num = 1;
-	db.each("SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes " +
-		"from votes group by sessionId order by somme desc limit " + nombre , function (error, row) {
+	db.each("SELECT sessionId, nb_votes, (somme + (nb_votes - somme)/2)/nb_votes as average from " +
+		"(SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes " +
+		"from votes group by sessionId) order by average desc, nb_votes desc limit " + nombre , function (error, row) {
 
 		var sessionId = row.sessionId;
 		var cur_sess = row_num;
