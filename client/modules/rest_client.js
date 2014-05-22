@@ -17,7 +17,7 @@ var restler = require('restler');
 module.exports = function(conf, schedule, votes, winston) {
 
 	/** Base url of the server */
-	var base_url = "http://bzhcamp:CHANGEME@server:3000";
+	var base_url = "http://bzhcamp:CHANGEME@vote-server:3000";
 
 	/** does the module checks server every minutes */
 	var running = false;
@@ -40,7 +40,7 @@ module.exports = function(conf, schedule, votes, winston) {
 		var url = base_url + '/status/' + conf.idBox;
 		winston.debug("Trying to retrieve status on [" + url + "]");
 
-		restler.get(url, { timeout: 3000 })
+		restler.get(url, { timeout: 10000 })
 			.on('fail', function(data, response) {
 				winston.error("fail on decoding status data:" + data);
 			}).on('error', function (err, response) {
@@ -70,7 +70,7 @@ module.exports = function(conf, schedule, votes, winston) {
 
 			var data = { votes: votesList };
 
-			restler.postJson(base_url + '/vote/' + conf.idBox, data, { timeout: 3000 })
+			restler.postJson(base_url + '/vote/' + conf.idBox, data, { timeout: 10000 })
 				.on('error', function (err, response) {
 					winston.error("error when posting votes", err);
 				}).on('timeout', function(ms) {
@@ -92,7 +92,7 @@ module.exports = function(conf, schedule, votes, winston) {
 			return;
 		}
 
-		restler.get(base_url + '/program', { timeout: 3000 })
+		restler.get(base_url + '/program', { timeout: 10000 })
 			.on('fail', function(data, response) {
 				winston.error("fail on decoding schedule data: " + data);
 			}).on('error', function (err, response) {

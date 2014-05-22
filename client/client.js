@@ -84,10 +84,6 @@ function displayCurrentSession() {
 /** Display the voting remaining time on the LCD screen */
 function displayRemainingTime() {
 	var nbMinLeft = moment(currentSession.endVote).diff(moment(), 'minutes');
-	if (nbMinLeft <= 0) {
-		loadCurrentSession();
-		return;
-	}
 	screen.goto(0,2).print(('Reste ' + nbMinLeft + 'min de vote  ').substr(0, nbCols));
 }
 

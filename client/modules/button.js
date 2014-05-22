@@ -32,7 +32,6 @@ module.exports = function(pinNum) {
 
 		button.watch(function(err, value) {
 			var now = Date.now();
-			console.log(now + " : " + value);
 			if (!value) {
 				if (now - last > debounceMs && state == 'up') {
 					last = now;
