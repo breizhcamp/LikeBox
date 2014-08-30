@@ -20,13 +20,26 @@
                   ]
                },
                {
+                  "type":"Miam",
+                  "proposals":[
+                     {
+                        "id":0000,
+                        "start":"12:00",
+                        "end":"14:00",
+                        "title":"Repas",
+                        "format":"repas",
+                        "room":"Restaurant"
+                     }
+                  ]
+               },
+               {
                   "type":"Conférences",
                   "proposals":[
                      {
                         "id":1082,
                         "start":"10:00",
                         "end":"11:00",
-                        "title":" Lucy in the Sky with Docker",
+                        "title":"Lucy in the Sky with Docker",
                         "format":"conference",
                         "room":"Casoar Tadorne"
                      },
@@ -36,6 +49,72 @@
                         "end":"11:00",
                         "title":"Ceylon d‘ici à l‘infini : tour d‘horizon et le futur",
                         "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1084,
+                        "start":"11:00",
+                        "end":"12:00",
+                        "title":" Docker : Zéro => Héro",
+                        "format":"conference",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1085,
+                        "start":"11:00",
+                        "end":"12:00",
+                        "title":"Cloud First",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1105,
+                        "start":"12:00",
+                        "end":"12:15",
+                        "title":"LikeBox, votre avis nous intéresse",
+                        "format":"quickie",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1106,
+                        "start":"12:00",
+                        "end":"12:15",
+                        "title":"MongoDB Aggregation Framework in action !",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     ,
+                     {
+                        "id":1108,
+                        "start":"12:15",
+                        "end":"12:30",
+                        "title":"Améliorer la qualité de votre application AngularJS avec ESLint",
+                        "format":"quickie",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1109,
+                        "start":"12:15",
+                        "end":"12:30",
+                        "title":"Asciidoctor et Java",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     ,
+                     {
+                        "id":1110,
+                        "start":"13:20",
+                        "end":"13:35",
+                        "title":"Mongodb aggregation pipeline",
+                        "format":"quickie",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1111,
+                        "start":"13:20",
+                        "end":"13:35",
+                        "title":"Une fille dans mon équipe ?",
+                        "format":"quickie",
                         "room":"Chanchardon"
                      }
                   ]
