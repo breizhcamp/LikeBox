@@ -23,7 +23,7 @@
                   "type":"Miam",
                   "proposals":[
                      {
-                        "id":0000,
+                        "id":0,
                         "start":"12:00",
                         "end":"14:00",
                         "title":"Repas",
@@ -83,7 +83,6 @@
                         "format":"quickie",
                         "room":"Chanchardon"
                      },
-                     ,
                      {
                         "id":1108,
                         "start":"12:15",
@@ -100,7 +99,6 @@
                         "format":"quickie",
                         "room":"Chanchardon"
                      },
-                     ,
                      {
                         "id":1110,
                         "start":"13:20",
