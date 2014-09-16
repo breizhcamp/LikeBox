@@ -25,7 +25,7 @@ var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 
 console.log("Downloading schedule");
 var programJSON = null;
-http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
+http.get('http://www.breizhcamp.org_bad/json/schedule.json', function(res) {
     var body = '';
 
     res.on('data', function(chunk) {
