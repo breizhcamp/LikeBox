@@ -114,7 +114,98 @@
                         "title":"Une fille dans mon équipe ?",
                         "format":"quickie",
                         "room":"Chanchardon"
-                     }
+                     },
+                     {
+                        "id":1110,
+                        "start":"13:20",
+                        "end":"13:35",
+                        "title":"Mongodb aggregation pipeline",
+                        "format":"quickie",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1112,
+                        "start":"13:35",
+                        "end":"13:50",
+                        "title":"Soyez Productifs ! I MEAN it !",
+                        "format":"quickie",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1113,
+                        "start":"13:35",
+                        "end":"13:50",
+                        "title":"Développons une application web AngularJS/Java8 dirigé par les tests",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1086,
+                        "start":"14:00",
+                        "end":"15:00",
+                        "title":"Drop Your Table ! MongoDB Schema Design",
+                        "format":"conference",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1087,
+                        "start":"14:00",
+                        "end":"15:00",
+                        "title":"Let's Invoke Dynamite in JavaEE with InvokeDynamic",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     
+                     {
+                        "id":1088,
+                        "start":"15:00",
+                        "end":"16:00",
+                        "title":"Web temps réel avec SimpleWeb4J",
+                        "format":"conference",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1089,
+                        "start":"15:00",
+                        "end":"16:00",
+                        "title":"Et si vous développiez dans le Cloud avec Codenvy ?",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     
+                     {
+                        "id":1090,
+                        "start":"16:15",
+                        "end":"17:15",
+                        "title":"Advanced search for your legacy application",
+                        "format":"conference",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1091,
+                        "start":"16:15",
+                        "end":"17:15",
+                        "title":"Golo, petit mais costaud",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     
+                     {
+                        "id":1092,
+                        "start":"17:15",
+                        "end":"18:10",
+                        "title":"I don't always write Reactive applications but when I do, it runs on Raspberry Pi",
+                        "format":"conference",
+                        "room":"Casoar Tadorne"
+                     },
+                     {
+                        "id":1093,
+                        "start":"17:15",
+                        "end":"18:10",
+                        "title":"Sirius 1.0 : un schéma vaut mieux qu'un long discours",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
                   ]
                }
             ]
