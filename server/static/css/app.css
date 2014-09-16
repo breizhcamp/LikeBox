@@ -2,9 +2,9 @@ html {
     height: 100%;
     font-family: "Helvetica Neue" Helvetica;
 
-    background-image:url(../img/background.jpg);
+    background: #fbf8d1;
+    background-image:url(../img/header.png);
     background-repeat:no-repeat;
-    background-size:cover;
     background-position: top center;
 }
 
@@ -34,7 +34,7 @@ ul {
 }
 
 li {
-  color: #FF6600;
+    color: #FF6600;
     text-shadow: 2px 2px 2px #FFF;
     margin: 30px;
     text-align: center;
