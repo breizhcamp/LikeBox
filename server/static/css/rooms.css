@@ -2,9 +2,9 @@ html {
     height: 100%;
     font-family: "Helvetica Neue" Helvetica;
 
-    background: #fbf8d1;
-    background-image:url(../img/header.png);
+    background-image:url(../img/background.jpg);
     background-repeat:no-repeat;
+    background-size:cover;
     background-position: top center;
 }
 
@@ -22,43 +22,8 @@ header {
 
 h1 {
     text-align: center;
-    margin-top: 5%;
+    margin: 5%;
 }
-
-ul {
-  font-size: 32px;
-  text-align: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-    color: #FF6600;
-    text-shadow: 2px 2px 2px #FFF;
-    margin: 30px;
-    text-align: center;
-    border-radius: 15px;
-    background-color: rgba(230,230,230,0.6);
-    box-shadow: 5px 5px 10px #555;
-    padding: 20px;
-}
-
-li div {
-  font-size: 25px;
-  margin: -5px 10px;
-  color: #8800BB;
-  text-align: right;
-}
-
-.twitter-timeline {
-  width: 90% !important;
-  height: 80% !important;
-  margin: 20px auto;
-  display: block;
-}
-
-
 
 h2 {
     text-align: center;

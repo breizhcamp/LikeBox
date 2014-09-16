@@ -32,6 +32,19 @@
                      }
                   ]
                },
+              {
+                 "type":"ConférencesChanchardon",
+                 "proposals":[
+                    {
+                       "id":1083,
+                       "start":"10:00",
+                       "end":"11:00",
+                       "title":"Ceylon d‘ici à l‘infini : tour d‘horizon et le futur",
+                       "format":"conference",
+                       "room":"Chanchardon"
+                    }
+                 ]
+              },
                {
                   "type":"Conférences",
                   "proposals":[
@@ -42,14 +55,6 @@
                         "title":"Lucy in the Sky with Docker",
                         "format":"conference",
                         "room":"Casoar Tadorne"
-                     },
-                     {
-                        "id":1083,
-                        "start":"10:00",
-                        "end":"11:00",
-                        "title":"Ceylon d‘ici à l‘infini : tour d‘horizon et le futur",
-                        "format":"conference",
-                        "room":"Chanchardon"
                      },
                      {
                         "id":1084,
@@ -155,7 +160,7 @@
                         "format":"conference",
                         "room":"Chanchardon"
                      },
-                     
+
                      {
                         "id":1088,
                         "start":"15:00",
@@ -172,7 +177,7 @@
                         "format":"conference",
                         "room":"Chanchardon"
                      },
-                     
+
                      {
                         "id":1090,
                         "start":"16:15",
@@ -189,7 +194,7 @@
                         "format":"conference",
                         "room":"Chanchardon"
                      },
-                     
+
                      {
                         "id":1092,
                         "start":"17:15",
@@ -205,7 +210,7 @@
                         "title":"Sirius 1.0 : un schéma vaut mieux qu'un long discours",
                         "format":"conference",
                         "room":"Chanchardon"
-                     },
+                     }
                   ]
                }
             ]

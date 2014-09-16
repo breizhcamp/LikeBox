@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="BreizhcampRoom">
+<head>
+    <title>JugSummerCamp - Programme par salle</title>
+    <meta charset="UTF-8" lang="fr" />
+
+    <link href="css/app.css" rel="stylesheet"/>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body ng-controller="ScheduleController">
+    <header>
+        <span class="time">{{time}}</span>
+    </header>
+
+    <h1 ng-show="talks.length > 0">Actuellement dans les salles</h1>
+
+    <article ng-repeat="talk in talks" class="talk" ng-style="{width: (100/talks.length - 1) + '%'}">
+        <div class="time">{{talk.start}}</div>
+        <div class="room">{{talk.room}}</div>
+        <div class="title">{{talk.title}}</div>
+    </article>
+
+    <h2 ng-show="nextTalks.length > 0">A venir</h2>
+
+    <article ng-repeat="talk in nextTalks" class="talk next" ng-style="{width: (100/nextTalks.length - 1) + '%'}">
+        <div class="time">{{talk.start}}</div>
+        <div class="room">{{talk.room}}</div>
+        <div class="title">{{talk.title}}</div>
+    </article>
+
+    <script src="js/app.js"></script>
+    <script src="js/Markdown.Converter.js"></script>
+    <script src="js/Markdown.Sanitizer.js"></script>
+</body>
+</html>
