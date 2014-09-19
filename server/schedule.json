@@ -7,7 +7,7 @@
             "date":"19/09/2014",
             "tracks":[
                {
-                  "type":"Keynote",
+                  "type":"Casoar Tadorne",
                   "proposals":[
                      {
                         "id":1078,
@@ -16,38 +16,7 @@
                         "title":"Keynote",
                         "format":"keynote",
                         "room":"Casoar Tadorne"
-                     }
-                  ]
-               },
-               {
-                  "type":"Miam",
-                  "proposals":[
-                     {
-                        "id":0,
-                        "start":"12:00",
-                        "end":"14:00",
-                        "title":"Repas",
-                        "format":"repas",
-                        "room":"Restaurant"
-                     }
-                  ]
-               },
-              {
-                 "type":"ConférencesChanchardon",
-                 "proposals":[
-                    {
-                       "id":1083,
-                       "start":"10:00",
-                       "end":"11:00",
-                       "title":"Ceylon d‘ici à l‘infini : tour d‘horizon et le futur",
-                       "format":"conference",
-                       "room":"Chanchardon"
-                    }
-                 ]
-              },
-               {
-                  "type":"Conférences",
-                  "proposals":[
+                     },
                      {
                         "id":1082,
                         "start":"10:00",
@@ -65,14 +34,6 @@
                         "room":"Casoar Tadorne"
                      },
                      {
-                        "id":1085,
-                        "start":"11:00",
-                        "end":"12:00",
-                        "title":"Cloud First",
-                        "format":"conference",
-                        "room":"Chanchardon"
-                     },
-                     {
                         "id":1105,
                         "start":"12:00",
                         "end":"12:15",
@@ -81,44 +42,12 @@
                         "room":"Casoar Tadorne"
                      },
                      {
-                        "id":1106,
-                        "start":"12:00",
-                        "end":"12:15",
-                        "title":"MongoDB Aggregation Framework in action !",
-                        "format":"quickie",
-                        "room":"Chanchardon"
-                     },
-                     {
                         "id":1108,
                         "start":"12:15",
                         "end":"12:30",
                         "title":"Améliorer la qualité de votre application AngularJS avec ESLint",
                         "format":"quickie",
                         "room":"Casoar Tadorne"
-                     },
-                     {
-                        "id":1109,
-                        "start":"12:15",
-                        "end":"12:30",
-                        "title":"Asciidoctor et Java",
-                        "format":"quickie",
-                        "room":"Chanchardon"
-                     },
-                     {
-                        "id":1110,
-                        "start":"13:20",
-                        "end":"13:35",
-                        "title":"Mongodb aggregation pipeline",
-                        "format":"quickie",
-                        "room":"Casoar Tadorne"
-                     },
-                     {
-                        "id":1111,
-                        "start":"13:20",
-                        "end":"13:35",
-                        "title":"Une fille dans mon équipe ?",
-                        "format":"quickie",
-                        "room":"Chanchardon"
                      },
                      {
                         "id":1110,
@@ -137,14 +66,6 @@
                         "room":"Casoar Tadorne"
                      },
                      {
-                        "id":1113,
-                        "start":"13:35",
-                        "end":"13:50",
-                        "title":"Développons une application web AngularJS/Java8 dirigé par les tests",
-                        "format":"quickie",
-                        "room":"Chanchardon"
-                     },
-                     {
                         "id":1086,
                         "start":"14:00",
                         "end":"15:00",
@@ -152,15 +73,6 @@
                         "format":"conference",
                         "room":"Casoar Tadorne"
                      },
-                     {
-                        "id":1087,
-                        "start":"14:00",
-                        "end":"15:00",
-                        "title":"Let's Invoke Dynamite in JavaEE with InvokeDynamic",
-                        "format":"conference",
-                        "room":"Chanchardon"
-                     },
-
                      {
                         "id":1088,
                         "start":"15:00",
@@ -170,15 +82,6 @@
                         "room":"Casoar Tadorne"
                      },
                      {
-                        "id":1089,
-                        "start":"15:00",
-                        "end":"16:00",
-                        "title":"Et si vous développiez dans le Cloud avec Codenvy ?",
-                        "format":"conference",
-                        "room":"Chanchardon"
-                     },
-
-                     {
                         "id":1090,
                         "start":"16:15",
                         "end":"17:15",
@@ -187,21 +90,102 @@
                         "room":"Casoar Tadorne"
                      },
                      {
-                        "id":1091,
-                        "start":"16:15",
-                        "end":"17:15",
-                        "title":"Golo, petit mais costaud",
-                        "format":"conference",
-                        "room":"Chanchardon"
-                     },
-
-                     {
                         "id":1092,
                         "start":"17:15",
                         "end":"18:10",
                         "title":"I don't always write Reactive applications but when I do, it runs on Raspberry Pi",
                         "format":"conference",
                         "room":"Casoar Tadorne"
+                     }
+                  ]
+               },
+               {
+                  "type":"Miam",
+                  "proposals":[
+                     {
+                        "id":0,
+                        "start":"12:00",
+                        "end":"14:00",
+                        "title":"Repas",
+                        "format":"repas",
+                        "room":"Restaurant"
+                     }
+                  ]
+               },
+               {
+                  "type":"Conférences",
+                  "proposals":[
+                     {
+                        "id":1083,
+                        "start":"10:00",
+                        "end":"11:00",
+                        "title":"Ceylon d‘ici à l‘infini : tour d‘horizon et le futur",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1085,
+                        "start":"11:00",
+                        "end":"12:00",
+                        "title":"Cloud First",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1106,
+                        "start":"12:00",
+                        "end":"12:15",
+                        "title":"MongoDB Aggregation Framework in action !",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1109,
+                        "start":"12:15",
+                        "end":"12:30",
+                        "title":"Asciidoctor et Java",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1111,
+                        "start":"13:20",
+                        "end":"13:35",
+                        "title":"Une fille dans mon équipe ?",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1113,
+                        "start":"13:35",
+                        "end":"13:50",
+                        "title":"Développons une application web AngularJS/Java8 dirigé par les tests",
+                        "format":"quickie",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1087,
+                        "start":"14:00",
+                        "end":"15:00",
+                        "title":"Let's Invoke Dynamite in JavaEE with InvokeDynamic",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1089,
+                        "start":"15:00",
+                        "end":"16:00",
+                        "title":"Et si vous développiez dans le Cloud avec Codenvy ?",
+                        "format":"conference",
+                        "room":"Chanchardon"
+                     },
+                     {
+                        "id":1091,
+                        "start":"16:15",
+                        "end":"17:15",
+                        "title":"Golo, petit mais costaud",
+                        "format":"conference",
+                        "room":"Chanchardon"
                      },
                      {
                         "id":1093,
