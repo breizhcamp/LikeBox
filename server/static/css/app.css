@@ -18,11 +18,13 @@ header {
     padding: 20px;
     color: white;
     text-shadow: 2px 2px 2px #111;
+    margin-left: 75px;
+    margin-right: 75px;
 }
 
 h1 {
     text-align: center;
-    margin-top: 5%;
+    margin-top: 15%;
 }
 
 ul {
@@ -53,8 +55,8 @@ li div {
 
 .twitter-timeline {
   width: 90% !important;
-  height: 80% !important;
-  margin: 20px auto;
+  height: 75% !important;
+  margin: 90px auto;
   display: block;
 }
 
@@ -62,7 +64,7 @@ li div {
 
 h2 {
     text-align: center;
-    margin-top: 25%;
+    margin-top: 15%;
     clear: both;
 }
 
@@ -72,7 +74,7 @@ h2 {
     margin: 0.5%;
     float: left;
     text-align: center;
-    font-size: 20px;
+    font-size: 25px;
     border-radius: 15px;
     background-color: rgba(230,230,230,0.6);
     box-shadow: 5px 5px 10px #555;
