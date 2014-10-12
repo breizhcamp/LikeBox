@@ -7,7 +7,10 @@ var debug = process.env.DEBUG,
 	scheduleReader = require('./modules/schedule.js'),
 	confMod = require('./modules/conf.js'),
 	moment = require('moment'),
-	winston = require('winston');
+	winston = require('winston'),
+	ip = require('ip'),
+	sleep = require('sleep');
+
 
 // -- init modules --
 var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
@@ -93,6 +96,16 @@ function loadCurrentSession() {
 	});
 }
 
+function hello() {
+        screen.clear();
+        screen.goto(3,0).print('## LikeBox ##');
+        screen.goto(0,1).print('--------------------');
+        screen.goto(0,2).print(moment().format("D MM YYYY HH:mm:ss"));
+        screen.goto(0,3).print(ip.address());
+        sleep.sleep(4);
+        screen.clear();
+}
+
 /**
  * Display no session message on LCD screen
  * @param clear True if we have to clear screen before printing the message
@@ -159,6 +172,8 @@ function exit() {
 	screen.clear().goto(0,1).print('EXTINCTION EN COURS');
 	process.exit(0);
 }
+
+hello();
 
 //--- BINDING BUTTONS ---
 greenButton.events().on('released', function(){
