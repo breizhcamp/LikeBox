@@ -1,766 +1,393 @@
 {
-   "titre":"breizhcamp",
-   "programme":{
-      "jours":[
-         {
-            "title":"day1",
-            "date":"21/05/2014",
-            "tracks":[
-               {
-                  "type":"track 1",
-                  "proposals":[
-                     {
-                        "id":148,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Objets connectés : démystification",
-                        "format":"conference",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":24,
-                        "start":"15:00",
-                        "end":"17:00",
-                        "title":"NodeSchool : workshops NodeJS en self-service",
-                        "format":"hands-on",
-                        "room":"Belle-Île-en-Mer"
-                     }
-                  ]
-               },
-               {
-                  "type":"Buy a game",
-                  "proposals":[
-                     {
-                        "id":145,
-                        "start":"14:00",
-                        "end":"17:00",
-                        "title":"Buy a game",
-                        "format":"hands-on",
-                        "room":"Bréhat"
-                     }
-                  ]
-               },
-               {
-                  "type":"NAO & ORA Smart Glasses",
-                  "proposals":[
-                     {
-                        "id":149,
-                        "start":"14:00",
-                        "end":"14:30",
-                        "title":"NAO Connected",
-                        "format":"tools in action",
-                        "room":"Hall"
-                     },
-                     {
-                        "id":100,
-                        "start":"14:30",
-                        "end":"15:00",
-                        "title":"Démo ORA Smart Glasses",
-                        "format":"tools in action",
-                        "room":"Hall"
-                     },
-                     {
-                        "id":1004,
-                        "start":"15:00",
-                        "end":"15:30",
-                        "title":"NAO Connected",
-                        "format":"tools in action",
-                        "room":"Hall"
-                     },
-                     {
-                        "id":1005,
-                        "start":"15:30",
-                        "end":"16:00",
-                        "title":"Démo ORA Smart Glasses",
-                        "format":"tools in action",
-                        "room":"Hall"
-                     },
-                     {
-                        "id":1006,
-                        "start":"16:00",
-                        "end":"16:30",
-                        "title":"NAO Connected",
-                        "format":"tools in action",
-                        "room":"Hall"
-                     },
-                     {
-                        "id":1007,
-                        "start":"16:30",
-                        "end":"17:00",
-                        "title":"Démo ORA Smart Glasses",
-                        "format":"tools in action",
-                        "room":"Hall"
-                     }
-                  ]
-               },
-               {
-                  "type":"Devoxx4Kids",
-                  "proposals":[
-                     {
-                        "id":1001,
-                        "start":"14:00",
-                        "end":"17:00",
-                        "title":"Devoxx4Kids",
-                        "format":"hands-on",
-                        "room":"Molène"
-                     }
-                  ]
-               },
-               {
-                  "type":"LabFab",
-                  "proposals":[
-                     {
-                        "id":1002,
-                        "start":"14:00",
-                        "end":"17:00",
-                        "title":"LabFab",
-                        "format":"hands-on",
-                        "room":"Groix"
-                     }
-                  ]
-               }
+    "titre": "Bdx.io",
+    "programme": {
+        "jours": {
+            "title": "day1",
+            "date": "17/10/2014",
+            "tracks": [
+                {
+                    "proposals": [
+                        {
+                            "start": "10:00",
+                            "room": "Amphi D",
+                            "title": "MongoDB Internals : La vie d'une Ã©criture et sa rÃ©plication...",
+                            "end": "10:50",
+                            "id": "5074",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "11:00",
+                            "room": "Amphi D",
+                            "title": "Hacking your home",
+                            "end": "11:50",
+                            "id": "9585",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:20",
+                            "room": "Amphi D",
+                            "title": "Java 8 - Les interfaces fonctionnelles",
+                            "end": "12:35",
+                            "id": "2044",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:45",
+                            "room": "Amphi D",
+                            "title": "Saga inachevÃ©e d'un dÃ©veloppeur",
+                            "end": "13:00",
+                            "id": "5484",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:10",
+                            "room": "Amphi D",
+                            "title": "Ivre, jâ€™ai dÃ©veloppÃ© une api de tests automatisÃ©s en Bash",
+                            "end": "13:25",
+                            "id": "9307",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:35",
+                            "room": "Amphi D",
+                            "title": "Shiro Games",
+                            "end": "13:50",
+                            "id": "3299",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "14:00",
+                            "room": "Amphi D",
+                            "title": "Les Web Components, oui, mais tout de suite !",
+                            "end": "14:50",
+                            "id": "8945",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "16:10",
+                            "room": "Amphi D",
+                            "title": "MaÃ®triser son style CSS",
+                            "end": "17:00",
+                            "id": "5485",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "15:00",
+                            "room": "Amphi D",
+                            "title": "Les aventures d'Alice : la rÃ©volte des Tests",
+                            "end": "15:50",
+                            "id": "0937",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "17:10",
+                            "room": "Amphi D",
+                            "title": "Tdd dans la vraie vie",
+                            "end": "18:00",
+                            "id": "0412",
+                            "format": "Talk"
+                        }
+                    ],
+                    "type": "Amphi D"
+                },
+                {
+                    "proposals": [
+                        {
+                            "start": "10:00",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Concevoir une app mobile qui tient 5 millions de visites par mois",
+                            "end": "10:50",
+                            "id": "2195",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "09:00",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Keynote",
+                            "end": "09:50",
+                            "id": "5662",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "11:00",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Live coding Angularjs + RESTX avec deploiement continu et monitoring temps rÃ©el",
+                            "end": "11:50",
+                            "id": "9702",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:20",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "12 Factor",
+                            "end": "12:35",
+                            "id": "7383",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:45",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Trucs et astuces pour avoir des schÃ©mas de DB (relationnelle) propres",
+                            "end": "13:00",
+                            "id": "7515",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:10",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "De zÃ©ro Ã  hÃ©ros en 15 minutes avec Spring Boot",
+                            "end": "13:25",
+                            "id": "8278",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:35",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Oh purÃ©e! Ma SPA n'est pas sÃ©curisÃ©e!",
+                            "end": "13:50",
+                            "id": "0216",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "14:00",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Microservices avec Dart et Polymer",
+                            "end": "14:50",
+                            "id": "3577",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "15:00",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Nouvelles opportunitÃ©s offertes par les bases de donnÃ©es de graphes",
+                            "end": "15:50",
+                            "id": "8652",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "16:10",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "Docker : de "
+Error: Parse error on line 170:
+...tle": "Docker : de "ZÃ©ro" Ã  "HÃ©ros"",
+-----------------------^
+Expecting 'EOF', '}', ':', ',', ']'
+ZÃ©ro" Ã  "HÃ©ros"",
+                            "end": "17:00",
+                            "id": "7933",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "17:10",
+                            "room": "Grand Amphi CapGÃ©",
+                            "title": "RUN | PROVISION | DEPLOY - Your Workstation in Production",
+                            "end": "18:00",
+                            "id": "7455",
+                            "format": "Talk"
+                        }
+                    ],
+                    "type": "Grand Amphi CapGÃ©"
+                },
+                {
+                    "proposals": [
+                        {
+                            "start": "10:00",
+                            "room": "Amphi E",
+                            "title": "Cloud First",
+                            "end": "10:50",
+                            "id": "1231",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "11:00",
+                            "room": "Amphi E",
+                            "title": "Haxe pour les pas nuls",
+                            "end": "11:50",
+                            "id": "6517",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:20",
+                            "room": "Amphi E",
+                            "title": "Asciidoc et Asciidoctor",
+                            "end": "12:35",
+                            "id": "2846",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:45",
+                            "room": "Amphi E",
+                            "title": "WRO4J La toolbox Javascript/CSS du dÃ©veloppeur Java",
+                            "end": "13:00",
+                            "id": "2298",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:10",
+                            "room": "Amphi E",
+                            "title": "Bluetooth Low Energy : De la mobilitÃ© aux objets connectÃ©s",
+                            "end": "13:25",
+                            "id": "5227",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:35",
+                            "room": "Amphi E",
+                            "title": "Pourquoi versionner ses donnÃ©es en noSQL",
+                            "end": "13:50",
+                            "id": "6223",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "14:00",
+                            "room": "Amphi E",
+                            "title": "Make sense of your (BIG) data!",
+                            "end": "14:50",
+                            "id": "7681",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "15:00",
+                            "room": "Amphi E",
+                            "title": "Introduction to Clojure",
+                            "end": "15:50",
+                            "id": "9331",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "16:10",
+                            "room": "Amphi E",
+                            "title": "S.A.R.A.H., de l'UX pour contrÃ´ler les objets connectÃ©s de la maison autrement.",
+                            "end": "17:00",
+                            "id": "7176",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "17:10",
+                            "room": "Amphi E",
+                            "title": "Bootstrapping Machine Learning",
+                            "end": "18:00",
+                            "id": "9127",
+                            "format": "Talk"
+                        }
+                    ],
+                    "type": "Amphi E"
+                },
+                {
+                    "proposals": [
+                        {
+                            "start": "10:00",
+                            "room": "Amphi B",
+                            "title": "Ruby Aujourd'hui",
+                            "end": "10:50",
+                            "id": "0970",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "11:00",
+                            "room": "Amphi B",
+                            "title": "Apprenez les ficelles de Marionette",
+                            "end": "11:50",
+                            "id": "3544",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:20",
+                            "room": "Amphi B",
+                            "title": "PrÃ©sentation de BdxCoin, communautÃ© Bordelaise des crypto-monnaies !",
+                            "end": "12:35",
+                            "id": "0048",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "12:45",
+                            "room": "Amphi B",
+                            "title": "Monitoring d'un compteur EDF avec Node.js",
+                            "end": "13:00",
+                            "id": "7780",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:10",
+                            "room": "Amphi B",
+                            "title": "De Java Ã  Android (il n'y a qu'un pas ou pasâ€¦)",
+                            "end": "13:25",
+                            "id": "0955",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "13:35",
+                            "room": "Amphi B",
+                            "title": "La galaxie Javascript vue par un dÃ©veloppeur Java",
+                            "end": "13:50",
+                            "id": "9786",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "14:00",
+                            "room": "Amphi B",
+                            "title": "REST dans le monde Symfony",
+                            "end": "14:50",
+                            "id": "2958",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "15:00",
+                            "room": "Amphi B",
+                            "title": "ReactJS et l'avenir de l'interface utilisateur HTML5",
+                            "end": "15:50",
+                            "id": "0186",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "16:10",
+                            "room": "Amphi B",
+                            "title": "Retour d'expÃ©rience sur la mise en oeuvre du Go au sein d'Orange",
+                            "end": "17:00",
+                            "id": "5192",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "17:10",
+                            "room": "Amphi B",
+                            "title": "Grunt & Broccoli ou reÌaliser une architecture dâ€™application web robuste et performante",
+                            "end": "18:00",
+                            "id": "9811",
+                            "format": "Talk"
+                        }
+                    ],
+                    "type": "Amphi B"
+                },
+                {
+                    "proposals": [
+                        {
+                            "start": "10:00",
+                            "room": "TD 11",
+                            "title": "Code-moi un Domain Driven Design en Java",
+                            "end": "11:50",
+                            "id": "6087",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "14:00",
+                            "room": "TD 11",
+                            "title": "Workshop: MongoDB par la pratique!",
+                            "end": "15:50",
+                            "id": "4373",
+                            "format": "Talk"
+                        },
+                        {
+                            "start": "16:10",
+                            "room": "TD 11",
+                            "title": "Je vais vous faire aimer Javascript avec ECMAScript 6",
+                            "end": "18:00",
+                            "id": "2335",
+                            "format": "Talk"
+                        }
+                    ],
+                    "type": "TD 11"
+                }
             ]
-         },
-         {
-            "title":"day2",
-            "date":"22/05/2014",
-            "tracks":[
-               {
-                  "type":"keynote",
-                  "proposals":[
-                     {
-                        "id":0,
-                        "start":"9:00",
-                        "end":"10:00",
-                        "title":"Keynote",
-                        "format":"keynote",
-                        "room":"Ouessant"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 1",
-                  "proposals":[
-                     {
-                        "id":109,
-                        "start":"10:30",
-                        "end":"12:30",
-                        "title":"Premiers pas avec Symfony",
-                        "format":"hands-on",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":35,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"We Are Family",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":26,
-                        "start":"15:00",
-                        "end":"17:00",
-                        "title":"Développeurs, venez jouer avec les pratiques XP !",
-                        "format":"hands-on",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":113,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"Behat : Automatisation des tests fonctionnels",
-                        "format":"tools in action",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":94,
-                        "start":"18:05",
-                        "end":"18:35",
-                        "title":"Y sont pas cher mes tests !",
-                        "format":"tools in action",
-                        "room":"Groix"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 2",
-                  "proposals":[
-                     {
-                        "id":56,
-                        "start":"10:30",
-                        "end":"12:30",
-                        "title":"Vulnérabilité des applications web : théorie et pratique",
-                        "format":"hands-on",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":160,
-                        "start":"13:00",
-                        "end":"13:15",
-                        "title":"Yeoman, génère moi un générateur",
-                        "format":"quickie",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":131,
-                        "start":"13:30",
-                        "end":"13:45",
-                        "title":"Branchez Node.js à votre compteur EDF",
-                        "format":"quickie",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":72,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Node.js dans Microsoft Azure",
-                        "format":"conference",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":68,
-                        "start":"15:00",
-                        "end":"17:00",
-                        "title":"Angular from scratch",
-                        "format":"hands-on",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":91,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"faire un jeu sur Leap Motion en Java",
-                        "format":"tools in action",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":75,
-                        "start":"18:05",
-                        "end":"18:35",
-                        "title":"Vagrant pour les développeurs",
-                        "format":"tools in action",
-                        "room":"Belle-Île-en-Mer"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 3",
-                  "proposals":[
-                     {
-                        "id":116,
-                        "start":"10:30",
-                        "end":"12:30",
-                        "title":"DevOps Mindstorms",
-                        "format":"hands-on",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":88,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Continuous Delivery chez Capitaine Train",
-                        "format":"conference",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":34,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"De 20 000 à 4 millions d'utilisateurs",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":1008,
-                        "start":"16:00",
-                        "end":"16:55",
-                        "title":"Faire la conception en équipe sans architecte, non mais allô quoi ?",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":153,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"\"Bash\" et moi",
-                        "format":"tools in action",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":25,
-                        "start":"18:05",
-                        "end":"18:35",
-                        "title":"Initiation à PowerShell",
-                        "format":"tools in action",
-                        "room":"Molène"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 4",
-                  "proposals":[
-                     {
-                        "id":52,
-                        "start":"10:30",
-                        "end":"12:30",
-                        "title":"Hands on elasticsearch and Kibana",
-                        "format":"hands-on",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":137,
-                        "start":"13:00",
-                        "end":"13:15",
-                        "title":"Pourquoi versionner ses données en noSQL",
-                        "format":"quickie",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":59,
-                        "start":"13:30",
-                        "end":"13:45",
-                        "title":"JavaFX2, un tour d'horizon",
-                        "format":"quickie",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":39,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Cassandra, retour vers le futur",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":17,
-                        "start":"15:00",
-                        "end":"17:00",
-                        "title":"Workshop: MongoDB par la pratique!",
-                        "format":"hands-on",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":118,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"5 ingrédients pour pimenter Elasticsearch",
-                        "format":"tools in action",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":23,
-                        "start":"18:05",
-                        "end":"18:35",
-                        "title":"Libérez la puissance de Couchbase",
-                        "format":"tools in action",
-                        "room":"Bréhat"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 5",
-                  "proposals":[
-                     {
-                        "id":102,
-                        "start":"10:30",
-                        "end":"11:25",
-                        "title":"Une partie de cache-cache",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":124,
-                        "start":"11:30",
-                        "end":"12:25",
-                        "title":"Le tour de Varnish en 80 jours",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":44,
-                        "start":"13:00",
-                        "end":"13:15",
-                        "title":"Java 8 - Les interfaces fonctionnelles",
-                        "format":"quickie",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":121,
-                        "start":"13:30",
-                        "end":"13:45",
-                        "title":"Une fille dans mon équipe ?",
-                        "format":"quickie",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":84,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Voteriez-vous pour un Web Déconnecté ?",
-                        "format":"conference",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":77,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"Approche des architectures micro-services",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":70,
-                        "start":"16:00",
-                        "end":"16:55",
-                        "title":"Créer des jeux 3D pour le web",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":136,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"Le Multi-Langage dans SonarQube",
-                        "format":"tools in action",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":108,
-                        "start":"18:05",
-                        "end":"18:35",
-                        "title":"Centralisez vos logs avec logstash",
-                        "format":"tools in action",
-                        "room":"Ouessant"
-                     }
-                  ]
-               }
-            ]
-         },
-         {
-            "title":"day3",
-            "date":"23/05/2014",
-            "tracks":[
-               {
-                  "type":"keynote",
-                  "proposals":[
-                     {
-                        "id":0,
-                        "start":"9:00",
-                        "end":"10:00",
-                        "title":"Keynote",
-                        "format":"keynote",
-                        "room":"Ouessant"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 1",
-                  "proposals":[
-                     {
-                        "id":67,
-                        "start":"10:30",
-                        "end":"11:25",
-                        "title":"Trend it",
-                        "format":"conference",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":89,
-                        "start":"11:30",
-                        "end":"12:25",
-                        "title":"Le monitoring à l'heure de DevOps et BigData",
-                        "format":"conference",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":123,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Développeur Entreprise, dessine moi un Linux",
-                        "format":"conference",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":48,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"Demarrer avec Docker",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":54,
-                        "start":"16:30",
-                        "end":"17:25",
-                        "title":"Vers des infrastructures agiles",
-                        "format":"conference",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":155,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"Délivrer en continu avec VSO et Windows Azure",
-                        "format":"tools in action",
-                        "room":"Groix"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 2",
-                  "proposals":[
-                     {
-                        "id":47,
-                        "start":"10:30",
-                        "end":"12:30",
-                        "title":"Démarrer avec SaltStack",
-                        "format":"hands-on",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":55,
-                        "start":"13:00",
-                        "end":"13:15",
-                        "title":"Développer en Java et en Caleçon",
-                        "format":"quickie",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":140,
-                        "start":"13:30",
-                        "end":"13:45",
-                        "title":"Dur d'être à son compte : mythe && réalité",
-                        "format":"quickie",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":105,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Google Glass - Ma première application",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":53,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"UX Design, Design thinking…? De quoi parle t-on ?",
-                        "format":"conference",
-                        "room":"Groix"
-                     },
-                     {
-                        "id":81,
-                        "start":"16:30",
-                        "end":"17:25",
-                        "title":"Trois bonnes raisons de travailler avec agilité",
-                        "format":"conference",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":32,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"Soyez Productifs ! \"I MEAN it !\"",
-                        "format":"tools in action",
-                        "room":"Belle-Île-en-Mer"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 3",
-                  "proposals":[
-                     {
-                        "id":64,
-                        "start":"10:30",
-                        "end":"11:25",
-                        "title":"Dart, it's Angular too!",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":78,
-                        "start":"11:30",
-                        "end":"12:25",
-                        "title":"Qu'est-ce qui rends Groovy \"groovy\" ?",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":139,
-                        "start":"13:00",
-                        "end":"13:15",
-                        "title":"Stressez votre serveur avec Gatling",
-                        "format":"quickie",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":152,
-                        "start":"13:30",
-                        "end":"13:45",
-                        "title":"RAML",
-                        "format":"quickie",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":157,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"MongoDB 2.6 : Quoi de neuf doc?",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":58,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"RxJava + Java8 pour sortir de l'enfer des Callback",
-                        "format":"conference",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":79,
-                        "start":"16:30",
-                        "end":"17:25",
-                        "title":"Programmation fonctionnelle avec Groovy",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":151,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"Orika, mapping objet Java sans réflexion",
-                        "format":"tools in action",
-                        "room":"Molène"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 4",
-                  "proposals":[
-                     {
-                        "id":16,
-                        "start":"10:30",
-                        "end":"11:25",
-                        "title":"Du web temps réel avec SimpleWeb4J",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":117,
-                        "start":"11:30",
-                        "end":"12:25",
-                        "title":"De zéro à héros en 5 minutes avec Spring Boot",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":62,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"HTML5 Gaming",
-                        "format":"conference",
-                        "room":"Belle-Île-en-Mer"
-                     },
-                     {
-                        "id":22,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"Live coding: Web temps réel avec Play 2",
-                        "format":"conference",
-                        "room":"Molène"
-                     },
-                     {
-                        "id":18,
-                        "start":"16:30",
-                        "end":"17:25",
-                        "title":"WebRTC : Real Time Communication",
-                        "format":"conference",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":142,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"AngularJS à 60fps",
-                        "format":"tools in action",
-                        "room":"Ouessant"
-                     }
-                  ]
-               },
-               {
-                  "type":"track 5",
-                  "proposals":[
-                     {
-                        "id":134,
-                        "start":"10:30",
-                        "end":"11:25",
-                        "title":"How to scale ?",
-                        "format":"conference",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":83,
-                        "start":"11:30",
-                        "end":"12:25",
-                        "title":"Des petits pas vers le Continuous Delivery",
-                        "format":"conference",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":20,
-                        "start":"13:00",
-                        "end":"13:15",
-                        "title":"Les Sensors et le HTML5  (TIA)",
-                        "format":"quickie",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":100,
-                        "start":"13:30",
-                        "end":"13:45",
-                        "title":"Présentation de la Plateforme de RA ORA-1",
-                        "format":"quickie",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":1000,
-                        "start":"14:00",
-                        "end":"14:55",
-                        "title":"Machine learning et régulation numérique",
-                        "format":"conference",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":144,
-                        "start":"15:00",
-                        "end":"15:55",
-                        "title":"Faire agile c'est bien, être agile c'est mieux, vivre agile c'est...",
-                        "format":"conference",
-                        "room":"Bréhat"
-                     },
-                     {
-                        "id":146,
-                        "start":"16:30",
-                        "end":"17:25",
-                        "title":"Mutualiser du code natif multiplateforme",
-                        "format":"conference",
-                        "room":"Ouessant"
-                     },
-                     {
-                        "id":85,
-                        "start":"17:30",
-                        "end":"18:00",
-                        "title":"Ionic In Action",
-                        "format":"tools in action",
-                        "room":"Bréhat"
-                     }
-                  ]
-               }
-            ]
-         }
-      ]
-   }
+        }
+    }
 }
