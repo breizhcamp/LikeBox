@@ -10,7 +10,7 @@
                         {
                             "start": "10:00",
                             "room": "Amphi D",
-                            "title": "MongoDB Internals : La vie d'une Ã©criture et sa rÃ©plication...",
+                            "title": "MongoDB Internals : La vie d'une écriture et sa réplication...",
                             "end": "10:50",
                             "id": "5074",
                             "format": "Talk"
@@ -34,7 +34,7 @@
                         {
                             "start": "12:45",
                             "room": "Amphi D",
-                            "title": "Saga inachevÃ©e d'un dÃ©veloppeur",
+                            "title": "Saga inachevée d'un développeur",
                             "end": "13:00",
                             "id": "5484",
                             "format": "Talk"
@@ -42,7 +42,7 @@
                         {
                             "start": "13:10",
                             "room": "Amphi D",
-                            "title": "Ivre, jâ€™ai dÃ©veloppÃ© une api de tests automatisÃ©s en Bash",
+                            "title": "Ivre, j'ai développé une api de tests automatisés en Bash",
                             "end": "13:25",
                             "id": "9307",
                             "format": "Talk"
@@ -66,7 +66,7 @@
                         {
                             "start": "16:10",
                             "room": "Amphi D",
-                            "title": "MaÃ®triser son style CSS",
+                            "title": "Maîtriser son style CSS",
                             "end": "17:00",
                             "id": "5485",
                             "format": "Talk"
@@ -74,7 +74,7 @@
                         {
                             "start": "15:00",
                             "room": "Amphi D",
-                            "title": "Les aventures d'Alice : la rÃ©volte des Tests",
+                            "title": "Les aventures d'Alice : la révolte des Tests",
                             "end": "15:50",
                             "id": "0937",
                             "format": "Talk"
@@ -94,7 +94,7 @@
                     "proposals": [
                         {
                             "start": "10:00",
-                            "room": "Grand Amphi CapGÃ©",
+                            "room": "Grand Amphi CapGé",
                             "title": "Concevoir une app mobile qui tient 5 millions de visites par mois",
                             "end": "10:50",
                             "id": "2195",
@@ -102,7 +102,7 @@
                         },
                         {
                             "start": "09:00",
-                            "room": "Grand Amphi CapGÃ©",
+                            "room": "Grand Amphi CapGé",
                             "title": "Keynote",
                             "end": "09:50",
                             "id": "5662",
@@ -110,15 +110,15 @@
                         },
                         {
                             "start": "11:00",
-                            "room": "Grand Amphi CapGÃ©",
-                            "title": "Live coding Angularjs + RESTX avec deploiement continu et monitoring temps rÃ©el",
+                            "room": "Grand Amphi CapGé",
+                            "title": "Live coding Angularjs + RESTX avec deploiement continu et monitoring temps réel",
                             "end": "11:50",
                             "id": "9702",
                             "format": "Talk"
                         },
                         {
                             "start": "12:20",
-                            "room": "Grand Amphi CapGÃ©",
+                            "room": "Grand Amphi CapGé",
                             "title": "12 Factor",
                             "end": "12:35",
                             "id": "7383",
@@ -126,7 +126,7 @@
                         },
                         {
                             "start": "12:45",
-                            "room": "Grand Amphi CapGÃ©",
+                            "room": "Grand Amphi CapGé",
                             "title": "Trucs et astuces pour avoir des schÃ©mas de DB (relationnelle) propres",
                             "end": "13:00",
                             "id": "7515",
@@ -134,23 +134,23 @@
                         },
                         {
                             "start": "13:10",
-                            "room": "Grand Amphi CapGÃ©",
-                            "title": "De zÃ©ro Ã  hÃ©ros en 15 minutes avec Spring Boot",
+                            "room": "Grand Amphi CapGé",
+                            "title": "De zéro Ã  héros en 15 minutes avec Spring Boot",
                             "end": "13:25",
                             "id": "8278",
                             "format": "Talk"
                         },
                         {
                             "start": "13:35",
-                            "room": "Grand Amphi CapGÃ©",
-                            "title": "Oh purÃ©e! Ma SPA n'est pas sÃ©curisÃ©e!",
+                            "room": "Grand Amphi CapGé",
+                            "title": "Oh purée! Ma SPA n'est pas sécurisée!",
                             "end": "13:50",
                             "id": "0216",
                             "format": "Talk"
                         },
                         {
                             "start": "14:00",
-                            "room": "Grand Amphi CapGÃ©",
+                            "room": "Grand Amphi CapGé",
                             "title": "Microservices avec Dart et Polymer",
                             "end": "14:50",
                             "id": "3577",
@@ -158,28 +158,23 @@
                         },
                         {
                             "start": "15:00",
-                            "room": "Grand Amphi CapGÃ©",
-                            "title": "Nouvelles opportunitÃ©s offertes par les bases de donnÃ©es de graphes",
+                            "room": "Grand Amphi CapGé",
+                            "title": "Nouvelles opportunités offertes par les bases de données de graphes",
                             "end": "15:50",
                             "id": "8652",
                             "format": "Talk"
                         },
                         {
                             "start": "16:10",
-                            "room": "Grand Amphi CapGÃ©",
-                            "title": "Docker : de "
-Error: Parse error on line 170:
-...tle": "Docker : de "ZÃ©ro" Ã  "HÃ©ros"",
------------------------^
-Expecting 'EOF', '}', ':', ',', ']'
-ZÃ©ro" Ã  "HÃ©ros"",
+                            "room": "Grand Amphi CapGé",
+                            "title": "Docker : de 'Zéro' à 'Héros',
                             "end": "17:00",
                             "id": "7933",
                             "format": "Talk"
                         },
                         {
                             "start": "17:10",
-                            "room": "Grand Amphi CapGÃ©",
+                            "room": "Grand Amphi CapGé",
                             "title": "RUN | PROVISION | DEPLOY - Your Workstation in Production",
                             "end": "18:00",
                             "id": "7455",
@@ -217,7 +212,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "12:45",
                             "room": "Amphi E",
-                            "title": "WRO4J La toolbox Javascript/CSS du dÃ©veloppeur Java",
+                            "title": "WRO4J La toolbox Javascript/CSS du développeur Java",
                             "end": "13:00",
                             "id": "2298",
                             "format": "Talk"
@@ -225,7 +220,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "13:10",
                             "room": "Amphi E",
-                            "title": "Bluetooth Low Energy : De la mobilitÃ© aux objets connectÃ©s",
+                            "title": "Bluetooth Low Energy : De la mobilité aux objets connectés",
                             "end": "13:25",
                             "id": "5227",
                             "format": "Talk"
@@ -233,7 +228,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "13:35",
                             "room": "Amphi E",
-                            "title": "Pourquoi versionner ses donnÃ©es en noSQL",
+                            "title": "Pourquoi versionner ses données en noSQL",
                             "end": "13:50",
                             "id": "6223",
                             "format": "Talk"
@@ -257,7 +252,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "16:10",
                             "room": "Amphi E",
-                            "title": "S.A.R.A.H., de l'UX pour contrÃ´ler les objets connectÃ©s de la maison autrement.",
+                            "title": "S.A.R.A.H., de l'UX pour contrôler les objets connectés de la maison autrement.",
                             "end": "17:00",
                             "id": "7176",
                             "format": "Talk"
@@ -294,7 +289,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "12:20",
                             "room": "Amphi B",
-                            "title": "PrÃ©sentation de BdxCoin, communautÃ© Bordelaise des crypto-monnaies !",
+                            "title": "Présentation de BdxCoin, communauté Bordelaise des crypto-monnaies !",
                             "end": "12:35",
                             "id": "0048",
                             "format": "Talk"
@@ -318,7 +313,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "13:35",
                             "room": "Amphi B",
-                            "title": "La galaxie Javascript vue par un dÃ©veloppeur Java",
+                            "title": "La galaxie Javascript vue par un développeur Java",
                             "end": "13:50",
                             "id": "9786",
                             "format": "Talk"
@@ -342,7 +337,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "16:10",
                             "room": "Amphi B",
-                            "title": "Retour d'expÃ©rience sur la mise en oeuvre du Go au sein d'Orange",
+                            "title": "Retour d'expérience sur la mise en oeuvre du Go au sein d'Orange",
                             "end": "17:00",
                             "id": "5192",
                             "format": "Talk"
@@ -350,7 +345,7 @@ ZÃ©ro" Ã  "HÃ©ros"",
                         {
                             "start": "17:10",
                             "room": "Amphi B",
-                            "title": "Grunt & Broccoli ou reÌaliser une architecture dâ€™application web robuste et performante",
+                            "title": "Grunt & Broccoli ou réaliser une architecture d'application web robuste et performante",
                             "end": "18:00",
                             "id": "9811",
                             "format": "Talk"
