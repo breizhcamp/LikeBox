@@ -522,7 +522,7 @@
         },
         {
           "id": "AXE-2491",
-          "start": "18:0",
+          "start": "18:00",
           "end": "18:25",
           "title": "D3js par l'exemple",
           "format": "Tools-in-Action",
@@ -725,7 +725,7 @@
           "id": "TYR-8750",
           "start": "13:00",
           "end": "13:15",
-          "title": "Refactoring avec 1,22% de code couvert par les tests ... Golden Master testing à la rescousse ! ",
+          "title": "Refactoring avec 1,22% de code couvert par les tests ... Golden Master testing �� la rescousse ! ",
           "format": "Quickie",
           "room": "Molène",
           "track": "track2"

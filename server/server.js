@@ -1,16 +1,21 @@
 var restify = require('restify'),
 	fs = require('fs'),
 	http = require('http'),
+	winston = require('winston'),
+	moment = require('moment'),
 	sqlite3 = require('sqlite3').verbose();
 
 // -- INIT --
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, { timestamp: true });
+
 var server = restify.createServer();
 server.use(restify.bodyParser());
 server.use(restify.authorizationParser());
 
 var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 	if (err) {
-		console.log(err);
+		winston.error(err);
 		return;
 	}
 
@@ -19,12 +24,12 @@ var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 		"(id integer primary key AUTOINCREMENT, sessionId integer, vote integer, timeStamp date, boitierId integer)", function(err) {
 
 		if (err) {
-			console.log(err);
+			winston.error(err);
 		}
 	});
 });
 
-console.log("Downloading schedule");
+winston.info("Downloading schedule");
 var programJSON = null;
 http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
     var body = '';
@@ -34,19 +39,19 @@ http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
     });
 
     res.on('end', function() {
-		console.log("Schedule downloaded");
+		winston.info("Schedule downloaded");
         programJSON = JSON.parse(body);
 		fs.writeFileSync(__dirname + '/schedule.json', body);
 		cacheTitle();
     });
 
 }).on('error', function(e) {
-	console.log("Got error when downloading schedule, using local version: ", e);
+	winston.error("Got error when downloading schedule, using local version: ", e);
 	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
 	cacheTitle();
 
 }).setTimeout(10000, function() {
-	console.log("Got timeout when downloading schedule, using local version");
+	winston.error("Got timeout when downloading schedule, using local version");
 	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
 	cacheTitle();
 });
@@ -98,9 +103,12 @@ server.get('/status/:idboitier', function(req, res, next) {
 	var stats = fs.statSync(__dirname + '/schedule.json');
 	var schedule_mtime = stats.mtime.getTime();
 	db.get("SELECT max(timestamp) as last_timestamp FROM votes WHERE boitierId='" + boitier + "'", function (error, row) {
-		console.log('Dernier timestamp pour le boitier : ' + boitier + ' => ' + row.last_timestamp);
+		var lasttime = row.last_timestamp;
+		winston.info('[' + req.connection.remoteAddress + '] ' +
+			'Dernier timestamp pour le boitier : ' + boitier + ' => ' + lasttime + ' / ' + moment(lasttime).format());
+
 		res.json({
-			timestamp: row.last_timestamp,
+			timestamp: lasttime,
 			schedule_mtime: schedule_mtime
 		});
 		return next();
@@ -124,7 +132,7 @@ server.post('/vote/:idboitier', function(req, res, next) {
 			$boitierId : boitier
 		});
 
-		console.log('Vote sur le boitier ' + boitier + ':', vote);
+		winston.info('[' + req.connection.remoteAddress + '] Vote sur le boitier ' + boitier + ':', vote);
 	}
 	res.send("ok");
 	next();
@@ -160,5 +168,5 @@ server.get('/.*', restify.serveStatic({
 }));
 
 server.listen(3000, function() {
-	console.log('Listening on port 3000');
+	winston.info('Listening on port 3000');
 });
