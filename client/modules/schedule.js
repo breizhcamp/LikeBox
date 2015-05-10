@@ -24,16 +24,12 @@ module.exports = function(scheduleFile) {
 
 				var days = schedule.programme.jours;
 				for (var i = 0 ; i < days.length ; i++) {
-					var tracks = days[i].tracks;
+					var proposals = days[i].proposals;
 
-					for (var j = 0 ; j < tracks.length ; j++) {
-						var proposals = tracks[j].proposals;
-
-						for (var k = 0 ; k < proposals.length ; k++) {
-							var room = proposals[k].room;
-							if (room.trim().length > 0) {
-								rooms[room] = room;
-							}
+					for (var k = 0 ; k < proposals.length ; k++) {
+						var room = proposals[k].room;
+						if (room.trim().length > 0) {
+							rooms[room] = room;
 						}
 					}
 				}
@@ -81,28 +77,25 @@ module.exports = function(scheduleFile) {
 					}
 
 					//we're on the good day, let's find the right proposal
-					var tracks = days[i].tracks;
-					for (var j = 0 ; j < tracks.length ; j++) {
-						var proposals = tracks[j].proposals;
+					var proposals = days[i].proposals;
 
-						for (var k = 0 ; k < proposals.length ; k++) {
-							var proposal = proposals[k];
-							if (proposal.room != room) {
-								continue;
-							}
+					for (var k = 0 ; k < proposals.length ; k++) {
+						var proposal = proposals[k];
+						if (proposal.room != room) {
+							continue;
+						}
 
-							//we're on the right room, let's check the start and end+delay
-							var start = moment(date + ' ' + proposal.start, 'DD/MM/YYYY HH:mm:ss')
-									.add('minutes', startDelay),
-								end = moment(date + ' ' + proposal.end, 'DD/MM/YYYY HH:mm:ss')
-										.add('minutes', endDelay);
+						//we're on the right room, let's check the start and end+delay
+						var start = moment(date + ' ' + proposal.start, 'DD/MM/YYYY HH:mm:ss')
+								.add(startDelay, 'minutes'),
+							end = moment(date + ' ' + proposal.end, 'DD/MM/YYYY HH:mm:ss')
+									.add(endDelay, 'minutes');
 
-							if (start.isBefore(now) && end.isAfter(now)) {
-								//we found the current proposal
-								current = proposal;
-								current.endDate = end;
+						if (start.isBefore(now) && end.isAfter(now)) {
+							//we found the current proposal
+							current = proposal;
+							current.endDate = end;
 
-							}
 						}
 					}
 
