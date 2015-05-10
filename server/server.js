@@ -1,11 +1,12 @@
-var express = require('express'),
+var restify = require('restify'),
 	fs = require('fs'),
 	http = require('http'),
 	sqlite3 = require('sqlite3').verbose();
 
 // -- INIT --
-var app = express();
-app.use(express.json());
+var server = restify.createServer();
+server.use(restify.bodyParser());
+server.use(restify.authorizationParser());
 
 var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
 	if (err) {
@@ -55,29 +56,44 @@ function cacheTitle() {
 	// map proposal cache
 	var days = programJSON.programme.jours;
 	for (var i = 0 ; i < days.length ; i++) {
-		var tracks = days[i].tracks;
+		var proposals = days[i].proposals;
 
-		for (var j = 0 ; j < tracks.length ; j++) {
-			var proposals = tracks[j].proposals;
-
-			for (var k = 0 ; k < proposals.length ; k++) {
-				var id = proposals[k].id;
-				proposalsMap[id] = proposals[k].title;
-			}
+		for (var k = 0 ; k < proposals.length ; k++) {
+			var id = proposals[k].id;
+			proposalsMap[id] = proposals[k].title;
 		}
 	}
 }
 
-// -- MAPPING URL --
-var auth = express.basicAuth('bzhcamp', 'CHANGEME');
+// -- USER/PASS --
+server.use(function (req, res, next) {
+	var auth = req.authorization;
 
-app.use(express.static(__dirname + '/static'));
+	if (auth && auth.scheme == "Basic"
+			&& auth.basic.username == 'bzhcamp' && auth.basic.password == 'CHANGEME') {
+		return next();
+	}
 
-app.get('/program', function(req, res) {
-    res.download(__dirname + '/schedule.json');
+	res.header('WWW-Authenticate', 'Basic realm="LikeBox"');
+	return next(new restify.UnauthorizedError("Invalid username or password"));
 });
 
-app.get('/status/:idboitier', auth, function(req, res) {
+// -- MAPPING URL --
+server.get('/program', function(req, res, next) {
+	fs.readFile(__dirname + '/schedule.json', function (err, data) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.setHeader('Content-Type', 'application/json');
+		res.writeHead(200);
+		res.end(data);
+		next();
+	});
+});
+
+server.get('/status/:idboitier', function(req, res, next) {
 	var boitier = req.params.idboitier;
 	var stats = fs.statSync(__dirname + '/schedule.json');
 	var schedule_mtime = stats.mtime.getTime();
@@ -87,10 +103,11 @@ app.get('/status/:idboitier', auth, function(req, res) {
 			timestamp: row.last_timestamp,
 			schedule_mtime: schedule_mtime
 		});
+		return next();
 	});
 });
 
-app.post('/vote/:idboitier', auth, function(req, res) {
+server.post('/vote/:idboitier', function(req, res, next) {
 	var boitier = req.params.idboitier;
 	var votes = req.body.votes;
 
@@ -110,9 +127,10 @@ app.post('/vote/:idboitier', auth, function(req, res) {
 		console.log('Vote sur le boitier ' + boitier + ':', vote);
 	}
 	res.send("ok");
+	next();
 });
 
-app.get('/top/:nb', function(req, res) {
+server.get('/top/:nb', function(req, res, next) {
 
 	var nombre = req.params.nb;
 	var results = {};
@@ -132,9 +150,15 @@ app.get('/top/:nb', function(req, res) {
 
 	}, function () {
 		res.send(results);
+		next();
 	});
 });
 
-app.listen(3000, function() {
+server.get('/.*', restify.serveStatic({
+	directory: './static',
+	default: 'index.html'
+}));
+
+server.listen(3000, function() {
 	console.log('Listening on port 3000');
 });
