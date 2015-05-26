@@ -5,6 +5,10 @@ var restify = require('restify'),
 	moment = require('moment'),
 	sqlite3 = require('sqlite3').verbose();
 
+var data_dir = process.env.DATA_DIR || __dirname,
+	schedule_file = data_dir + '/schedule.json',
+	database_file = data_dir + '/server_votes.db';
+
 // -- INIT --
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, { timestamp: true });
@@ -13,7 +17,7 @@ var server = restify.createServer();
 server.use(restify.bodyParser());
 server.use(restify.authorizationParser());
 
-var db = new sqlite3.Database(__dirname + '/server_votes.db', function(err) {
+var db = new sqlite3.Database(database_file, function(err) {
 	if (err) {
 		winston.error(err);
 		return;
@@ -41,18 +45,18 @@ http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
     res.on('end', function() {
 		winston.info("Schedule downloaded");
         programJSON = JSON.parse(body);
-		fs.writeFileSync(__dirname + '/schedule.json', body);
+		fs.writeFileSync(schedule_file, body);
 		cacheTitle();
     });
 
 }).on('error', function(e) {
 	winston.error("Got error when downloading schedule, using local version: ", e);
-	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
+	programJSON = JSON.parse(fs.readFileSync(schedule_file));
 	cacheTitle();
 
 }).setTimeout(10000, function() {
 	winston.error("Got timeout when downloading schedule, using local version");
-	programJSON = JSON.parse(fs.readFileSync(__dirname + '/schedule.json'));
+	programJSON = JSON.parse(fs.readFileSync(schedule_file));
 	cacheTitle();
 });
 
@@ -85,7 +89,7 @@ server.use(function (req, res, next) {
 
 // -- MAPPING URL --
 server.get('/program', function(req, res, next) {
-	fs.readFile(__dirname + '/schedule.json', function (err, data) {
+	fs.readFile(schedule_file, function (err, data) {
 		if (err) {
 			next(err);
 			return;
@@ -100,7 +104,7 @@ server.get('/program', function(req, res, next) {
 
 server.get('/status/:idboitier', function(req, res, next) {
 	var boitier = req.params.idboitier;
-	var stats = fs.statSync(__dirname + '/schedule.json');
+	var stats = fs.statSync(schedule_file);
 	var schedule_mtime = stats.mtime.getTime();
 	db.get("SELECT max(timestamp) as last_timestamp FROM votes WHERE boitierId='" + boitier + "'", function (error, row) {
 		var lasttime = row.last_timestamp;
@@ -163,7 +167,7 @@ server.get('/top/:nb', function(req, res, next) {
 });
 
 server.get('/.*', restify.serveStatic({
-	directory: './static',
+	directory: __dirname + '/static',
 	default: 'index.html'
 }));
 

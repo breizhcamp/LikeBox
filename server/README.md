@@ -1,8 +1,13 @@
-breizhcamp-vote - serveur
-=========================
+Breizhcamp-vote - server
+========================
 
-Création de la base de données
-```
-sqlite3 server_votes.db
-CREATE TABLE votes(id integer primary key AUTOINCREMENT,sessionId integer, vote integer, timeStamp date, boitierId integer);
-```
+Configuration
+-------------
+
+You can change the following environment variables :
+ * DATA_DIR: directory containing votes database and schedule
+
+Run
+---
+
+Just run `server.js`
