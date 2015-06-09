@@ -725,7 +725,7 @@
           "id": "TYR-8750",
           "start": "13:00",
           "end": "13:15",
-          "title": "Refactoring avec 1,22% de code couvert par les tests ... Golden Master testing �� la rescousse ! ",
+          "title": "Refactoring avec 1,22% de code couvert par les tests ... Golden Master testing à la rescousse ! ",
           "format": "Quickie",
           "room": "Molène",
           "track": "track2"
@@ -866,10 +866,10 @@
           "track": "track1"
         },
         {
-          "id": "IOT-0245",
+          "id": "ZFC-0379",
           "start": "14:00",
           "end": "14:55",
-          "title": "A Saner Management for a Multi-facet Development Environment with Vagrant and Docker",
+          "title": "Beyond Polymer: a comparison of web components libraries",
           "format": "Conférence",
           "room": "Bréhat",
           "track": "track4"

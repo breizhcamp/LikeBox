@@ -6,6 +6,7 @@ html {
     background-repeat:no-repeat;
     background-size:cover;
     background-position: top center;
+    color: #DEDEDE;
 }
 
 header {
@@ -35,7 +36,7 @@ ul {
 
 li {
   color: #FF6600;
-    text-shadow: 2px 2px 2px #FFF;
+    text-shadow: 2px 2px 2px #444;
     margin: 30px;
     text-align: center;
     border-radius: 15px;
@@ -54,6 +55,6 @@ li div {
 .twitter-timeline {
   width: 90% !important;
   height: 80% !important;
-  margin: 20px auto;
-  display: block;
+  margin: 20px auto !important;
+  display: block !important;
 }
