@@ -76,12 +76,13 @@ function cacheTitle() {
 
 // -- USER/PASS --
 server.use(function (req, res, next) {
-	var auth = req.authorization;
+	var toAuth = req.url.match('^\/status\/.*$') || req.url.match('^\/vote\/.*$');
+        var auth = req.authorization;
 
-	if (auth && auth.scheme == "Basic"
-			&& auth.basic.username == 'bzhcamp' && auth.basic.password == 'CHANGEME') {
-		return next();
-	}
+        if (!toAuth || auth && auth.scheme == "Basic"
+                        && auth.basic.username == 'bzhcamp' && auth.basic.password == 'CHANGEME') {
+                return next();
+        }
 
 	res.header('WWW-Authenticate', 'Basic realm="LikeBox"');
 	return next(new restify.UnauthorizedError("Invalid username or password"));
