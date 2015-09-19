@@ -29,6 +29,8 @@ http://www.ebay.com/itm/Blue-Serial-IIC-I2C-TWI-2004-204-20X4-Character-LCD-Modu
 
 ## Module RTC
 
+http://www.ebay.com/itm/1x-Tiny-RTC-I2C-Module-DS1307-AT24C32-Time-Clock-AVR-ARM-PIC-SMD-Fr-Arduino-OT8G/221846054619
+
 ## câblage etc
 
 ## pieds
