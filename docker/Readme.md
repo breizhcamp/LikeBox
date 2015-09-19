@@ -11,5 +11,8 @@ Contient kernel 4.1.6 + Docker 1.8.1
 
 Pré-requis : booter la RPi sur la RC1 avec une connexion réseau
 
+```
 wget http://downloads.hypriot.com/docker-hypriot_1.8.2-1_armhf.deb
 sudo dpkg -i docker-hypriot_1.8.2-1_armhf.deb
+```
+
