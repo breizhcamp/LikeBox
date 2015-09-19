@@ -25,6 +25,8 @@ http://fr.farnell.com/itw-switches/76-9450-439088r/commutateur-rouge-domed/dp/24
 
 ## Ecran
 
+http://www.ebay.com/itm/Blue-Serial-IIC-I2C-TWI-2004-204-20X4-Character-LCD-Module-Display-For-Arduino/181299099752
+
 ## Module RTC
 
 ## câblage etc
