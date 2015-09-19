@@ -19,6 +19,10 @@ Les trous de fixation sont percés en 2mm avec une mêche à métaux, puis un fi
 
 ## Boutons
 
+http://fr.farnell.com/itw-switches/76-9450-439088g/commutateur-vert-domed/dp/241519
+
+http://fr.farnell.com/itw-switches/76-9450-439088r/commutateur-rouge-domed/dp/241520
+
 ## Ecran
 
 ## Module RTC
