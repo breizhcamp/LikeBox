@@ -2,13 +2,13 @@
 
 ## Boitier
 
-# Fourniture
+### Fourniture
 
 Le boitier est composé de plaques de Plexiglass 250 x 200 x 8 mm 
 disponible aux dimensions avec bords polis sur http://www.plastiquesurmesure.com/ (ref)
 Coût: 
 
-# Préparation
+### Préparation
 Les plans de découpe peuvent être collés sur les plaques dont on conserve le film de protection jusqu'au montage final.
 
 Les passages de cables sont percés à la mêche de charpentier avec une perceuse sur colonne à vitesse lente. Percer avec un martyr ou par les deux faces pour éviter un éclatement du plexiglass à la sortie de la mêche.
