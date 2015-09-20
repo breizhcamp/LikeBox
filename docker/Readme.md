@@ -16,3 +16,12 @@ wget http://downloads.hypriot.com/docker-hypriot_1.8.2-1_armhf.deb
 sudo dpkg -i docker-hypriot_1.8.2-1_armhf.deb
 ```
 
+# Activer l'i2c
+
+Ajouter dans le fichier /etc/modules les modules i2c :
+```
+i2c-bcm2708 
+i2c-dev
+```
+
+
