@@ -24,4 +24,14 @@ i2c-bcm2708
 i2c-dev
 ```
 
+# Lancement du container
 
+docker run --cap-add SYS_RAWIO --device /dev/i2c-1 --device /dev/mem -ti -v /sys:/sys <nom_image>
+
+- /dev/mem requis par du code de configuration de résistances de pullup des GPIO
+- /dev/i2c-1 requis pour l'ecran LCD
+- volume /sys requis pour atteindre les GPIO via sysfs (module node onoff)
+
+# Reste à faire
+
+Configurer la carte RTC et synchroniser le timezone avec le container.
