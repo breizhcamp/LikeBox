@@ -34,7 +34,7 @@ http://www.ebay.com/itm/1x-Tiny-RTC-I2C-Module-DS1307-AT24C32-Time-Clock-AVR-ARM
 ## câblage etc
 
 Nous avons fonctionné un bon moment avec des connecteurs de platine de test, mais pour éviter les erreurs de branchement, comme d'inverser les boutons (sic), une nappe est une solution propre et pas chère :
-http://www.ebay.fr/itm/Fils-cable-plat-26-broches-2-54-mm-picth-Pour-Raspberry-Pi-GPIO-tete-BA-/281382016940
+http://www.ebay.com/itm/GPIO-Ribbon-Cable-for-Raspberry-Pi-10cm-15cm-30cm-50cm-Rainbow-Grey-/141181560531?var=440250034003&hash=item20df13a6d3
 
 ## Wifi
 
