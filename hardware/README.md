@@ -33,6 +33,11 @@ http://www.ebay.com/itm/1x-Tiny-RTC-I2C-Module-DS1307-AT24C32-Time-Clock-AVR-ARM
 
 ## câblage etc
 
+## Wifi
+
+Les likebox peuvent fonctionner en autonome si un résau Wifi est disponible
+Après de mauvaises surprise nous recommandons une clé Wifi supportée our-of-the-box par le noyeau, avec un chipset courant, comme par exemple : http://www.materiel.net/reseau/tp-link-cle-usb-wifi-tl-wn823n-94768.html
+
 ## pieds
 
 ## Alimentation
