@@ -14,7 +14,11 @@ RUN wget "http://node-arm.herokuapp.com/node_0.10.36_armhf.deb" \
 
 # TODO synchro timezone container / host
 
-# TODO passer la conf de boitier au container (actuellement dans le fichier config.json)
+# TODO passer la conf de boitier au container (actuellement dans le fichier config.json) 
+# -> volume avec votes.db / schedule.json ?
+
+RUN cd /opt && git clone https://github.com/BreizhJUG/LikeBox.git && \
+  cd LikeBox/client && npm install
 
 # TODO quand l'image sera finalisée : lancer 'node /opt/Likebox/client/client.js"
 CMD [ "bash" ]
