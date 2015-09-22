@@ -10,10 +10,6 @@ RUN wget "http://node-arm.herokuapp.com/node_0.10.36_armhf.deb" \
   && dpkg -i "node_0.10.36_armhf.deb" \
   && rm "node_0.10.36_armhf.deb"
 
-RUN wget "http://node-arm.herokuapp.com/node_0.10.36_armhf.deb" \
-  && dpkg -i "node_0.10.36_armhf.deb" \
-  && rm "node_0.10.36_armhf.deb"
-
 # TODO synchro timezone container / host
 
 # TODO passer la conf de boitier au container (actuellement dans le fichier config.json)
