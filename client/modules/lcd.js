@@ -26,7 +26,7 @@ module.exports = function(i2cDev, address, nbLines, nbCols) {
 		var chars = ['é', 'è', 'ê', 'à', 'â', 'î', 'û', 'ù'];
 		for (var i = 0; i < chars.length; i++) {
 			var char = chars[i];
-			str = str.replace(char, String.fromCharCode(i));
+			str = str.replace(RegExp(char,"g"), String.fromCharCode(i));
 		}
 		return str;
 	}
