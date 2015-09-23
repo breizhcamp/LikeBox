@@ -9,7 +9,7 @@ Each machine has 2 push buttons to track polls and an LCD screen display to show
 
 Here is the wiring schematic :
 
-![Wiring](docs/wiring_2014_04_27.png)
+![Wiring](docs/wiring_2015_09_23.png)
 
 **I2C installation**
 In order to use the i2c port for the LCD module, you have to do the following on a raspbian :
