@@ -5,8 +5,8 @@
 ### Fourniture
 
 Le boitier est composé de plaques de Plexiglass 250 x 200 x 8 mm 
-disponible aux dimensions avec bords polis sur http://www.plastiquesurmesure.com/ (ref)
-Coût: 
+disponible aux dimensions avec bords polis sur http://www.plastiquesurmesure.com/ [Plaque PMMA Coule Incolore Transparent Brillant 8mm](http://www.plastiquesurmesure.com/materiaux-plastiques-1/plaque/plaque-pmma-coule-incolore-transparent-brillant-8-mm.html)
+
 
 ### Préparation
 Les plans de découpe peuvent être collés sur les plaques dont on conserve le film de protection jusqu'au montage final.
