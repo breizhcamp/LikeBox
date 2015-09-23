@@ -7,6 +7,7 @@
 Le boitier est composé de plaques de Plexiglass 250 x 200 x 8 mm 
 disponible aux dimensions avec bords polis sur http://www.plastiquesurmesure.com/ [Plaque PMMA Coule Incolore Transparent Brillant 8mm](http://www.plastiquesurmesure.com/materiaux-plastiques-1/plaque/plaque-pmma-coule-incolore-transparent-brillant-8-mm.html)
 
+~ 40€ pour deux plaques. 
 
 ### Préparation
 Les plans de découpe peuvent être collés sur les plaques dont on conserve le film de protection jusqu'au montage final.
@@ -16,6 +17,10 @@ Les passages de cables sont percés à la mêche de charpentier avec une perceus
 Les trous de fixation sont percés en 2mm avec une mêche à métaux, puis un filetage est créé au taraud de 2.8mm
 
 ## Raspberry Pi
+
+Une Raspberry 1ère génération suffit pour la box de base. Pour utiliser la sortie HDMI une 2nde génération a nettement plus de ressources.
+
+~ 50€
 
 ## Boutons
 
