@@ -14,8 +14,8 @@ var debug = process.env.DEBUG,
 
 // -- init modules --
 var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
-	greenButton = button(23),
-	redButton = button(24),
+	greenButton = button(24),
+	redButton = button(23),
 	schedule = scheduleReader('schedule.json'),
 	conf = confMod('config.json'),
 	votes = require('./modules/votes.js')(),
