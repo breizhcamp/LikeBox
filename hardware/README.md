@@ -35,7 +35,7 @@ http://www.ebay.com/itm/Blue-Serial-IIC-I2C-TWI-2004-204-20X4-Character-LCD-Modu
 ## Module RTC
 
 module "Tiny RTC" I2C à base de DS1307 - attention, ce module utilise une pile bouton lithium rechargeable, autant le commander avec sa pile. 
-http://www.ebay.fr/itm/DS1307-Tiny-I2C-RTC-AT24C32-Module-Board-Real-Time-Clock-horloge-Pr-AVR-ARM-PIC-/131286341644?hash=item1e9146980c
+http://www.ebay.fr/itm/Real-Time-Clock-Module-I2C-RTC-DS1307-AT24C32-Battery-UK-/181812257370?hash=item2a54dae25a
 
 ## câblage etc
 
