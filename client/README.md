@@ -33,6 +33,12 @@ i2c-dev
 
 Software
 --------
+
+## Système
+Le logiciel est déployé sous forme de conteneur Docker, le système utilisé est [hypriot](http://blog.hypriot.com/downloads/)
+
+## Client
+
 The client is composed of several modules. You can activate the DEBUG mode in order to emulate the hardware through
 virtual modules :
 ```
