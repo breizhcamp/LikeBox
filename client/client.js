@@ -112,8 +112,8 @@ function hello() {
  */
 function displayNoSession(clear) {
 	if (clear) screen.clear();
-	screen.goto(3,1).print('AUCUNE SESSION');
-	screen.goto(2,2).print('EN COURS DE VOTE');
+	screen.goto(3,1).print('NO ACTIVE SESSION');
+	screen.goto(2,2).print('* * * * * * * * *');
 }
 
 /** Display the current voting session on the LCD screen */
@@ -131,7 +131,7 @@ function displayRemainingTime() {
 	}
 	if (nbMinLeft == 0) nbMinLeft = "<1";
 
-	screen.goto(0,2).print(('Reste ' + nbMinLeft + 'min de vote  ').substr(0, nbCols));
+	screen.goto(0,2).print((nbMinLeft + 'min left to vote').substr(0, nbCols));
 }
 
 /** Display current vote count on the LCD screen */
@@ -151,7 +151,7 @@ function userVoted(vote) {
 	if (!currentSession) return;
 
 	state = 'voted';
-	screen.goto(0,2).print("       A VOTE       ");
+	screen.goto(0,2).print("      THANKS !      ");
 
 	votes.addVote(currentSession.id, vote);
 	if (vote == 1) {
@@ -169,7 +169,7 @@ function userVoted(vote) {
 
 /** Function called to exit the client */
 function exit() {
-	screen.clear().goto(0,1).print('EXTINCTION EN COURS');
+	screen.clear().goto(0,1).print('SHUTING DOWN...');
 	process.exit(0);
 }
 
