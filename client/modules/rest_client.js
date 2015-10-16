@@ -17,7 +17,7 @@ var restler = require('restler');
 module.exports = function(conf, schedule, votes, winston) {
 
 	/** Base url of the server */
-	var base_url = "http://bzhcamp:CHANGEME@vote-server:3000";
+	var base_url = "http://bzhcamp:CHANGEME@backend.likebox.io";
 
 	/** does the module checks server every minutes */
 	var running = false;
