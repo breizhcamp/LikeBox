@@ -1,5 +1,7 @@
-breizhcamp-vote
-===============
+LikeBox
+=======
+
+See [http://www.likebox.io]
 
 Installation node.js sur Raspberry Pi :
 ```
