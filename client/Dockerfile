@@ -12,7 +12,7 @@ RUN wget "http://node-arm.herokuapp.com/node_0.10.36_armhf.deb" \
   && dpkg -i "node_0.10.36_armhf.deb" \
   && rm "node_0.10.36_armhf.deb"
 
-# TODO synchro timezone container / host
+RUN echo Europe/Paris > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 ADD / /opt/LikeBox/client
 
@@ -20,4 +20,4 @@ WORKDIR /opt/LikeBox/client
 
 RUN npm install
 
-ENTRYPOINT [ "node", "/opt/Likebox/client/client.js" ]
+ENTRYPOINT [ "node", "/opt/LikeBox/client/client.js" ]
