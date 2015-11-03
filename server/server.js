@@ -35,7 +35,7 @@ var db = new sqlite3.Database(database_file, function(err) {
 
 winston.info("Downloading schedule");
 var programJSON = null;
-http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
+http.get('http://dockerconeu2015.sched.org/api/session/list?api_key=cd5a8871cb3bc3bc8a732d2b3e30bf39%5C&format=json', function(res) {
     var body = '';
 
     res.on('data', function(chunk) {
@@ -63,14 +63,10 @@ http.get('http://www.breizhcamp.org/json/schedule.json', function(res) {
 var proposalsMap = {};
 function cacheTitle() {
 	// map proposal cache
-	var days = programJSON.programme.jours;
-	for (var i = 0 ; i < days.length ; i++) {
-		var proposals = days[i].proposals;
-
-		for (var k = 0 ; k < proposals.length ; k++) {
-			var id = proposals[k].id;
-			proposalsMap[id] = proposals[k].title;
-		}
+	for (var i = 0 ; i < programJSON.length ; i++) {
+		var talk = programJSON[i];
+		var id = talk.id;
+		proposalsMap[id] = talk.name;
 	}
 }
 
