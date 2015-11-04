@@ -8,6 +8,7 @@
     "moment": "^2.10.2",
     "restify": "3.0.2",
     "sqlite3": "3.0.8",
-    "winston": "^1.0.0"
+    "winston": "^1.0.0",
+    "request": "2.65.0"
   }
 }

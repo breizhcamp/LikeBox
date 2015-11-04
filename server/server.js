@@ -1,6 +1,7 @@
 var restify = require('restify'),
     fs = require('fs'),
     http = require('http'),
+    request = require('request')
     winston = require('winston'),
     moment = require('moment'),
     sqlite3 = require('sqlite3').verbose();
@@ -34,30 +35,26 @@ var programJSON = null;
 function downloadSchedule() {
     var url = process.env.SCHEDULE_URL
     winston.info("Downloading schedule from " + url);
-    http.get(url, function (res) {
-        var body = '';
-
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        res.on('end', function () {
-            winston.info("Schedule downloaded");
-            programJSON = JSON.parse(body);
-            fs.writeFileSync(schedule_file, body);
-            cacheTitle();
-        });
-
-    }).on('error', function (e) {
-        winston.error("Got error when downloading schedule, using local version: ", e);
-        programJSON = JSON.parse(fs.readFileSync(schedule_file));
-        cacheTitle();
-
-    }).setTimeout(10000, function () {
-        winston.error("Got timeout when downloading schedule, using local version");
-        programJSON = JSON.parse(fs.readFileSync(schedule_file));
-        cacheTitle();
-    });
+    request.get(
+        {
+            method: "GET",
+            uri: url,
+            headers: {
+                "User-Agent": "nodejs"
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                winston.info("Schedule downloaded");
+                programJSON = JSON.parse(body);
+                fs.writeFileSync(schedule_file, body);
+            } else {
+                winston.error("Got error when downloading schedule, using local version: ", error);
+                programJSON = JSON.parse(fs.readFileSync(schedule_file));
+                cacheTitle();
+            }
+        }
+    );
 }
 
 var proposalsMap = {};
