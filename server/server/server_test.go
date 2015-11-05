@@ -4,28 +4,24 @@ import (
 	"testing"
 	"net/http/httptest"
 	"net/http"
-	"log"
 	"io/ioutil"
-	"strings"
+	"github.com/assertgo/assert"
 )
 
 func TestUnauthorized(t *testing.T) {
+	assert := assert.New(t)
 
 	server := NewAPIServer(StubBackend{})
 	ts := httptest.NewServer(server)
 	defer ts.Close()
 
 	res, err := http.Get(ts.URL+"/status/1")
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println("Status code "+res.Status)
-	if res.StatusCode != http.StatusUnauthorized {
-		log.Fatal("Should have been rejected as unahtuorized")
-	}
+	assert.That(err).IsNil()
+	assert.ThatInt(res.StatusCode).IsEqualTo(http.StatusUnauthorized)
 }
 
 func TestStatus(t *testing.T) {
+	assert := assert.New(t)
 
 	server := NewAPIServer(StubBackend{})
 	ts := httptest.NewServer(server)
@@ -35,22 +31,14 @@ func TestStatus(t *testing.T) {
 	req, err := http.NewRequest("GET", ts.URL+"/status/1", nil)
 	req.SetBasicAuth("bzhcamp","CHANGEME")
 	res, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-	}
+	assert.That(err).IsNil()
 	payload, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
+	assert.That(err).IsNil()
 
 	json := string(payload)
-	if !strings.Contains(json, "\"Timestamp\": 12345") {
-		log.Fatal("Unexpected status "+json)
-	}
-	if !strings.Contains(json, "\"Schedule_mtime\": 67890") {
-		log.Fatal("Unexpected status "+json)
-	}
+	assert.ThatString(json).Contains("\"Timestamp\": 12345")
+	assert.ThatString(json).Contains("\"Schedule_mtime\": 67890")
 }
 
 type StubBackend struct {
