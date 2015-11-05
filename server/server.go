@@ -6,6 +6,6 @@ import (
 
 
 func main() {
-	apiServer := server.CreateAPIServer()
+	apiServer := server.NewAPIServer()
 	http.ListenAndServe(":8000", apiServer)
 }
