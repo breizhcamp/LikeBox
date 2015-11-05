@@ -10,12 +10,12 @@ type Status struct {
 	Schedule_mtime int64
 }
 
-func GetStatus(_ *Backend, w http.ResponseWriter, r *http.Request) {
+func GetStatus(b Backend, w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
 	box := params.Get(":id")
 	println("status for box", box)
 
-	status, err := getStatus(box)
+	status, err := b.GetStatus(box)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
