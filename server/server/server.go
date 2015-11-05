@@ -1,22 +1,39 @@
 package server
 import (
+	"github.com/drone/routes"
 	"net/http"
-	auth "github.com/abbot/go-http-auth"
+	"encoding/base64"
+	"bytes"
+	"strings"
 )
 
-func Secret(user, realm string) string {
-	if user == "bzhcamp" {
-		// encrypted password with salt :
-		// string(auth.MD5Crypt([]byte("CHANGEME"), []byte("azerty"), []byte("$1$")))
-		return "$1$azerty$zUCR/Z0FcipxnOptjQs6t/"
-	}
-	return ""
+func unauthorized(w http.ResponseWriter) {
+	w.Header().Set("WWW-Authenticate", `Basic realm=likebox.io`)
+	http.Error(w, "Unauthorized", http.StatusUnauthorized)
 }
 
-func CreateAPIServer() *http.ServeMux {
-	authenticator := auth.NewBasicAuthenticator("backend.likebox.io", Secret)
-	server := http.NewServeMux()
-	server.HandleFunc("/status/", authenticator.Wrap(GetStatus))
-	server.HandleFunc("/vote/", authenticator.Wrap(Vote))
+const basicAuthPrefix string = "Basic "
+
+func CreateAPIServer() *routes.RouteMux {
+
+	server := routes.New()
+	server.Get("/status/:id", GetStatus)
+	server.Post("/vote/:id", Vote)
+	server.FilterParam("id", func(w http.ResponseWriter, r *http.Request) {
+		auth := r.Header.Get("Authorization")
+		if strings.HasPrefix(auth, basicAuthPrefix) {
+			payload, err := base64.StdEncoding.DecodeString(auth[len(basicAuthPrefix):])
+			if err == nil {
+				pair := bytes.SplitN(payload, []byte(":"), 2)
+				if len(pair) == 2 &&
+				bytes.Equal(pair[0], []byte("bzhcamp")) &&
+				bytes.Equal(pair[1], []byte("CHANGEME")) {
+					return
+				}
+			}
+		}
+		unauthorized(w)
+	})
+	server.Static("/static", "static")
 	return server
 }

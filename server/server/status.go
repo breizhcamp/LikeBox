@@ -1,10 +1,8 @@
 package server
 import (
 	"net/http"
-	"strings"
-	"encoding/json"
 	"os"
-	auth "github.com/abbot/go-http-auth"
+	"github.com/drone/routes"
 )
 
 type Status struct {
@@ -12,35 +10,29 @@ type Status struct {
 	Schedule_mtime int64
 }
 
-func GetStatus(w http.ResponseWriter, r *auth.AuthenticatedRequest) {
-	parts := strings.Split(r.URL.Path, "/")
-	if len(parts) != 3 {
-		http.Error(w, "Bad Request, expected /satus/boxID", http.StatusBadRequest)
-		return
-	}
-	box := parts[2]
+func GetStatus(w http.ResponseWriter, r *http.Request) {
+	params := r.URL.Query()
+	box := params.Get(":id")
 	println("status for box", box)
 
 	status, err := getStatus(box)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-	bytes, _ := json.Marshal(status)
-	w.Header().Add("Content-Type", "application/json")
-	w.Write(bytes)
+	routes.ServeJson(w, &status)
 }
 
 func getStatus(box string) (Status, error) {
 
-	last := int64(123)
-	// 'SELECT max(timestamp) as last_timestamp FROM votes WHERE boitierId='" + box + "''
+
+	timestamp := 1234
 
 	mtime, err := os.Stat("schedule.json")
 	if err != nil {
 		return Status{}, err
 	}
 	return Status{
-		Timestamp: last,
+		Timestamp: int64(timestamp),
 		Schedule_mtime: mtime.ModTime().Unix(),
 	}, nil
 }
