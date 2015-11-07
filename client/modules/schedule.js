@@ -12,11 +12,10 @@ module.exports = function(scheduleFile) {
 		/**
 		 * Retrieve the current voting session from the schedule file. The voting starts 10 minutes
 		 * after the beginning of the session and ends 15 minutes after the session ends.
-		 * @param room Name of the room to get the current voting session
 		 * @returns {promise|Q.promise} Param will be the current voting session or undefined:
 		 * 		{ id: numeric, title: String, endVote: date }
 		 */
-		getCurrentSession: function(room) {
+		getCurrentSession: function() {
 			//number of minutes after which the vote starts and ends
 			var startDelay = 10,
 				endDelay = 15;
@@ -34,9 +33,6 @@ module.exports = function(scheduleFile) {
 
 				for (var k = 0 ; k < schedule.length ; k++) {
 					var event = schedule[k];
-					if (event.venue_id != room) {
-						continue;
-					}
 
 					var start = moment(event.event_start, 'YYYY-MM-DD HH:mm:ss')
 							.add(startDelay, 'minutes'),

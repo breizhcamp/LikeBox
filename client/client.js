@@ -67,7 +67,7 @@ function loadCurrentSession() {
 		dot = !dot;
 	}
 
-	schedule.getCurrentSession(conf.roomName).then(function(session) {
+	schedule.getCurrentSession().then(function(session) {
 		if (session) {
 			if (!currentSession || currentSession.id != session.id) {
 				//reload only if we change session

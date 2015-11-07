@@ -96,19 +96,28 @@ server.post('/program', function(req, res, next) {
     next();
 });
 
+var venueFor = {};
+venueFor[1] = "378156"; // Level 1, Room 111
+venueFor[2] = "375424"; // Level 1, Room 112
+venueFor[3] = "375421"; // Level 1, Room 113
+venueFor[4] = "378155"; // Level 1, Room 114
+venueFor[5] = "378153"; // Level 1, Room 118-119
+venueFor[6] = "377082"; // Level 1, Room 120-121
+venueFor[7] = "378151"; // Auditorium
 
-server.get('/program', function(req, res, next) {
-    fs.readFile(schedule_file, function (err, data) {
-        if (err) {
-            next(err);
-            return;
+server.get('/schedule/:idboitier', function(req, res, next) {
+    var boitier = req.params.idboitier;
+    var venue = venueFor[idboitier];
+
+    var boxSchedule = []
+    for (var i = 0 ; i < programJSON.length ; i++) {
+        var talk = programJSON[i];
+        if (talk.venue_id == venue) {
+            boxSchedule.add(talk)
         }
-
-        res.setHeader('Content-Type', 'application/json');
-        res.writeHead(200);
-        res.end(data);
-        next();
-    });
+    }
+    res.json(boxSchedule);
+    return next();
 });
 
 server.get('/status/:idboitier', function(req, res, next) {

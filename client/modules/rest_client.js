@@ -92,7 +92,7 @@ module.exports = function(conf, schedule, votes, winston) {
 			return;
 		}
 
-		restler.get(base_url + '/program', { timeout: 10000 })
+		restler.get(base_url + '/schedule/' + conf.idBox, { timeout: 10000 })
 			.on('fail', function(data, response) {
 				winston.error("fail on decoding schedule data: " + data);
 			}).on('error', function (err, response) {
