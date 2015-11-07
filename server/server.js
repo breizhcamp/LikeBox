@@ -109,11 +109,11 @@ server.get('/schedule/:idboitier', function(req, res, next) {
     var boitier = req.params.idboitier;
     var venue = venueFor[boitier];
 
-    var boxSchedule = []
+    var boxSchedule = [];
     for (var i = 0 ; i < programJSON.length ; i++) {
         var talk = programJSON[i];
         if (talk.venue_id == venue) {
-            boxSchedule.add(talk)
+            boxSchedule.push(talk)
         }
     }
     res.json(boxSchedule);
