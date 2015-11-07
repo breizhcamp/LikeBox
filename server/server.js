@@ -107,7 +107,7 @@ venueFor[7] = "378151"; // Auditorium
 
 server.get('/schedule/:idboitier', function(req, res, next) {
     var boitier = req.params.idboitier;
-    var venue = venueFor[idboitier];
+    var venue = venueFor[boitier];
 
     var boxSchedule = []
     for (var i = 0 ; i < programJSON.length ; i++) {
