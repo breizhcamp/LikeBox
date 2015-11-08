@@ -3,8 +3,7 @@ echo "i2c-dev" >> /etc/modules
 echo "i2c-bcm2708" >> /etc/modules
 
 sed -i '/exit 0/d' /etc/rc.local
-echo "echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device" >> /etc/rc.loc
-al
+echo "echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device" >> /etc/rc.local
 echo "hwclock -s" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 
