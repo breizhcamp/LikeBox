@@ -1,5 +1,7 @@
 var restler = require('restler');
 
+var scheduleModifTime = -1
+
 /**
  * Module handling communication with the server : getting server status, uploading vote
  * and updating schedule if modified.
@@ -87,7 +89,7 @@ module.exports = function(boxId, schedule, votes, winston) {
 	 * @param modifTimestamp timestamp of the last modification of the schedule on the server
 	 */
 	function getSchedule(modifTimestamp) {
-		if (conf.scheduleModifTime && conf.scheduleModifTime == modifTimestamp) {
+		if (scheduleModifTime && scheduleModifTime == modifTimestamp) {
 			//schedule not modified
 			return;
 		}
