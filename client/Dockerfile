@@ -20,4 +20,4 @@ WORKDIR /opt/LikeBox/client
 
 RUN npm install
 
-ENTRYPOINT [ "node", "/opt/LikeBox/client/client.js" ]
+CMD [ "node", "/opt/LikeBox/client/client.js" ]
