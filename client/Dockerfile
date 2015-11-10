@@ -14,10 +14,12 @@ RUN wget "http://node-arm.herokuapp.com/node_0.10.36_armhf.deb" \
 
 RUN echo Europe/Paris > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
-ADD / /opt/LikeBox/client
-
+ADD package.json /opt/LikeBox/client/package.json
 WORKDIR /opt/LikeBox/client
-
 RUN npm install
+
+ADD client.js /opt/LikeBox/client/client.js
+ADD modules /opt/LikeBox/client/modules
+
 
 CMD [ "node", "/opt/LikeBox/client/client.js" ]
