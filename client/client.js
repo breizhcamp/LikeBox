@@ -98,7 +98,7 @@ function loadCurrentSession() {
 
 function hello() {
         screen.clear();
-        screen.goto(3,0).print('## LikeBox ##');
+        screen.goto(3,0).print('   LikeBox #' + conf.idBox);
         screen.goto(0,1).print('--------------------');
         screen.goto(0,2).print(moment().format("D MM YYYY HH:mm:ss"));
         screen.goto(0,3).print(ip.address());
@@ -118,7 +118,7 @@ function displayNoSession(clear) {
 
 /** Display the current voting session on the LCD screen */
 function displayCurrentSession() {
-	var title = currentSession.title + '                                        '; //padding screen
+	var title = currentSession.name + '                                        '; //padding screen
 	screen.goto(0, 0).print(title.substr(0, nbCols * 2));
 }
 
