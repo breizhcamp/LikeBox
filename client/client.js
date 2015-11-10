@@ -5,7 +5,6 @@ var debug = process.env.DEBUG,
 	button = debug ? require('./modules/button_virtual.js') : require('./modules/button.js'),
 	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
 	scheduleReader = require('./modules/schedule.js'),
-	confMod = require('./modules/conf.js'),
 	moment = require('moment'),
 	winston = require('winston'),
 	ip = require('ip'),
@@ -17,9 +16,9 @@ var screen = lcd('/dev/i2c-1', 0x27, 4, 20),
 	greenButton = button(24),
 	redButton = button(23),
 	schedule = scheduleReader('schedule.json'),
-	conf = confMod('config.json'),
+	boxId = process.env.BOX_ID,
 	votes = require('./modules/votes.js')(),
-	rest = require('./modules/rest_client.js')(conf, schedule, votes, winston);
+	rest = require('./modules/rest_client.js')(boxId, schedule, votes, winston);
 
 /**
  * State of the vote machine. Could be the following state :
@@ -98,7 +97,7 @@ function loadCurrentSession() {
 
 function hello() {
         screen.clear();
-        screen.goto(3,0).print('   LikeBox #' + conf.idBox);
+        screen.goto(3,0).print('   LikeBox #' + boxId);
         screen.goto(0,1).print('--------------------');
         screen.goto(0,2).print(moment().format("D MM YYYY HH:mm:ss"));
         screen.goto(0,3).print(ip.address());
@@ -189,8 +188,8 @@ redButton.events().on('released', function(){
 });
 
 //--- BOX INITIALISATION ---
-if (!conf.roomName) {
-	winston.error("Room name not defined, goto config menu");
+if (boxId) {
+	winston.error("Box ID not defined, goto config menu");
 
 } else {
 	//normal startup

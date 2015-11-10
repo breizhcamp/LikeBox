@@ -9,12 +9,12 @@ var restler = require('restler');
  * Then, if there's new vote, the client upload it.
  * If the schedule is also modified, the client download it and save it locally.
  *
- * @param conf Conf module
+ * @param boxId Box unique identifier
  * @param schedule Schedule module
  * @param votes Vote module
  * @param winston Winston log module
  */
-module.exports = function(conf, schedule, votes, winston) {
+module.exports = function(boxId, schedule, votes, winston) {
 
 	/** Base url of the server */
 	var base_url = "http://bzhcamp:CHANGEME@backend.likebox.io";
@@ -37,7 +37,7 @@ module.exports = function(conf, schedule, votes, winston) {
 
 	/** Load status, upload vote if needed, grab schedule if needed */
 	function loadStatus() {
-		var url = base_url + '/status/' + conf.idBox;
+		var url = base_url + '/status/' + boxId;
 		winston.debug("Trying to retrieve status on [" + url + "]");
 
 		restler.get(url, { timeout: 10000 })
@@ -70,7 +70,7 @@ module.exports = function(conf, schedule, votes, winston) {
 
 			var data = { votes: votesList };
 
-			restler.postJson(base_url + '/vote/' + conf.idBox, data, { timeout: 10000 })
+			restler.postJson(base_url + '/vote/' + boxId, data, { timeout: 10000 })
 				.on('error', function (err, response) {
 					winston.error("error when posting votes", err);
 				}).on('timeout', function(ms) {
@@ -92,7 +92,7 @@ module.exports = function(conf, schedule, votes, winston) {
 			return;
 		}
 
-		restler.get(base_url + '/schedule/' + conf.idBox, { timeout: 10000 })
+		restler.get(base_url + '/schedule/' + boxId, { timeout: 10000 })
 			.on('fail', function(data, response) {
 				winston.error("fail on decoding schedule data: " + data);
 			}).on('error', function (err, response) {
