@@ -106,8 +106,8 @@ module.exports = function(boxId, schedule, votes, winston) {
 
 				schedule.update(response.raw).then(function() {
 					winston.info("Schedule successfully updated");
-					conf.scheduleModifTime = modifTimestamp;
-					return conf.save();
+					scheduleModifTime = modifTimestamp;
+					return;
 				}).fail(function(err) {
 					winston.error("Can't update schedule", err);
 				});
