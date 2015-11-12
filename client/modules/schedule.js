@@ -56,7 +56,7 @@ module.exports = function(scheduleFile) {
 				//building result
 				var res = {
 					id: current.id,
-					title: current.title,
+					title: current.name,
 					endVote: current.endDate.toDate()
 				};
 

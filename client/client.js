@@ -118,7 +118,7 @@ function displayNoSession(clear) {
 
 /** Display the current voting session on the LCD screen */
 function displayCurrentSession() {
-	var title = currentSession.name + '                                        '; //padding screen
+	var title = currentSession.title + '                                        '; //padding screen
 	screen.goto(0, 0).print(title.substr(0, nbCols * 2));
 }
 
