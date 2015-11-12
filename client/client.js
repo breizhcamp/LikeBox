@@ -2,6 +2,7 @@
  * Node file for client poll machine
  */
 var debug = process.env.DEBUG,
+	verbose = process.env.VERBOSE,
 	button = debug ? require('./modules/button_virtual.js') : require('./modules/button.js'),
 	lcd = debug ? require('./modules/lcd_virtual.js') : require('./modules/lcd.js'),
 	scheduleReader = require('./modules/schedule.js'),
@@ -41,15 +42,15 @@ var dot = true;
 //--- LOGGING CONFIG ---
 winston.remove(winston.transports.Console);
 
-if (debug) {
+winston.add(winston.transports.File, {
+	timestamp: true,
+	filename: '/tmp/vote-client.log',
+	maxsize: 1024*1024*5, //5 MB
+	maxFiles: 5
+});
+
+if (verbose) {
 	winston.add(winston.transports.Console, { timestamp: true });
-} else {
-	winston.add(winston.transports.File, {
-		timestamp: true,
-		filename: '/tmp/vote-client.log',
-		maxsize: 1024*1024*5, //5 MB
-		maxFiles: 5
-	});
 }
 
 
@@ -188,7 +189,7 @@ redButton.events().on('released', function(){
 });
 
 //--- BOX INITIALISATION ---
-if (boxId) {
+if (typeof boxId === "undefined") {
 	winston.error("Box ID not defined, goto config menu");
 
 } else {
