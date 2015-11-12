@@ -1,3 +1,6 @@
+#!/bin/bash
+HERE=$(dirname $(readlink -f $0))
+
 echo "rtc-ds1307" >> /etc/modules
 echo "i2c-dev" >> /etc/modules
 echo "i2c-bcm2708" >> /etc/modules
@@ -13,3 +16,7 @@ apt-get update
 apt-get install i2c-tools
 
 docker pull breizhcamp/likebox
+
+cp $HERE/likebox.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable likebox.service
