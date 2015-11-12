@@ -99,12 +99,12 @@ server.post('/program', function(req, res, next) {
 var venueFor = {};
 // By box number and Raspberry serial number
 venueFor['1'] = venueFor['000000002d177ce5'] = "378156"; // Level 1, Room 111
-venueFor['2'] = "375424"; // Level 1, Room 112
+venueFor['2'] = venueFor['0000000012cc151e'] = "375424"; // Level 1, Room 112
 venueFor['3'] = venueFor['00000000b480167d'] = "375421"; // Level 1, Room 113
-venueFor['4'] = "378155"; // Level 1, Room 114
-venueFor['5'] = "378153"; // Level 1, Room 118-119
-venueFor['6'] = "377082"; // Level 1, Room 120-121
-venueFor['7'] = "378151"; // Auditorium
+venueFor['4'] = venueFor['00000000c9b1bb20'] = "378155"; // Level 1, Room 114
+venueFor['5'] = venueFor['00000000bffde9a5'] = "378153"; // Level 1, Room 118-119
+venueFor['6'] = venueFor['000000006ddccfec'] = "377082"; // Level 1, Room 120-121
+venueFor['7'] = venueFor['00000000748cfa28'] = "378151"; // Auditorium
 
 
 server.get('/schedule/:idboitier', function(req, res, next) {
