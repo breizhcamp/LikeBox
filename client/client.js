@@ -98,8 +98,8 @@ function loadCurrentSession() {
 
 function hello() {
         screen.clear();
-        screen.goto(3,0).print('   LikeBox #' + boxId);
-        screen.goto(0,1).print('--------------------');
+        screen.goto(0,0).print(' ###  LikeBox  ### ');
+     	screen.goto(0,1).print(boxId);
         screen.goto(0,2).print(moment().format("D MM YYYY HH:mm:ss"));
         screen.goto(0,3).print(ip.address());
         sleep.sleep(4);
