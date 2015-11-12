@@ -15,6 +15,7 @@ RUN wget "http://node-arm.herokuapp.com/node_0.10.36_armhf.deb" \
 RUN echo Europe/Paris > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 ADD package.json /opt/LikeBox/client/package.json
+ADD npm-shrinkwrap.json /opt/LikeBox/client/npm-shrinkwrap.json
 WORKDIR /opt/LikeBox/client
 RUN npm install
 

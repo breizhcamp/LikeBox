@@ -98,7 +98,7 @@ server.post('/program', function(req, res, next) {
 
 var venueFor = {};
 // By box number and Raspberry serial number
-venueFor['1'] = "378156"; // Level 1, Room 111
+venueFor['1'] = venueFor['000000002d177ce5'] = "378156"; // Level 1, Room 111
 venueFor['2'] = "375424"; // Level 1, Room 112
 venueFor['3'] = venueFor['00000000b480167d'] = "375421"; // Level 1, Room 113
 venueFor['4'] = "378155"; // Level 1, Room 114
