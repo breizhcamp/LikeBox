@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if [[ -z BOX_ID ]] then
-    export BOX_ID=`cat /proc/cpuinfo|grep Serial|cut -d ':' -f 2`
+if [[ -z $BOX_ID ]]; then
+    echo "BOX_ID unset, using cpuinfo Serial"
+    export BOX_ID=`cat /proc/cpuinfo|grep Serial|cut -c 13-99`
 fi
-exec "$@"
+echo "BOX_ID=$BOX_ID"
+exec env "BOX_ID=$BOX_ID" "$@"
