@@ -23,5 +23,5 @@ ADD client.js /opt/LikeBox/client/client.js
 ADD modules /opt/LikeBox/client/modules
 ADD entrypoint.sh /opt/LikeBox/client/entrypoint.sh
 
-ENTRYPONT ["/opt/LikeBox/client/entrypoint.sh"]
+ENTRYPOINT ["/opt/LikeBox/client/entrypoint.sh"]
 CMD [ "node", "/opt/LikeBox/client/client.js" ]
