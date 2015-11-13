@@ -12,8 +12,8 @@ echo "exit 0" >> /etc/rc.local
 
 echo "dtparam=i2c1=on" >> /boot/config.txt
 echo "dtparam=i2c_arm=on" >> /boot/config.txt
-apt-get update
-apt-get install i2c-tools
+apt-get -y update
+apt-get -y install i2c-tools
 
 mkdir /opt/data
 docker pull breizhcamp/likebox
