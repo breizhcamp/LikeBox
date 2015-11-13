@@ -5,10 +5,7 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker kill likebox
-ExecStartPre=/usr/bin/docker create --name likebox --cap-add SYS_RAWIO --device /dev/i2c-1 --device /dev/mem -v /sys:/sys -t -e VERBOSE=1 breizhcamp/likebox
-ExecStart=/usr/bin/docker start likebox
-ExecStop=/usr/bin/docker stop likebox
+ExecStart=/usr/bin/docker run --cap-add SYS_RAWIO --device /dev/i2c-1 --device /dev/mem -v /sys:/sys -t -e VERBOSE=1 breizhcamp/likebox
 
 [Install]
 WantedBy=multi-user.target
