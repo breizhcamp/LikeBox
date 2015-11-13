@@ -13,7 +13,7 @@ module.exports = function() {
 	 */
 	var start = function() {
 		var deferred = Q.defer();
-		db = new sqlite3.Database('votes.db', function(err) {
+		db = new sqlite3.Database('/opt/data/votes.db', function(err) {
 			if (err) {
 				deferred.reject(new Error(err));
 				return;
