@@ -112,7 +112,7 @@ function hello() {
  */
 function displayNoSession(clear) {
 	if (clear) screen.clear();
-	screen.goto(3,1).print('NO ACTIVE SESSION');
+	screen.goto(2,1).print('NO ACTIVE SESSION');
 	screen.goto(2,2).print('* * * * * * * * *');
 }
 
@@ -164,7 +164,7 @@ function userVoted(vote) {
 	setTimeout(function() {
 		state = 'voting';
 		displayRemainingTime();
-	}, 800);
+	}, 500);
 }
 
 /** Function called to exit the client */
