@@ -102,8 +102,8 @@ venueFor['1'] = venueFor['000000002d177ce5'] = "378156"; // Level 1, Room 111
 venueFor['2'] = venueFor['0000000012cc151e'] = "375424"; // Level 1, Room 112
 venueFor['3'] = venueFor['00000000b480167d'] = "375421"; // Level 1, Room 113
 venueFor['4'] = venueFor['00000000c9b1bb20'] = "378155"; // Level 1, Room 114
-venueFor['5'] = venueFor['00000000bffde9a5'] = "378153"; // Level 1, Room 118-119
-venueFor['6'] = venueFor['000000006ddccfec'] = "377082"; // Level 1, Room 120-121
+venueFor['5'] = venueFor['00000000bffde9a5'] = "378151";
+venueFor['6'] = venueFor['000000006ddccfec'] = "378151";
 venueFor['7'] = venueFor['00000000748cfa28'] = "378151"; // Auditorium
 
 
@@ -167,9 +167,9 @@ server.get('/top/:nb', function(req, res, next) {
     var nombre = req.params.nb;
     var results = {};
     var row_num = 1;
-    db.each("SELECT sessionId, nb_votes, (somme + (nb_votes - somme)/2)/nb_votes as average from " +
+    db.each("SELECT sessionId, nb_votes, (somme/nb_votes) as average from " +
         "(SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes " +
-        "from votes group by sessionId) order by average desc, nb_votes desc limit " + nombre , function (error, row) {
+        "from votes where count(vote) > 0 group by sessionId) order by average desc, nb_votes desc limit " + nombre , function (error, row) {
 
         var sessionId = row.sessionId;
         var cur_sess = row_num;
