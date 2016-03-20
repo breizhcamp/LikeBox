@@ -51,8 +51,8 @@ function downloadSchedule() {
             } else {
                 winston.error("Got error when downloading schedule, using local version: ", error);
                 programJSON = JSON.parse(fs.readFileSync(schedule_file));
-                cacheTitle();
             }
+            cacheTitle();
         }
     );
 }
