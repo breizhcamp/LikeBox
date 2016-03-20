@@ -33,7 +33,7 @@ var db = new sqlite3.Database(database_file, function(err) {
 var programJSON = null;
 
 function downloadSchedule() {
-    var url = process.env.SCHEDULE_URL
+    var url = process.env.SCHEDULE_URL || "http://127.0.0.1:3000/schedule.json"
     winston.info("Downloading schedule from " + url);
     request.get(
         {
@@ -98,13 +98,13 @@ server.post('/program', function(req, res, next) {
 
 var venueFor = {};
 // By box number and Raspberry serial number
-venueFor['1'] = venueFor['000000002d177ce5'] = "378156"; // Level 1, Room 111
-venueFor['2'] = venueFor['0000000012cc151e'] = "375424"; // Level 1, Room 112
-venueFor['3'] = venueFor['00000000b480167d'] = "375421"; // Level 1, Room 113
-venueFor['4'] = venueFor['00000000c9b1bb20'] = "378155"; // Level 1, Room 114
-venueFor['5'] = venueFor['00000000bffde9a5'] = "378151";
-venueFor['6'] = venueFor['000000006ddccfec'] = "378151";
-venueFor['7'] = venueFor['00000000748cfa28'] = "378151"; // Auditorium
+venueFor['1'] = venueFor['000000002d177ce5'] = "1"; // Level 1, Room 111
+venueFor['2'] = venueFor['0000000012cc151e'] = "2"; // Level 1, Room 112
+venueFor['3'] = venueFor['00000000b480167d'] = "3"; // Level 1, Room 113
+venueFor['4'] = venueFor['00000000c9b1bb20'] = "4"; // Level 1, Room 114
+venueFor['5'] = venueFor['00000000bffde9a5'] = "5";
+venueFor['6'] = venueFor['000000006ddccfec'] = "5";
+venueFor['7'] = venueFor['00000000748cfa28'] = "5"; // Auditorium
 
 
 server.get('/schedule/:idboitier', function(req, res, next) {
