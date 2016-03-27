@@ -167,7 +167,7 @@ server.get('/top/:nb', function(req, res, next) {
     var nombre = req.params.nb;
     var results = {};
     var row_num = 1;
-    db.each("SELECT sessionId, nb_votes, (somme/nb_votes) as average from " +
+    db.each("SELECT sessionId, nb_votes, (CAST(somme as float) / CAST(nb_votes as float)) as average from " +
         "(SELECT sessionId, sum(vote) as somme, count(vote) as nb_votes " +
         "from votes group by sessionId) order by average desc, nb_votes desc limit " + nombre , function (error, row) {
 
